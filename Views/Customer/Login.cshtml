@@ -1,0 +1,210 @@
+﻿@model LoginModel
+@using Nop.Web.Models.Customer;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@{
+
+  //title
+  Html.AddTitleParts(T("PageTitle.Login").Text);
+
+  //register URL with return URL (if specified)
+  var registerUrl = Url.RouteUrl("Register");
+
+  var returnurl = "";
+  if (!String.IsNullOrEmpty(this.Context.Request.QueryString["returnUrl"]))
+  {
+    returnurl = this.Context.Request.QueryString["returnUrl"];
+
+    var webHelper = EngineContext.Current.Resolve<IWebHelper>();
+
+    registerUrl = webHelper.ModifyQueryString(registerUrl, "returnurl=" + HttpUtility.UrlEncode(this.Context.Request.QueryString["returnUrl"]), null);
+  }
+
+
+  }
+
+
+
+<div class="col-main-slim">
+  <!--sign in sign up-->
+  <div class="mt-5 d-block d-md-none hidden-md hidden-lg"></div>
+  <div class="d-none d-md-block hidden-sm hidden-xs"></div>
+
+  <div class="form-login">
+    <div class="text-center">
+      <h2 id="title" style="font-size: 35px; font-weight: bold; font-style: italic;">Log In</h2>
+      <p id="subtitle" style="font-size: 14px;">Please log in or sign up for an account</p>
+    </div>
+
+    <div class="tab-content">
+      <div class="container tab-pane active" id="signin">
+        <br />
+
+        @using (Ajax.BeginForm("Login", "Customer", new AjaxOptions
+        {
+          InsertionMode = InsertionMode.InsertAfter,
+          HttpMethod = "POST",
+          LoadingElementId = "ajax-loader",
+          OnSuccess = "loginCallback",
+          UpdateTargetId = "pnlMsg"
+        }, new { id = "form1", @class = "login-form" }))
+
+
+        {
+          @Html.AntiForgeryToken()
+          @Html.Hidden("ReturnUrl", @returnurl)
+
+          var validationSummary = Html.ValidationSummary(true, T("Account.Login.Unsuccessful").Text);
+          <div id="pnlMsg" class="text-danger">@validationSummary</div>
+          <div class="form-fields">
+            <div class="form-group">
+              @if (Model.UsernamesEnabled)
+              {
+                <label style="font-size: 14px; font-weight: bold;">Username</label>
+                @Html.TextBoxFor(m => m.Username, new { @class = "form_signin", autofocus = "autofocus", placeholder = "Username" })
+                @Html.ValidationMessageFor(m => m.Username)
+              }
+              else
+              {
+                <label style="font-size: 14px; font-weight: bold;">Email</label>
+                <input type="email" placeholder="Email" name="Email" class="form_signin" required>
+                @Html.ValidationMessageFor(m => m.Email)
+              }
+            </div>
+            <div class="form-group">
+              <label style="font-size: 14px; font-weight: bold;">Password</label>
+              @Html.PasswordFor(m => m.Password, new { @class = "form_signin pb-2", placeholder = "Password" })
+              @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+              <span class="psw" style="font-weight: bold;">
+                @Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery")
+              </span>
+            </div>
+
+
+            <button type="submit" class="btn btn-default button_signin">LOGIN</button>
+            <div style="display: flex; justify-content: flex-start; align-items: center;">
+              <ul class="nav nav-pills form-caption" style="color: black;font-size: 14px; font-weight: bold;">
+                <p>Don’t have an account? <li style="margin: 0 5px; padding: 0;"><a id="signup-nav" style="margin: 0; padding: 0; text-decoration: underline; cursor: pointer;" class="">Sign Up</a></li></p>
+              </ul>
+            </div>
+            
+            @if (Model.DisplayCaptcha)
+            {
+              <div class="captcha-box">
+                @Html.Raw(Html.GenerateCaptcha())
+              </div>
+            }
+          </div>
+        }
+
+
+      </div>
+      <div class="container tab-pane fade" id="signup">
+        <br />
+        @Html.Action("Register", "Customer")
+        <div style="display: flex; justify-content: flex-start; align-items: center;">
+          <ul class="nav nav-pills form-caption" style="color: black;font-size: 14px; font-weight: bold;">
+            <p>Have an account? <li style="margin: 0 5px; padding: 0;"><a id="login-nav" style="margin: 0; padding: 0; text-decoration: underline; cursor: pointer;" class="">Log In</a></li></p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--end of sign in sign up-->
+
+  
+
+</div>
+
+
+
+
+@section scripts
+{
+
+  @Scripts.Render("~/bundles/jqueryval")
+  <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+  <script>
+    function loginCallback(data) {
+
+      if (data.ok) {
+        if (data.msg != "")
+        {
+          $("#pnlMsg").html(data.msg);
+        }
+        else
+        {
+          $("#pnlMsg").html('');
+        }
+
+        //alert(data.newurl);
+
+        window.location = data.newurl;
+      }
+      else {
+        $("#pnlMsg").html(data.msg);
+      }
+    }
+
+    function reqfailed() {
+      $("#pnlfailure").html("Sorry, an error occured.");
+    }
+
+    function loginCallbackRegister(data) {
+
+      if (data.ok) {
+        if (data.msg != "") {
+          $("#pnlfailure").html(data.msg);
+        }
+        else {
+          $("#pnlfailure").html('');
+        }
+
+        $("#form-register-body").hide();
+
+        //window.location = data.newurl;
+      }
+      else {
+        $("#pnlfailure").html(data.msg);
+      }
+    }
+
+    $(document).ready(function(){  
+      if ($("#login-nav").hasClass("active")) {
+        $('#title').text('Log in');
+        $('#subtitle').text('Please log in or sign up for an account');
+      } else if ($("#signup-nav").hasClass("active")) {
+        $('#title').text('Create Account');
+        $('#subtitle').text('Creating an account has many benefits: check out faster, keep more than one address, track orders and more.');
+      }
+    });  
+
+    $("#login-nav").click(function(){  
+      setTimeout(function() { 
+        $('#title').text('Log in');
+        $('#subtitle').text('Please log in or sign up for an account');
+        $('#signin').addClass('active');
+        $('#signup').removeClass('show active');
+      }, 100);
+    });
+
+    $("#signup-nav").click(function(){  
+      setTimeout(function() { 
+        $('#title').text('Create Account');
+        $('#subtitle').text('Creating an account has many benefits: check out faster, keep more than one address, track orders and more.');
+        $('#signin').removeClass('active');
+        $('#signup').addClass('show active');
+      }, 100);
+    });
+
+  </script>
+
+}
+
+
+  

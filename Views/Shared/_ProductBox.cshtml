@@ -1,0 +1,80 @@
+﻿@model Nop.Web.Models.Catalog.ProductOverviewModel
+
+<div class="product-item">
+    <div>
+        <div class="ori-product-img">
+            <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName})" class="clean"><img src="@Model.DefaultPictureModel.ImageUrl" class="img-fluid center-block" /></a>
+
+            @if (Model.AlternateImage != null)
+            {
+              <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName})" class="clean overlay-product-img"><img src="@Model.AlternateImage.ImageUrl" class="img-fluid center-block" /></a>
+            }
+
+            @if (Model.Quantity == 0) {
+              <div class="d-none d-md-block hidden-sm hidden-xs justify-content-center align-items-center" style="display: flex !important; position: absolute; top: 0; right: 0; height: 45px; width: 45px; background-color: black; border-radius: 10px;">
+                <p style="margin: 0; color: white; font-size: 12px;">SOLD</p>
+              </div>
+
+              <div class="d-block d-md-none hidden-md hidden-lg d-flex justify-content-center align-items-center" style="position: absolute; top: 0; right: 0; height: 45px; width: 45px; background-color: black; border-radius: 10px;">
+                <p style="margin: 0; color: white; font-size: 10px;">SOLD</p>
+              </div>
+            }
+
+            @if (Model.MarkAsNew)
+            {
+              <div class="d-none d-md-block hidden-sm hidden-xs justify-content-center align-items-center" style="display: flex !important; position: absolute; top: 0; right: 0; height: 45px; width: 45px; background-color: black; border-radius: 10px;">
+                <p style="margin: 0; color: white; font-size: 12px;">NEW</p>
+              </div>
+
+              <div class="d-block d-md-none hidden-md hidden-lg d-flex justify-content-center align-items-center" style="position: absolute; top: 0; right: 0; height: 45px; width: 45px; background-color: black; border-radius: 10px;">
+                <p style="margin: 0; color: white; font-size: 10px;">NEW</p>
+              </div>
+            }
+        </div>
+
+    </div>
+
+    <div class="description">
+        <h2 class="text-left" style="line-height: 1.5em;">
+          <a class="clean" style="font-size: 12px; color: #707070; font-weight: bold; text-transform: uppercase;" href="@Url.RouteUrl("Product", new { SeName = Model.SeName})">
+            Antonio Lupi
+          </a>
+        </h2>
+
+        <h2 class="text-left" style="line-height: 1.5em;">
+          <a class="clean" style="font-size: 12px; color: #707070;" href="@Url.RouteUrl("Product", new { SeName = Model.SeName})">
+            @Model.Name
+          </a>
+        </h2>
+
+        <div class="prices text-left" style="line-height: 1.5em; padding-top: 0;">
+          @if (Model.ProductPrice.AvailableForPreOrder) {
+            <div class="price">Request A Quote</div>
+          } else {
+            if (!String.IsNullOrEmpty(Model.ProductPrice.OldPrice) || Model.ProductPrice.DisplayTaxShippingInfo)
+            {
+                if (!String.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+                {
+
+                    <div class="price old--price"><span style="color:black;text-decoration:line-through"><span style="color:#707070">@Model.ProductPrice.OldPrice</span></span></div>
+
+                }
+                <div class="price actual--price"><b>@Model.ProductPrice.Price</b></div>
+            }
+            else
+            {
+                <div class="price">@Model.ProductPrice.Price</div>
+            }
+          }
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+	//console.log(`PRODUCT BOX`);
+	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+	//console.log(model);    
+</script>

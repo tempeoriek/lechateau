@@ -1,0 +1,106 @@
+﻿@model IList<ProductOverviewModel>
+@{
+  Layout = "~/Views/Shared/_LayoutTwo.cshtml";
+  //title
+  Html.AddTitleParts(T("PageTitle.NewProducts").Text);
+}
+@using Nop.Web.Models.Catalog;
+
+
+  <div class="container">
+
+    @if (Model.Count > 0)
+    {
+      var pg_i = 0;
+
+      <div class="row">
+        <div class="col-md-3">
+          <div id="productgallery" class="left_menu d-none d-lg-block">
+            <div id="accordionLeftMenu">
+              @* breadcrumb *@
+              <div class="mb-5">
+                <p>HOME / SHOP</p>
+              </div>
+
+              @* category title *@
+              <div style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey; border-top: 1px solid lightgrey">
+                <div class="p-2" role="tab" style="font-weight: bold;"> CATEGORIES </div>
+              </div>
+
+              @* category accordion *@
+              <div style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey; border-top: 1px solid lightgrey">
+                <div class=" p-2" role="tab" id="HeadingOne">
+                  <a style="font-weight: 500;" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    PARKLON
+                  </a>
+                </div>
+                <div data-parent="#accordionLeftMenu" id="collapseOne" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingOne" style="border-top: 1px solid lightgrey">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                </div>
+              </div>
+
+              @* category non accordion *@
+              <div style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey; border-top: 1px solid lightgrey">
+                <div class="p-2" role="tab">
+                  <a style="font-weight: 500;" href="#" role="button">
+                    NEW ARRIVAL
+                  </a>
+                </div>
+              </div>
+
+              <div style="border: 1px solid lightgrey;">
+                <div class="p-2" role="tab">
+                  <a style="font-weight: 500;" href="#" role="button">
+                    PRE-ORDER
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-9">
+          <div class="row">
+            @foreach (var product in Model)
+            {
+              <div class="col-6 col-sm-6 col-md-4 col-lg-4 catalog-line">
+                @Html.Partial("_ProductBox", product)
+              </div>
+              pg_i++;
+            }
+          </div>
+        </div>
+
+        <div class="gap"></div>
+      </div>
+    }
+    else
+    {
+      <p></p>
+      <div class="col-main-slim mt-5">
+        <h3 style="text-align:center;">
+          We are still preparing our collection.<br />
+          Stay tuned!
+        </h3>
+      </div>
+
+    }
+
+  </div>
+
+
+
+
+
+
+@*sticky thumbnail*@
+<script src="~/Themes/v1/Scripts/jquery.sticky.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#productgallery").sticky({ topSpacing: 58 });
+  });
+
+  $('#close-alert').click(function(){
+    $("#productgallery").sticky({ topSpacing: 10 });
+  });
+</script>

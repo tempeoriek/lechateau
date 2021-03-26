@@ -1,0 +1,225 @@
+﻿@model RegisterModel
+@using Nop.Web.Models.Customer;
+@{
+
+  //title
+  Html.AddTitleParts(T("PageTitle.Register").Text);
+
+
+
+}
+@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+{
+  <script type="text/javascript">
+    $(function () {
+      $("#@Html.FieldIdFor(model => model.CountryId)").change(function () {
+        var selectedItem = $(this).val();
+        var ddlStates = $("#@Html.FieldIdFor(model => model.StateProvinceId)");
+        var statesProgress = $("#states-loading-progress");
+        statesProgress.show();
+        $.ajax({
+          cache: false,
+          type: "GET",
+          url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+          data: { "countryId": selectedItem, "addSelectStateItem": "true" },
+          success: function (data) {
+            ddlStates.html('');
+            $.each(data, function (id, option) {
+              ddlStates.append($('<option></option>').val(option.id).html(option.name));
+            });
+            statesProgress.hide();
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert('Failed to retrieve states.');
+            statesProgress.hide();
+          }
+        });
+      });
+    });
+  </script>
+}
+
+
+@*@using (Html.BeginForm("Register", "Customer", FormMethod.Post,new { id = "formRegister", @class = "login-form" }))*@
+@using (Ajax.BeginForm("Register", "Customer", new AjaxOptions
+{
+  InsertionMode = InsertionMode.Replace,
+  HttpMethod = "POST",
+  OnFailure = "reqfailed",
+  OnSuccess = "loginCallbackRegister",
+  LoadingElementId = "ajax-loader",
+  UpdateTargetId = "pnlRegister",
+
+}, new { id = "formRegister", @class = "login-form" }))
+
+
+{
+
+  <div id="pnlRegister" class="">
+    @Html.AntiForgeryToken()
+    <div class="page registration-page">
+      <div class="page-body">
+        <div class="">
+          <div class="form-fields">
+            @if (Model.UsernamesEnabled)
+            {
+              <div class="inputs">
+                @Html.EditorFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.Username)
+                @if (Model.CheckUsernameAvailabilityEnabled)
+                {
+                  @Html.Partial("_CheckUsernameAvailability")
+                }
+              </div>
+            }
+          </div>
+          <div class="form-fields">
+            <div class="row">
+              <div class="col-6 col-md-6 col-sm-6 form-group">
+                <label style="font-size: 14px; font-weight: bold;">First Name</label>
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form_signup pb-2", placeholder = "First name" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+              </div>
+
+              <div class="col-6 col-md-6 col-sm-6 form-group">
+                <label style="font-size: 14px; font-weight: bold;">Surename</label>
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form_signup pb-2", placeholder = "Surename" })
+                @Html.ValidationMessageFor(model => model.LastName)
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-12 col-sm-12 form-group">
+                <label style="font-size: 14px; font-weight: bold;">Email</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form_signin pb-2", placeholder = "Email Address" })
+                @Html.ValidationMessageFor(model => model.Email)
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-12 col-sm-12 form-group">
+                <label style="font-size: 14px; font-weight: bold;">Password</label>
+                @Html.PasswordFor(model => model.Password, new { @class = "form_signin pb-2", placeholder = "Password" })
+                @Html.ValidationMessageFor(model => model.Password)
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-12 col-sm-12 form-group">
+                <label style="font-size: 14px; font-weight: bold;">Confirm Password</label>
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form_signin pb-2", placeholder = "Confirm Password" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-12 col-sm-12 form-group">
+                @if (Model.GenderEnabled)
+                {
+                  <div class="inputs">
+                    <label>@T("Account.Fields.Gender"):</label>
+                    <div class="gender">
+                      <span class="male">
+                        @Html.RadioButton("Gender", "M", (Model.Gender == "M"), new { id = "gender-male" })
+                        <label class="forcheckbox" for="gender-male">@T("Account.Fields.Gender.Male")</label>
+                      </span>
+                      <span class="female">
+                        @Html.RadioButton("Gender", "F", (Model.Gender == "F"), new { id = "gender-female" })
+                        <label class="forcheckbox" for="gender-female">@T("Account.Fields.Gender.Female")</label>
+                      </span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            
+
+            @if (Model.DateOfBirthEnabled)
+            {
+              <div class="inputs date-of-birth">
+                <label>@T("Account.Fields.DateOfBirth"):</label>
+                @Html.DatePickerDropDowns(Html.FieldNameFor(x => x.DateOfBirthDay),
+                Html.FieldNameFor(x => x.DateOfBirthMonth),
+                Html.FieldNameFor(x => x.DateOfBirthYear),
+                DateTime.Now.Year - 110,
+                DateTime.Now.Year,
+                Model.DateOfBirthDay,
+                Model.DateOfBirthMonth,
+                Model.DateOfBirthYear)
+                @if (Model.DateOfBirthRequired)
+                {
+                  @Html.RequiredHint()
+                }
+                @Html.ValidationMessageFor(model => model.DateOfBirthDay)
+                @Html.ValidationMessageFor(model => model.DateOfBirthMonth)
+                @Html.ValidationMessageFor(model => model.DateOfBirthYear)
+              </div>
+            }
+
+
+            @if (Model.PhoneEnabled)
+            {
+              <div class="row">
+                <div class="col-12 col-md-12 col-sm-12 form-group">
+                  <label style="font-size: 14px; font-weight: bold;">Phone Number</label>
+                  @Html.TextBoxFor(model => model.Phone, new { @class = "form_signin pb-2", placeholder = "Phone number" })
+                  @Html.ValidationMessageFor(model => model.Phone)
+                </div>
+              </div>
+            }
+
+            @if (Model.DisplayCaptcha)
+            {<div class="form-group">
+                <div class="captcha-box">
+                  @Html.Raw(Html.GenerateCaptcha())
+                </div>
+              </div>
+            }
+            @if (Model.HoneypotEnabled)
+            {
+              @Html.Raw(Html.GenerateHoneypotInput())
+            }
+
+
+            @if (Model.AcceptPrivacyPolicyEnabled)
+            {
+              <script type="text/javascript">
+                  $(document).ready(function () {
+                    $('#register-button').click(function () {
+                      if ($('#accept-privacy-policy').is(':checked')) {
+                        //do some stuff
+                        return true;
+                      }
+                      else {
+                        //just show validation errors, dont post
+                        alert('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))');
+                        return false;
+                      }
+                    });
+                  });
+              </script>
+              <div class="accept-privacy-policy">
+                <input id="accept-privacy-policy" type="checkbox" name="accept-privacy-policy" />
+                <label for="accept-privacy-policy">@T("Account.Fields.AcceptPrivacyPolicy")</label>
+                <span class="read" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "privacyinfo" })', 450, 500, true)">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
+              </div>
+            }
+          </div>
+
+          @{
+            var validationSummary = Html.ValidationSummary(true);
+            if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+              <div class="message-error">@validationSummary</div>
+            }
+          }
+
+          <button type="submit" id="register-button" class="btn btn-default button_signin" name="register-button">CREATE ACCOUNT</button>
+        </div>
+      </div>
+      <div id="pnlfailure"></div>
+    </div>
+ </div>
+}
+

@@ -1,0 +1,82 @@
+﻿@model ShoppingCartModel
+@using Nop.Web.Models.Checkout
+@using Nop.Web.Models.ShoppingCart;
+@{
+    //title
+    Html.AddTitleParts(T("PageTitle.ShoppingCart").Text);
+}
+
+
+@*@if (!Model.OnePageCheckoutEnabled){@Html.Action("CheckoutProgress", "Checkout", new {step = CheckoutProgressStep.Cart})}*@
+
+@*@section Left{@Html.Partial("MenuStatic")}*@
+
+<div class="container mt-5">
+    <div class="col-main mt-normal">
+        <h2 class="text-left mb-3">BAG</h2>
+        <div id="pleasewait" style="display:none;" class="text-shop">
+            <img src="~/Themes/v1/Content/images/ajax_loader_small.gif" style="display:block;" /> <i>Please wait...</i>
+        </div>
+        @Html.Partial("OrderSummary", Model)
+    </div>
+    </div>
+<br /><br /><br /><br /><br />
+
+      
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script>
+        function newAddress(that) {
+            if (that.value == "other") {
+                document.getElementById("ifNewbil").style.display = "block";
+            } else {
+                document.getElementById("ifNewbil").style.display = "none";
+            }
+        }
+        function newAddress2(that) {
+            if (that.value == "other") {
+                document.getElementById("ifNewship").style.display = "block";
+            } else {
+                document.getElementById("ifNewship").style.display = "none";
+            }
+        }
+
+
+        function reqfailed() {
+            $("#pnlfailure").html("Sorry, an error occured.");
+        }
+
+        function frmUpdateComplete(data, status, xhr) {
+            if (typeof data.uri != "undefined")
+                window.location = data.uri;
+
+            if ($('#cartqty').html() != "undefined") {
+                var q = ($('#cartqty').html());
+
+                if (q > 0) {
+                    $('.cart-qty').html(q);
+                }
+                else {
+                    var width = $(window).width(), height = $(window).height();
+                    //if ((width >= 1080)) {
+                    //    $('.cart-qty').html('0');
+                    //}
+                    //else {
+                    $('.cart-qty').empty();
+                    //}
+                }
+
+            }
+        }
+
+        $("#continueshopping").click(function () {
+            $("#pleasewait").css("display", "block");
+        });
+        $("#checkout").click(function () {
+            $("#pleasewait").css("display", "block");
+        });
+
+    </script>
+}

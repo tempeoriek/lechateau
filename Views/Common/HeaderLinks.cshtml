@@ -1,0 +1,437 @@
+﻿@model HeaderLinksModel
+@using Nop.Web.Models.Common;
+@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Services.Localization
+@using Nop.Web.Framework.Themes
+
+@{
+
+	//logo path
+	var currentThemeName = "v1"; //EngineContext.Current.Resolve<IThemeContext>().WorkingThemeName;
+	var logo = "~/Themes/" + currentThemeName + "/Content/images/logo.svg";
+
+	//store name
+	var storeName = EngineContext.Current.Resolve<IStoreContext>().CurrentStore.GetLocalized(x => x.Name);
+
+	//current category ID
+	int currentCategoryId = 0;
+	if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+		Url.RequestContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.InvariantCultureIgnoreCase))
+	{
+		currentCategoryId = Convert.ToInt32(Url.RequestContext.RouteData.Values["categoryId"].ToString());
+	}
+
+
+	//current product ID
+	int currentProductId = 0;
+	if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("product", StringComparison.InvariantCultureIgnoreCase) &&
+		Url.RequestContext.RouteData.Values["action"].ToString().Equals("productdetails", StringComparison.InvariantCultureIgnoreCase))
+	{
+		currentProductId = Convert.ToInt32(Url.RequestContext.RouteData.Values["productId"].ToString());
+	}
+
+	string about, newproduct, contact, saleall;
+	about = newproduct = contact = saleall = string.Empty;
+	var url = HttpContext.Current.Request.Url.AbsolutePath;
+	if (url.Contains("/about"))
+	{
+		about = "category-menu";
+	}
+	else if (url.Contains("/newproducts"))
+	{
+		newproduct = "category-menu";
+	}
+	else if (url.Contains("/contact"))
+	{
+		contact = "category-menu";
+	}
+	else if (url.Contains("sale-all"))
+	{
+		saleall = "category-menu";
+	}
+  string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
+}
+
+@*desktop navbar*@
+<div class="fixed-top d-none d-md-block hidden-xs hidden-sm" style="background-color: white; height: 70px;">
+	
+	@* new nav bar full width dropdown *@
+	@Html.Action("CategoryNavigation", "Catalog", new {saleall = saleall, about = about, newproduct = newproduct, contact = contact, currentCategoryId = currentCategoryId, currentProductId = currentProductId, isSidebar = false })
+
+	<div style="width:100%; text-align:center;">
+		<div class="d-flex justify-content-center align-items-center" style="float:left; width:30%; height: 70px;">
+			<a href="~/"><img src="~/Themes/v1/Content/images/logo.svg" class="brandImage" style="width: 60%;" /></a>
+		</div>
+
+		<div class="d-flex justify-content-center align-items-center" style="float:right; width: 30%; height: 70px;">
+			<div class="row">
+				@* login and account headers *@
+				<div class="col-4 col-md-4 d-flex justify-content-center align-items-center" id="acc-panel">
+					@if (Model.IsAuthenticated)
+					{
+						<ul class="list-unstyled list-inline" style="margin: 0;">
+							<li>
+								<div class="dropdown">
+									<a href="#" class="nav-item"><img src="~/Themes/v1/Content/images/account-icon.png"/></a>
+									<div class="dropdown-content2 text-left">
+										<a href="~/order/ConfirmPayments">Confirm Payment</a>
+										<a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
+										<a href="@Url.RouteUrl("CustomerInfo")">Personal Info</a>
+										<a href="@Url.RouteUrl("CustomerChangePassword")">Change Password</a>
+										<a href="~/customer/addressAdd">Address Book</a>
+										<a href="@Url.RouteUrl("Logout")"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Logout</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					}
+					else
+					{
+						<div> 
+							<a href="~/login" class="signin btn-login" style="font-size: 16px;">LOGIN </a>
+						</div>
+					}
+				</div>
+				
+				@* search headers *@
+				<div class="col-4 col-md-4 d-flex justify-content-center align-items-center">
+					<div  id="search-panel" class="show-mobile-menu-btn" style="cursor:pointer;">
+						<img src="~/Themes/v1/Content/images/search.svg" />
+					</div>
+				</div>
+
+				@* cart headers *@
+				<div class="col-4 col-md-4 d-flex justify-content-center align-items-center">
+					@if (Model.ShoppingCartEnabled)
+					{
+						var cartItem = "0";
+						var cssCartItem = "bag-empty";
+						if (Model.ShoppingCartItems > 0)
+						{
+							cartItem = string.Format("{0}", Model.ShoppingCartItems);
+							cssCartItem = "shopping-bag";
+						}
+						<a href="#bag">
+							<div id="icbag-panel" class="@cssCartItem">
+								<img src="~/Themes/v1/Content/images/cart-icon.svg"/>
+							</div>
+						</a>
+						<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
+						</span>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@*overlay search*@
+@* <div class="form-group justify-content-center mb-4 mb-md-0 d-none d-md-block hidden-xs hidden-sm" style="vertical-align:top;">
+	<input class="email form-footer" type="email" style="border: 1px solid; border-radius: 4px; padding: 14px; background-color: white;" name="EMAIL" placeholder="Your e-mail" value="" required="required" />
+	<button id="mc-embedded-subscribe" style="margin-left: -30px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.png" /></button>
+	<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0713301c8224b9979b17bdd9b_0e2ea9797e" id="b_0713301c8224b9979b17bdd9b_0e2ea9797e" tabindex="-1" value=""></div>
+</div> *@
+
+<div class="asidesearch">
+	<form action="~/search" autocomplete="on" style="display: flex; justify-content: center; width: inherit;">
+		<input class="search-navdesktop" id="search" name="q" type="text" placeholder="Type something to search">
+		<button style="margin-left: -30px; border: none; background: none;" type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.png" /></button>
+	</form>
+</div>
+
+@*overlay shopping cart*@
+<div class="aside">
+	<div style="height: 100%; display: flex; justify-content: space-between">
+		<div id="bag" style="height: 100%; width: 100%;">
+			@Html.Action("FlyoutShoppingCart", "ShoppingCart")
+		</div>
+	</div>
+	@* <div class="aside-header p-4">
+		<span style="color: black; font-size: 22px;">Your Bag</span>
+		<span class="close" data-dismiss="aside" aria-hidden="true">&times;</span>
+		<hr style="border-top: 2px solid black;">
+	</div>
+	<div class="aside-contents">
+		<div id="bag" style="height: 100%;">@Html.Action("FlyoutShoppingCart", "ShoppingCart")</div>
+	</div> *@
+</div>
+
+@* cart mobile  *@
+<div class="asidemobile">
+	<div style="height: 100%; display: flex; justify-content: space-between">
+		<div id="bag" style="height: 100%; width: 100%;">
+			@Html.Action("FlyoutShoppingCart", "ShoppingCart")
+		</div>
+	</div>
+</div>
+<div class="asidemobile-backdrop"></div>
+
+
+@*mobile navbar*@
+<div class="d-block d-md-none hidden-md hidden-lg sidebarNavigation fixed-top">
+	<nav class="navbar navbar-expand-md" data-sidebarClass="navbar-dark" style="background-color: white; ">
+		<div class="text-center" style="width:100%;">
+			<div class="row m-1">
+				<div class="col-4 d-flex justify-content-start">
+					<button class="navbar-togglers leftNavbarToggler btn-toggle" type="button" data-target="#navbarsExampleDefault"
+							aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+						<div class="menu-header-mobile"><img src="~/Themes/v1/Content/images/menu.svg" /></div>
+					</button>
+				</div>
+
+				<div class="col-4 d-flex justify-content-center">
+					<a class="navbar-brand" href="~/"><img class="img-fluid brandImage" src="~/Themes/v1/Content/images/logo.svg" style="height: 22px;" /></a>
+				</div>
+
+
+				<div class="col-4 d-flex justify-content-end" style="padding-right: 5% !important;">
+					<a href="#" class="" onclick="openSearch()" style="padding-right:17px;"><img src="~/Themes/v1/Content/images/search.svg" /></a>
+					@if (Model.ShoppingCartEnabled)
+					{
+						var cartItem = "0";
+						var cssCartItem = "bag-empty";
+						if (Model.ShoppingCartItems > 0)
+						{
+							cartItem = string.Format("{0}", Model.ShoppingCartItems);
+							cssCartItem = "bag";
+						}
+						<a href="#bag" onclick="$('.asidemobile').asidebar('open')">
+							<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
+								<span class="nav-item" style="color:#707070;margin-left:-8px;">
+									<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" /> 
+								</span>
+								<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
+								</span>
+							</div>
+						</a>
+					}
+				</div>
+
+				<div class="navbar-collapse" id="navbarsExampleDefault" style="padding: 0;">
+					<div class="d-block d-md-none hidden-md hidden-lg">
+						@* category title in navbar *@
+						<div class="row mb-4" style="background-color: white">
+							<div class="col-4 d-flex justify-content-start align-items-center">
+								<span class="closebtn" onclick="closeMenu()" title="Close Overlay" style="font-size: 37px; padding-left: 20%;">×</span>
+							</div>
+							
+							<div class="col-4 d-flex justify-content-center align-items-center">
+								<img class="img-fluid store-logo" src="~/Themes/v1/Content/images/logo.svg" style="height: 22px;" />
+							</div>
+
+							<div class="col-4 d-flex justify-content-end align-items-center" style="padding-right: 10% !important;">
+								<a onclick="openSearch()"><img src="~/Themes/v1/Content/images/search.svg" /></a>
+								@if (Model.ShoppingCartEnabled)
+								{
+									var cartItem = "0";
+									var cssCartItem = "bag-empty";
+									if (Model.ShoppingCartItems > 0)
+									{
+										cartItem = string.Format("{0}", Model.ShoppingCartItems);
+										cssCartItem = "bag";
+									}
+									<a href="#bag" onclick="$('.asidemobile').asidebar('open')" style="padding: 0;">
+										<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
+											<span class="nav-item" style="color:#707070;">
+												<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" /> 
+											</span>
+											<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
+											</span>
+										</div>
+									</a>
+								}
+								@* <a style="width: auto;" href="#" class="" onclick="openSearch()" ><img src="~/Themes/v1/Content/images/search.svg" /></a>
+								@if (Model.ShoppingCartEnabled)
+								{
+									var cartItem = "0";
+									var cssCartItem = "bag-empty";
+									if (Model.ShoppingCartItems > 0)
+									{
+										cartItem = string.Format("{0}", Model.ShoppingCartItems);
+										cssCartItem = "bag";
+									}
+									<a href="#bag" onclick="$('.asidemobile').asidebar('open')" style="padding: 0 0 0 5px;">
+										<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
+											<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
+												<span class="nav-item" style="color:#707070;">
+													<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" /> 
+												</span>
+											</span>
+										</div>
+									</a>
+								} *@
+							</div>
+						</div>
+
+						<div id="accMobileHeader" style="padding: 0 5%;">
+							@* category menu in navbar *@
+							@Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId, isMobile = true })
+							<ul class="list-unstyled list-inline">
+								@if (Model.IsAuthenticated)
+								{
+									<li class="dropdown dropright-list">
+										<a href="@Url.RouteUrl("CustomerInfo")" class="dropbtn mb-2" style="font-size:16px;" data-toggle="collapse" data-target="#collapse-nav2" aria-expanded="false" aria-controls="collapse-nav2">My Account</a>
+										<div class="collapse" id="collapse-nav2" style="padding-left: 13%; width: 300px;">
+											<a class="mb-2" style="font-size: 16px; padding: 0;" href="~/order/ConfirmPayments">Confirm Payment</a>
+											<a class="mb-2" style="font-size: 16px; padding: 0;" href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
+											<a class="mb-2" style="font-size: 16px; padding: 0;" href="@Url.RouteUrl("CustomerInfo")">Personal Info</a>
+											<a class="mb-2" style="font-size: 16px; padding: 0;" href="@Url.RouteUrl("CustomerChangePassword")">Change Password</a>
+											<a class="mb-2" style="font-size: 16px; padding: 0;" href="~/customer/addressAdd">Address Book</a>
+											<a class="mb-2" style="font-size: 16px; padding: 0;" href="@Url.RouteUrl("Logout")"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Logout</a>
+										</div>
+									</li>
+								}
+								else
+								{
+									<li><a href="~/login" class="signin btn-login" style="font-size:16px;">Log in/Sign Up</a></li>
+								}
+
+							</ul>
+						</div>
+					</div>
+
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>
+
+@* search mobile *@
+<div class="overlay2 d-sm-none" id="myOverlay">
+	<span class="closebtn" onclick="closeSearch()" title="Close Overlay">close</span>
+	<div class="overlay-content">
+		<form action="~/search" autocomplete="on">
+			<input class="search-nav-2 mb-5" id="search" name="q" type="text" placeholder="Type something">
+		</form>
+	</div>
+</div>
+
+
+
+
+<script>
+	window.onload = function () { if (window.jQuery) { $(document).ready(function () { $(".sidebarNavigation .navbar-collapse").hide().clone().appendTo("body").removeAttr("class").addClass("sideMenu").show(); $("body").append("<div class='overlay'></div>"); $(".navbar-toggle, .navbar-togglers").on("click", function () { $(".sideMenu").addClass($(".sidebarNavigation").attr("data-sidebarClass")); $(".sideMenu, .overlay, .xclose").toggleClass("open"); $(".overlay, .xclose").on("click", function () { $(this).removeClass("open"); $(".sideMenu").removeClass("open") }) }); $("body").on("click", ".sideMenu.open .nav-item", function () { if (!$(this).hasClass("dropdown")) { $(".sideMenu, .overlay, .xclose").toggleClass("open") } }); $(window).resize(function () { if ($(".navbar-toggler").is(":block")) { $(".sideMenu, .overlay").hide() } else { $(".sideMenu, .overlay, .xclose").show() } }) }) } else { console.log("sidebarNavigation Requires jQuery") } }
+
+	$(document).on('click', '.dropdown', function (e) {
+		e.stopPropagation();
+		$('.dropdown').not($(this)).removeClass('active');
+		$(this).toggleClass('active');
+	});
+
+	$(document).on('click', function () {
+		$('.dropdown').removeClass('active');
+	});
+
+	$(document).on('click', '.dropdown-content', function (e) {
+		e.stopPropagation();
+	})
+
+	$("#acc-panel").hover(
+		function() {
+			$('.asidesearch').asidebar('close')
+			$('.aside').asidebar('close')
+		}, function() {}
+	)
+
+	//Hover header cart
+  $("#icbag-panel").hover(
+    function() {
+			$('.aside').asidebar('open')
+			$('.asidesearch').asidebar('close')
+    }, 
+    function() {
+      $( ".aside" ).mouseleave(function() {
+				$('.aside').asidebar('close')
+			});
+    }
+  );
+  
+	//Hover header search
+	$("#search-panel").hover(
+    function() {
+			$('.asidesearch').asidebar('open')
+			$('.aside').asidebar('close')
+
+    }, 
+    function() {
+      $( ".asidesearch" ).mouseleave(function() {
+				$('.asidesearch').asidebar('close')
+			});
+    }
+  );
+
+</script>
+
+@if (Model.ShoppingCartEnabled)
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			if (
+				$('.toggle > input').is(':checked') &&
+				!$(event.target).parents('.toggle').is('.toggle')
+			) {
+				$('.toggle > input').prop('checked', false);
+			}
+
+
+			$('.li-header-mini-cart').on('mouseenter', '#topcartlink', function () {
+				$('#flyout-cart').addClass('active');
+			});
+			$('.li-header-mini-cart').on('mouseleave', '#topcartlink', function () {
+				$('#flyout-cart').removeClass('active');
+			});
+			$('.li-header-mini-cart').on('mouseenter', '#flyout-cart', function () {
+				$('#flyout-cart').addClass('active');
+			});
+			$('.li-header-mini-cart').on('mouseleave', '#flyout-cart', function () {
+				$('#flyout-cart').removeClass('active');
+			});
+
+		});
+
+		function openSearch() {
+			document.getElementById("myOverlay").style.display = "block";
+		}
+
+		function closeSearch() {
+			document.getElementById("myOverlay").style.display = "none";
+		}
+		function closeMenu() {
+			$('.sideMenu').removeClass('open');
+			$('.overlay').removeClass('open');
+			$('.mobile-category-menu').attr('style', "display: block !important;");
+	    $('.header-links').attr('style', "display: none !important;;");
+		}
+		function showMobileMenu() {
+			console.log(document.querySelector('.search-text-homepage'))
+			if (document.querySelector('.search-text-homepage') !== null){
+					// Do something if class exists
+				$('.form-input-search').removeClass('search-text-homepage');
+			} else {
+					// Do something if class does not exist
+				$('.form-input-search').addClass('search-text-homepage');
+			}
+
+			//$('.mobile-left-sidebar').addClass('active');
+			//$('.mobile-left-sidebar-overlay').addClass('active');
+		}
+		function showMobileMenuHeader() {
+			$('.mobile-category-menu').attr('style', "display: none !important;");
+	    $('.header-links').attr('style', "display: block;");
+		}
+		function closeMobileMenu() {
+			$('.mobile-left-sidebar').removeClass('active');
+			$('.mobile-left-sidebar-overlay').removeClass('active');
+		}
+		$('.show-mobile-menu-btn').click(showMobileMenu);
+		$('.menu-header-mobile').click(showMobileMenuHeader);
+		$('.mobile-left-sidebar-overlay').click(closeMobileMenu);
+		$('.close-mobile-menu-btn').cli
+
+
+	</script>
+}

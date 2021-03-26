@@ -1,0 +1,489 @@
+﻿@model IEnumerable<Nop.Web.Models.Flitts.Homepage.HomepageViewModel>
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="">@Html.Action("HeaderLinks", "Common")</div>
+
+
+@if (Model != null)
+{
+  if (Model.Any())
+  {
+    foreach (var item in Model)
+    {
+      @* Slider *@
+      if (item.Id == 1)
+      {
+        <div class="container-fluid">
+          @if (item.DesktopItems.Any())
+          {
+            <div class="row d-none d-md-block hidden-xs hidden-sm carousel slide mb-5" data-ride="carousel" id="carouselDesktop">
+              <div class="carousel-inner col-12 d-block d-md-block">
+                @{
+                  var index = 0;
+                  var firstactive = "active";
+                  foreach (var img in item.DesktopItems)
+                  {
+                    if (index > 0)
+                    {
+                      firstactive = "";
+                    }
+
+                    <div class="carousel-item @firstactive position-relative">
+                      <a href="@img.NavigateTo" class="">
+                        <img class="d-block w-100" src="@img.PictureUrl">
+                      </a>
+                      
+                    </div>
+
+                    index++;
+
+                  }
+                }
+              </div>
+              <div class="row" style="position: absolute; bottom: 15%; right: 11%">
+                <div class="mr-5">
+                  <a href="#carouselDesktop" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </div>
+                <div>
+                  <a href="#carouselDesktop" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          }
+
+          @if (item.MobileItems.Any())
+          {
+            <div class="row d-block d-md-none hidden-md hidden-xl carousel slide mb-3">
+              <a href="@item.MobileItems[0].NavigateTo">
+                <img class="d-block w-100" src="@item.MobileItems[0].PictureUrl">
+              </a>
+            </div>
+          }
+        </div>
+      }
+
+      @* row 2 *@
+      if (item.Id == 2)
+      {
+        if (item.DesktopItems.Any()) {
+          <div class="container d-none d-md-block hidden-xs hidden-sm">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-5 col-md-5 col-sm-5" style="padding: 5% !important;">
+                <div style="height: 20%; display: flex; justify-content: flex-start; align-items: flex-end;">
+                  <h1 style="font-style: italic; font-weight: bold;">New ‘Era’ Collection</h1>
+                </div>
+                <div>
+                  <p>The balance of beauty. Pure geometric lines, comfort and lightness are the hallmarks of this collection with multiple vocations, which oï¬€er intelligent and compact solutions for furnishing the bathroom in a dynamic and versatile way. The sanitary ware of the collection foresees the use of the new rimless 2.0 discharge technology, a true revolution from an aesthetic and functional point of view.</p>
+                </div>
+                <div style="margin-top: 15%;">
+                  <button class="explore-now-home">EXPLORE NOW</button>
+                  <button class="buy-now-home">Buy Now</button>
+                </div>
+              </div>
+              <div class="col-5 col-md-5 col-sm-5" style="padding: 10px !important">
+                <a href="#">
+                  <img src="@item.DesktopItems[0].PictureUrl" class="img-fluid w-100" style="height: 100%;" />
+                </a>
+              </div>
+              <div class="col-1"></div>
+            </div>
+          </div>
+        }
+
+        if (item.MobileItems.Any()) {
+          <div class="container d-block d-md-none hidden-md hidden-xl">
+            <div class="row" style="padding: 30px 45px 0;">
+              <div class="col-12 col-sm-12">
+                <p style="font-size: 28px; font-style: italic; font-weight: bold;">New ‘Era’ Collection</p>
+              </div>
+            </div>
+
+            <div class="row" style="padding: 0 45px;">
+              <div class="col-12 col-sm-12">
+                <p style="font-size: 16px;">The balance of beauty. Pure geometric lines, comfort and lightness are the hallmarks of this collection with multiple vocations, which oï¬€er intelligent and compact solutions for furnishing the bathroom in a dynamic and versatile way. The sanitary ware of the collection foresees the use of the new rimless 2.0 discharge technology, a true revolution from an aesthetic and functional point of view.</p>
+              </div>
+            </div>
+
+            <div class="row" style="padding: 30px 45px;">
+              <div class="col-5 col-sm-5 p-0">
+                <button class="explore-now-home">EXPLORE NOW</button>
+              </div>
+              <div class="col-7 col-sm-7">
+                <button class="buy-now-home">Buy Now</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <a href="#">
+                <img src="@item.MobileItems[0].PictureUrl" class="img-fluid w-100" style="height: 100%;" />
+              </a>
+            </div>
+          </div>
+        }
+
+      }
+
+    }
+  }
+}
+
+<div class="row" style="margin-top: 10%; margin-bottom: 5%;">
+  <div class="col-12 col-md-12 d-flex justify-content-center">
+    <h1 style="color: black; font-weight: bold; font-style: italic; font-size: 28px;">Best Selling Items</h1>
+  </div>
+</div>
+
+
+@* Best Seller ? *@
+@Html.Action("HomepageBestSellers", "Product")
+
+@* Best Seller Desktop *@
+<div class="d-none d-md-block hidden-xs hidden-sm">
+  <div class="row mb-5" id="carouselExampleControlsBrand">
+    <div class="col-1 col-md-1 col-sm-1">
+    </div>
+    @for (int i = 0; i < 3; i++)
+    {
+
+      <div class="col-3 col-md-3 col-sm-3" style="margin-right: 2vw; margin-left: 2vw;">
+        <div class="row">
+          <div class="ori-product-img">
+            <a href="#" class="clean">
+              <img src="~/Themes/v1/Content/images/item-example.jpg" class="img-fluid center-block" />
+            </a>
+
+            <a href="#" class="clean overlay-product-img">
+              <img src="~/Themes/v1/Content/images/item-example2.jpg" class="img-fluid center-block" />
+            </a>
+          </div>
+        </div>
+        @if (i == 0) {
+          <div style="position: absolute; top: 23%; left: 10%;">
+            <a href="#carouselExampleControlsBrand" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </div>
+        }
+        @if (i == 2) {
+          <div style="position: absolute; top: 23%; right: 10%;">
+            <a href="#carouselExampleControlsBrand" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        }
+        <div class="row">
+          <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">ANTONIO LUPI</p>
+        </div>
+        <div class="row" style="font-size: 16px; line-height: 19px;">
+          <p>ANTONIO LUPI VITREO FREESTANDING WASHBASIN</p>
+        </div>
+        <div class="row" style="margin-top: -10px; font-size: 14px;">
+          <p>IDR 8.808.880</p>
+        </div>
+      </div>
+
+    }
+    <div class="col-1 col-md-1 col-sm-1">
+    </div>
+  </div>
+</div>
+
+@* Best Seller Mobile *@
+<div class="row d-block d-md-none hidden-md hidden-xl">
+  <div class="row" style="padding:0 4rem 30px; margin-top: -15px;" id="carouselExampleControlsBestItems">
+    @for (int i = 0; i < 1; i++)
+    {
+      <div class="col-12 col-md-12" style="padding: 10px !important;">
+        <div class="row" style="display: flex; justify-content: center; align-items: center;">
+          <div class="ori-product-img">
+            <a href="#" class="clean">
+              <img src="~/Themes/v1/Content/images/item-example.jpg" class="img-fluid center-block" />
+            </a>
+
+            <a href="#" class="clean overlay-product-img">
+              <img src="~/Themes/v1/Content/images/item-example2.jpg" class="img-fluid center-block" />
+            </a>
+          </div>
+        </div>
+        
+        <div style="position: absolute; top: 23%; left: 0;">
+          <a href="#carouselExampleControlsBrand" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </div>
+        <div style="position: absolute; top: 23%; right: 0;">
+          <a href="#carouselExampleControlsBrand" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        <div class="row">
+          <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">ANTONIO LUPI</p>
+        </div>
+        <div class="row" style="font-size: 16px; line-height: 19px;">
+          <p>ANTONIO LUPI VITREO FREESTANDING WASHBASIN</p>
+        </div>
+        <div class="row" style="margin-top: -10px; font-size: 14px;">
+          <p>IDR 8.808.880</p>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+
+
+
+
+@* Our Brands *@
+@* @if (Model != null)
+{
+  if (Model.Any())
+  {
+    foreach (var item in Model)
+    {
+      if (item.Id == 2)
+      {
+        if (item.DesktopItems.Any()) {
+          <div class="d-none d-md-block hidden-xs hidden-sm">
+            <div class="d-flex justify-content-center mb-5">
+              <hr  style="width: 90%; background-color: #707070; margin: 0;">
+            </div>
+            <div class="row mb-5">
+              <div class="col-12 col-md-12 d-flex justify-content-center">
+                <h1 style="color: #707070; font-weight: bold;">OUR BRANDS</h1>
+              </div>
+            </div>
+
+            <div class="row mb-5" style="height: 150px;">
+              <div class="col-md-2"></div>
+              @for (int i = 0; i < item.DesktopItems.Count(); i++) {
+                if (item.DesktopItems[i].Title.Contains("brand")) {
+                  <div class="col-6 col-md-2 col-sm-2 p-3" style="display: flex; justify-content: center; align-items: center;">
+                    <img class="w-50" src="@item.DesktopItems[i].PictureUrl">
+                  </div>
+                }
+              }
+              <div class="col-md-2 "></div>
+            </div>
+          </div>
+        }
+
+        if (item.MobileItems.Any())
+          {
+            <div class="row d-block d-md-none hidden-md hidden-xl carousel slide mb-3" data-ride="carousel" id="carouselExampleControlsBrand">
+              <div class="carousel-inner col-12 d-block d-md-block position-relative" style="height: 160px;">
+                @{
+                  var firstactive = "active";
+                  for (int z = 0; z < item.MobileItems.Count(); z++)
+                  {
+                    if (item.MobileItems[z].Title.Contains("brand")) {
+                      <div class="carousel-item @firstactive" style="height: inherit;">
+                        <div class="row" style="height: inherit;">
+                          <div class="col-6" style="height: inherit;">
+                            <a style="height: inherit;" class="d-flex justify-content-center align-items-center" href="@item.MobileItems[z].NavigateTo"> 
+                              <img style="margin-left: 60px;" class="w-50" src="@item.MobileItems[z].PictureUrl"> 
+                            </a>
+                          </div>
+                          <div class="col-6" style="height: inherit;">
+                            <a style="height: inherit;" class="d-flex justify-content-center align-items-center" href="@item.MobileItems[z].NavigateTo"> 
+                              <img style="margin-right: 60px;" class="w-50" src="@item.MobileItems[z+1].PictureUrl"> 
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+
+                      firstactive = "";
+                      z = z-1;
+
+                      if (z+2 <= item.MobileItems.Count()) {
+                        z = z+2;
+                      } else if (z < 0) {
+                        z = 0;
+                      }
+                    }
+                  
+                  }
+                }
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControlsBrand" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControlsBrand" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          }
+        
+      }
+
+    }
+  }
+} *@
+
+@*Instagram*@
+<div class="row" style="margin-top: 5%; margin-bottom: 10%;">
+  <div class="col-12 col-md-4 col-sm-4" style="height: inherit">
+    <div style="height: 50%; display: flex; justify-content: center; align-items: flex-end;">
+      <h1 style="color: black; font-size: 35px; font-style: italic; font-weight: bold">Stay<br>Updated</h1>
+    </div>
+    <div style="height: 50%; display: flex; justify-content: center; align-items: flex-start;">
+      <a href="https://www.instagram.com/lechateauliving/" style="text-decoration: none; color: black; font-size: 16px;">&#64;lechateauliving</a>
+    </div>
+  </div>
+  
+  <div class="col-12 col-md-8 col-sm-8 d-none d-md-block hidden-xs hidden-sm">
+    <div class="row">
+      @for (int j = 0; j < 3; j++) {
+        <div class="col-4 col-sm-4 col-md-4 text-center p-2">
+          <img src="~/Themes/v1/Content/images/ig-home.png" style="height: 100%; width: 100%">
+        </div>
+      }
+    </div>
+    <div class="row">
+      @for (int j = 0; j < 3; j++) {
+        <div class="col-4 col-sm-4 col-md-4 text-center p-2">
+          <img src="~/Themes/v1/Content/images/ig-home.png" style="height: 100%; width: 100%">
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@* mobile instagram content *@
+<div class="d-block d-md-none hidden-md hidden-xl" style="margin-top: -10%; margin-bottom: 10%;">
+  <div style="overflow-x: scroll;">
+    <div style="width: 1000px; margin-left: 35px;">
+      @for (int j = 0; j < 3; j++) {
+        <img src="~/Themes/v1/Content/images/ig-home.png" style=" padding: 5px;">
+      }
+    </div>
+  </div>
+</div>
+
+@* <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="recoleta mb-3">Follow us on instagram</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="carouseldesktop d-none d-md-block hidden-xs hidden-sm">
+          <div><img src="~/content/images/uploaded/homepage/thabs 2.png" class="img-fluid"></div>
+          <div><img src="~/content/images/uploaded/homepage/thabs 3.png" class="img-fluid"></div>
+          <div><img src="~/content/images/uploaded/homepage/thabs 4.png" class="img-fluid"></div>
+        </div>
+        <div class="carouselmobile d-block d-md-none hidden-md hidden-xl">
+          <div><img src="~/content/images/uploaded/homepage/thabs 2.png" class="img-fluid"></div>
+          <div><img src="~/content/images/uploaded/homepage/thabs 3.png" class="img-fluid"></div>
+          <div><img src="~/content/images/uploaded/homepage/thabs 4.png" class="img-fluid"></div>
+        </div>
+      </div>
+
+    </div>
+  </div> *@
+
+<input type="hidden" id="flag" value="0" />
+
+@Html.Action("Footer", "Common")
+
+@section RootHeaderSection{
+
+  <link rel="stylesheet" type="text/css" href="~/Scripts/app/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="~/Scripts/app/slick/slick-theme.css">
+
+  <link href="~/Themes/v1/Content/homepage.css" rel="stylesheet" />
+
+  <style>
+    .col-12, .col-6 {
+      padding: 0 !important;
+    }
+  </style>
+}
+
+@section RootScripts{
+
+  <script>
+    $(document).ready(function () {
+      $('.carousel').carousel({
+        touch: true
+      });
+
+    });
+
+  </script>
+
+  <script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.carouselhero').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouselhero2').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouseldesktop').slick({
+        slidesToShow: 3,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouselmobile').slick({
+        slidesToShow: 3,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
+
+    $('.left').click(function () {
+      $('.carouselmobile').slick('slickPrev');
+    })
+
+    $('.right').click(function () {
+      $('.carouselmobile').slick('slickNext');
+    })
+  </script>
+
+
+
+}
+<script>
+	//console.log(`HOME`);
+	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+	//console.log(model);    
+</script>
