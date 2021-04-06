@@ -192,7 +192,7 @@
           </div>
           
           @* sub sub category *@
-          <div id="divSubcategory" class="col-3 col-md-3 col-sm-3 d-flex justify-content-left" style="padding-top: 8%;">
+          <div id="divSubcategory" class="col-2 col-md-2 col-sm-2 d-flex justify-content-left" style="padding-top: 8%;">
             @foreach (var ctgry in Model.Categories) {
               foreach (var subcategory in ctgry.SubCategories) {
                 if (ctgry.Id == category.Id) {
@@ -222,20 +222,21 @@
             }
           </div>
 
-          <div class="col-4 col-md-4 col-sm-4">
-            <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@category.Id" style="max-height: 500px; width: fit-content;" class="header-img-hover"/>
+          <div class="col-5 col-md-5 col-sm-5 d-flex justify-content-center" style="padding-top: 8%;">
+            <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@category.Id" style="width: 100%; height: 75%;" class="header-img-hover"/>
 
             @foreach (var ctgry in Model.Categories) {
               foreach (var subcategory in ctgry.SubCategories) {
                 for (int z = 0; z < subcategory.SubCategories.Count(); z++) {
                   if (ctgry.Id == category.Id) {
-                    <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@subcategory.SubCategories[z].Id" style="max-height: 500px; width: fit-content;" class="header-img-hover"/>
+                    <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@subcategory.SubCategories[z].Id" style="width: 100%; height: 75%;" class="header-img-hover"/>
                   }
 
                 }
               }
             }
           </div>
+
           <div class="col-1 col-md-1 col-sm-1 d-flex justify-content-center" style="padding-top: 8%;">
             <a id="close-category-header" style="font-size: 20px; font-weight: 600;">X</a>
           </div>

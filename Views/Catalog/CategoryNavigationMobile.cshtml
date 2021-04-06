@@ -133,7 +133,7 @@
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-brand" style="margin: 0; float: left;"></p>
       <p class="removeshowfilter-brand" style="margin: 0; float: right;"></p>
-    </div> *@
+    </div> 
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-price" style="margin: 0; float: left;"></p>
       <p class="removeshowfilter-price" style="margin: 0; float: right;"></p>
@@ -141,7 +141,7 @@
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-avail" style="margin: 0; float: left;"></p>
       <p class="removeshowfilter-avail" style="margin: 0; float: right;"></p>
-    </div>
+    </div>*@
 
     @* categories *@
     @for (int j = 0 ; j < Model.Categories.Count(); j++) {
@@ -287,10 +287,39 @@
           </a>
         </div>
 
-        <div data-parent="#accordionDesktopMenu" id="collapse-Four" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFour" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
-          <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">0 IDR - 1,000,000 IDR</a></div>
+        <div data-parent="#accordionDesktopMenu" id="collapse-Four" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFour" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important; margin-bottom: 15px;">
+          @* <div class="row m-0">
+            <div class="col-12 col-sm-12 col-md-12 d-flex justify-content-center align-items-center">
+              <input class="checkboxprice" type="range" style="width: 100%;" id="checkbox-price">
+            </div>
+          </div>
+          <div style="float: left; clear: both">test</div>
+          <div style="float: right; ">test</div> *@
+
+          <div class="row m-0">
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">0 IDR - 1,000,000 IDR</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-right">
+              <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="1000000" id="checkbox-price">
+            </div>
+          </div>
+
+          <div class="row m-0">
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">1,000,000 IDR - 10,000,000 IDR</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-right">
+              <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="10000000" id="checkbox-price">
+            </div>
+          </div>
+
+          <div class="row m-0">
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">10,000,000 IDR - 100,000,000 IDR</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-right">
+              <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="100000000" id="checkbox-price">
+            </div>
+          </div>
+
+          @* <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">0 IDR - 1,000,000 IDR</a></div>
           <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">1,000,000 IDR - 10,000,000 IDR</a></div>
-          <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">10,000,000 IDR - 100,000,000 IDR</a></div>
+          <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">10,000,000 IDR - 100,000,000 IDR</a></div> *@
         </div>
 
         <div class="p-2 head-prod-detail" role="tab" id="HeadingFive" style="border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
@@ -300,8 +329,21 @@
         </div>
 
         <div data-parent="#accordionDesktopMenu" id="collapse-Five" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFive" style="border-bottom: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
-          <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 10px;">Pre Order</a></div>
-          <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 10px;">Available</a></div>
+          @* <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 10px;">Pre Order</a></div> *@
+          @* <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 10px;">Available</a></div> *@
+          <div class="row m-0">
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">Pre Order</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-right">
+              <input class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="True" id="checkbox-avail">
+            </div>
+          </div>
+
+          <div class="row m-0">
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">Available</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-right">
+              <input class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="False" id="checkbox-avail">
+            </div>
+          </div>
         </div>
       }
     }
@@ -492,33 +534,39 @@
     </div>
   </div>
 @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-  var category = Model.Categories[j];
-  @* MOBILE SIDE MENU NAVIGATION *@
-  <div class="header-links">
-    <div class="d-block d-md-none hidden-md hidden-lg">
-      @if (category.SubCategories.Any()) {
-        <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
-          <a style="font-size: 16px;" data-toggle="collapse" href="#collapseheader-@category.SeName" aria-expanded="false" aria-controls="collapseheader-@category.SeName">
-            @category.Name
-          </a>
-        </div>
+  var parent_category = Model.Categories[j];
+  if (parent_category.SeName == "shop") {
+    for (int k = 0 ; k < parent_category.SubCategories.Count(); k++) {
+      var category = parent_category.SubCategories[k];
 
-        <div data-parent="#accMobileHeader" id="collapseheader-@category.SeName" class="collapse" style="padding-left: 5%;" role="tabpanel" aria-labelledby="Headingheader-@category.SeName">
-            <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">View All @category.Name</a></div>
-            @foreach (var subcat in category.SubCategories)
-            {
-              <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = subcat.SeName })">@subcat.Name</a></div>
-            }
+      @* MOBILE SIDE MENU NAVIGATION *@
+      <div class="header-links">
+        <div class="d-block d-md-none hidden-md hidden-lg">
+          @if (category.SubCategories.Any()) {
+            <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
+              <a style="font-size: 16px;" data-toggle="collapse" href="#collapseheader-@category.SeName" aria-expanded="false" aria-controls="collapseheader-@category.SeName">
+                @category.Name
+              </a>
+            </div>
+
+            <div data-parent="#accMobileHeader" id="collapseheader-@category.SeName" class="collapse" style="padding-left: 5%;" role="tabpanel" aria-labelledby="Headingheader-@category.SeName">
+                <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">View All @category.Name</a></div>
+                @foreach (var subcat in category.SubCategories)
+                {
+                  <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = subcat.SeName })">@subcat.Name</a></div>
+                }
+            </div>
+          } else {
+            <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
+              <a href="/@category.SeName" style="font-size: 16px;">
+                @category.Name
+              </a>
+            </div>
+          }
         </div>
-      } else {
-        <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
-          <a href="/@category.SeName" style="font-size: 16px;">
-            @category.Name
-          </a>
-        </div>
-      }
-    </div>
-  </div>
+      </div>
+    }
+  }
 }
 
 

@@ -3,12 +3,12 @@
 <div class="product-item">
     <div>
         <div class="ori-product-img">
-            <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName})" class="clean"><img src="@Model.DefaultPictureModel.ImageUrl" class="img-fluid center-block" /></a>
+            <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName})" class="clean"><img src="@Model.DefaultPictureModel.ImageUrl" class="img-fluid center-block"/></a>
 
-            @if (Model.AlternateImage != null)
+            @* @if (Model.AlternateImage != null)
             {
               <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName})" class="clean overlay-product-img"><img src="@Model.AlternateImage.ImageUrl" class="img-fluid center-block" /></a>
-            }
+            } *@
 
             @if (Model.Quantity == 0) {
               <div class="d-none d-md-block hidden-sm hidden-xs justify-content-center align-items-center" style="display: flex !important; position: absolute; top: 0; right: 0; height: 45px; width: 45px; background-color: black; border-radius: 10px;">

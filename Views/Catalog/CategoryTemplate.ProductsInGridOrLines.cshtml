@@ -35,17 +35,25 @@
   
 
 @* header desktop *@
-<div class="row d-none d-md-block carousel" style="margin: -145px 0; margin-bottom: 0;"> 
-  @if (Model.PictureModel.ImageUrl != null) {
+<div class="row d-none d-md-block carousel" style="margin: -145px 0; margin-bottom: 0; position: relative;"> 
+  <img class="d-block w-100" src="~/Themes/v1/Content/images/banner-example.jpg"> 
+  <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%);">
+    <h1 style="color: white;">@Model.Name</h1>
+  </div>
+  @* @if (Model.PictureModel.ImageUrl != null) {
     <img class="d-block w-100" src="@Model.PictureModel.ImageUrl"> 
-  }
+  } *@
 </div>
 
 @* header mobile *@
-<div class="row d-block d-md-none carousel" style="margin: 15px -30px"> 
-  @if (Model.PictureModel.ImageUrl != null) {
+<div class="row d-block d-md-none carousel" style="margin: -30px -30px 15px; position: relative;"> 
+  <img style="left: 50%; position: relative; transform: translateX(-50%);" src="~/Themes/v1/Content/images/banner-example.jpg"> 
+  <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <h1 style="color: white;">@Model.Name</h1>
+  </div>
+@*   @if (Model.PictureModel.ImageUrl != null) {
     <img class="d-block w-100" src="@Model.PictureModel.ImageUrl"> 
-  }
+  } *@
 </div>
 
 
@@ -66,7 +74,7 @@
   </div>
 </div>
 
-<div class="container catalog" style="padding: 3%; margin-top: 5%;">
+<div class="container catalog" style="padding: 3%;">
   @if (Model.Products.Any())
   {
 
@@ -121,7 +129,7 @@
             }
             if (type.Equals("landscape", StringComparison.OrdinalIgnoreCase))
             {
-              colCss = "col-6";
+              colCss = "col-6 col-sm-6 col-md-4 col-lg-4";
             }
 
             <div class="@colCss catalog-line allproducts" id="normal-@item.Id" data-categories="@array_cat" data-color="@item.Name" data-new="@item.MarkAsNew" data-brand="@item.Name" data-price="@item.ProductPrice.PriceValue" data-avail="@item.ProductPrice.AvailableForPreOrder" style="text-transform: uppercase;">
@@ -150,7 +158,7 @@
               }
               if (type.Equals("landscape", StringComparison.OrdinalIgnoreCase))
               {
-                colCss = "col-6";
+                colCss = "col-6 col-sm-6 col-md-4 col-lg-4";
               }
 
               <div class="@colCss catalog-line allproducts" id="asc-@item.Id" data-categories="@array_cat" data-color="@item.Name" data-new="@item.MarkAsNew" data-brand="@item.Name" data-price="@item.ProductPrice.PriceValue" data-avail="@item.ProductPrice.AvailableForPreOrder" style="text-transform: uppercase;">
@@ -180,7 +188,7 @@
               }
               if (type.Equals("landscape", StringComparison.OrdinalIgnoreCase))
               {
-                colCss = "col-6";
+                colCss = "col-6 col-sm-6 col-md-4 col-lg-4";
               }
 
               <div class="@colCss catalog-line allproducts" id="desc-@item.Id" data-categories="@array_cat" data-color="@item.Name" data-new="@item.MarkAsNew" data-brand="@item.Name" data-price="@item.ProductPrice.PriceValue" data-avail="@item.ProductPrice.AvailableForPreOrder" style="text-transform: uppercase;">
@@ -245,12 +253,18 @@
   var all_arr = [], arr_none_cat = [], arr_none_color = [], arr_none_brand = [],arr_none_avail = [], arr_none_price = [], arr_none_new = [];
 
 
+  /*$('.checkboxprice').change(function(event) {
+    console.log(document.getElementById("checkbox-price").value);
+  });*/
+
   // create array for filter
   $("[name=SortProduct]").click(function(){
     var str = String(this.className.replace("content-filter-", ""), 10);
     var chckbox = String(this.id.replace("checkbox-", ""), 10);
     var val = $('#'+this.id).text();
     var cat_id = $(this).attr("data-cat-id");
+    var avail_id = $(this).attr("data-avail");
+    var price_id = $(this).attr("data-price");
 
     if (str == "categories") {
       arr[0] = cat_id;
@@ -281,17 +295,41 @@
       /*setTimeout(function() {
         tag("add", str, val);
       }, 100);*/
-    } else if (str == "price") {
-      arr[3] = this.id;
+    } else if (chckbox == "price") {
+      $('.checkbox-price').each(function(){
+        $(this).prop('checked', false); 
+      });
+      
+      if (arr[3] != price_id) {
+        $(this).prop('checked', true);
+        arr[3] = price_id;
+      } else {
+        arr[3] = null;
+        blockproduct(arr_none_price);
+        arr_none_price = [];
+      }
+
+      @* arr[3] = this.id; *@
 
       setTimeout(function() {
-        tag("add", str, val);
+        @* tag("add", str, val); *@
+        tag("add", chckbox, val);
       }, 100);
-    } else if (str == "avail") {
-      arr[4] = this.id;
+    } else if (chckbox == "avail") {
+      $('.checkbox-avail').each(function(){
+        $(this).prop('checked', false); 
+      });
       
+      if (arr[4] != avail_id) {
+        $(this).prop('checked', true);
+        arr[4] = avail_id;
+      } else {
+        arr[4] = null;
+        blockproduct(arr_none_avail);
+        arr_none_avail = [];
+      }
       setTimeout(function() {
-        tag("add", str, val);
+        tag("add", chckbox, val);
       }, 100);
     } else  if (str == "hightolow" || str == "lowtohigh" || str == "whatnew") {
       arr[5] = this.id;

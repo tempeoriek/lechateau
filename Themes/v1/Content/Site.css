@@ -2332,8 +2332,8 @@ a.dropdown-item {
 @media screen and (max-width: 767px) {
     #body-content{
         padding-top:80px;
-        padding-left:30px;
-        padding-right:30px;
+        padding-left:10px;
+        padding-right:10px;
     }
 
 
