@@ -23,18 +23,18 @@
     <div class="row m-1 mt-4">
       @* about *@
       <div class="col-12 col-md-4">
-        <h3 style="font-size: 16px; font-weight: bold; font-style: italic;">Services</h3>
+        <h3 style="font-size: 14px; font-weight: bold; font-style: italic;">Services</h3>
         <div class="row m-0">
           <div class="col-12 col-md-6 m-0 p-0">
             @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
             {
-              <a style="font-size: 14px;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
+              <a style="font-size: 12px;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
             }
           </div>
           <div class="col-12 col-md-6 m-0 p-0">
             @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
             {
-              <a style="font-size: 14px;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
+              <a style="font-size: 12px;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
             }
           </div>
         </div>
@@ -48,8 +48,8 @@
 
       @* mailing list *@
       <div class="col-12 col-md-4">
-        <h3 style="padding-left: 10%; font-size: 16px; margin: 0; margin-bottom: 10px; font-weight: bold; font-style: italic;">Join Our Mailinglist</h3>
-        <p style="padding-left: 10%; margin-bottom: 10px; font-size: 14px; line-height: 1.5em;">Find out first. Get our emails for info on new items, sales and more</p>
+        <h3 style="padding-left: 10%; font-size: 14px; margin: 0; margin-bottom: 10px; font-weight: bold; font-style: italic;">Join Our Mailinglist</h3>
+        <p style="padding-left: 10%; margin-bottom: 10px; font-size: 12px; line-height: 1.5em;">Find out first. Get our emails for info on new items, sales and more</p>
         <div style="padding-left: 10%; margin-bottom: 10px;">
           <div id="nieuwsbrief" style="width: 90%;">
             <form style="margin-left: -4%;" action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>

@@ -11,8 +11,10 @@
         Html.AddCanonicalUrlParts(topicUrl);
     }
 
-
-    Layout = "~/Views/Shared/_LayoutThreeAlternate.cshtml";
+    string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
+    if (absolutepath != "/capsule-collection") {
+        Layout = "~/Views/Shared/_LayoutThreeAlternate.cshtml";
+    }
    
 }
 
