@@ -9,7 +9,7 @@
 @font-face {
     font-family: 'librebaskerville';
     src: 
-        url('../../../fonts/LibreBaskerville/LibreBaskerville-Regular.ttf') format('truetype');
+        url('../../../fonts/LibreBaskerville/LibreBaskerville-Italic.ttf') format('truetype');
     font-display:swap;
 }
 
@@ -1422,11 +1422,14 @@ a.dropdown-item {
     border: none;
     background-color: white;
     border-bottom: 1px solid;
+    height: 23px;
 }
 .explore-now-home {
     margin-right: 30px;
     width: 124px;
+    height: 30px;
     color: white;
+    border: none;
     background-color: black;
 }
 

@@ -157,7 +157,7 @@
           @* when click child will show the clicked child  *@
           @* foreach (var othersubcategory in subcategory.SubCategories) {
             if (absolutepath.Contains(othersubcategory.SeName)){ 
-              <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 10px;">@othersubcategory.Name</a></div>
+              <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px;">@othersubcategory.Name</a></div>
             }
           } *@
           @foreach (var subcategory in category.SubCategories) {
@@ -165,11 +165,11 @@
               if (subcategory.SubCategories.Any()) {
                 foreach (var subsubcategory in subcategory.SubCategories) {
                   @* when click parent, show all child  *@
-                  <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 10px;">@subsubcategory.Name</a></div>
+                  <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 13px;">@subsubcategory.Name</a></div>
                 }
               } else {
                 @* when click parent, show only parent  *@
-                <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 10px;">@subcategory.Name</a></div>
+                <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px;">@subcategory.Name</a></div>
               }
             } else {
               foreach (var othersubcategory in subcategory.SubCategories) {
@@ -177,7 +177,7 @@
                   foreach (var tempcategory in category.SubCategories) {
                     if (tempcategory.Id == subcategory.Id){ 
                       foreach (var tempsubcategory in tempcategory.SubCategories) {
-                        <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 10px;">@tempsubcategory.Name</a></div>
+                        <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 13px;">@tempsubcategory.Name</a></div>
                       }
                     }
                   }
@@ -207,7 +207,7 @@
             if (category.SeName == "colors" && k == 0) {
               <div class="row m-0" style="border-top: 1px solid lightgrey; padding-top: 20px !important">
                 <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 10px;">
+                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
                     @subcategory.Name
                   </a>
                 </div>
@@ -219,7 +219,7 @@
             } else if (category.SeName == "finishing" && k+1 == category.SubCategories.Count()) {
               <div class="row m-0" style="padding-bottom: 20px !important">
                 <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 10px;">
+                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
                     @subcategory.Name
                   </a>
                 </div>
@@ -231,7 +231,7 @@
             } else {
               <div class="row m-0">
                 <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 10px;">
+                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
                     @subcategory.Name
                   </a>
                 </div>
@@ -262,7 +262,7 @@
             foreach (var subcategory in category.SubCategories) {
               <div class="row m-0">
                 <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-brand" style="padding-left: 0.5rem !important; font-size: 10px;">
+                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-brand" style="padding-left: 0.5rem !important; font-size: 13px;">
                     @subcategory.Name
                   </a>
                 </div>
@@ -297,29 +297,29 @@
           <div style="float: right; ">test</div> *@
 
           <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">0 IDR - 1,000,000 IDR</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">0 IDR - 1,000,000 IDR</a></div>
             <div class="col-6 col-sm-6 col-md-6 text-right">
               <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="1000000" id="checkbox-price">
             </div>
           </div>
 
           <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">1,000,000 IDR - 10,000,000 IDR</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">1,000,000 IDR - 10,000,000 IDR</a></div>
             <div class="col-6 col-sm-6 col-md-6 text-right">
               <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="10000000" id="checkbox-price">
             </div>
           </div>
 
           <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">10,000,000 IDR - 100,000,000 IDR</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">10,000,000 IDR - 100,000,000 IDR</a></div>
             <div class="col-6 col-sm-6 col-md-6 text-right">
               <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="100000000" id="checkbox-price">
             </div>
           </div>
 
-          @* <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">0 IDR - 1,000,000 IDR</a></div>
-          <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">1,000,000 IDR - 10,000,000 IDR</a></div>
-          <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 10px;">10,000,000 IDR - 100,000,000 IDR</a></div> *@
+          @* <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">0 IDR - 1,000,000 IDR</a></div>
+          <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">1,000,000 IDR - 10,000,000 IDR</a></div>
+          <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">10,000,000 IDR - 100,000,000 IDR</a></div> *@
         </div>
 
         <div class="p-2 head-prod-detail" role="tab" id="HeadingFive" style="border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
@@ -329,17 +329,17 @@
         </div>
 
         <div data-parent="#accordionDesktopMenu" id="collapse-Five" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFive" style="border-bottom: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
-          @* <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 10px;">Pre Order</a></div> *@
-          @* <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 10px;">Available</a></div> *@
+          @* <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 13px;">Pre Order</a></div> *@
+          @* <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 13px;">Available</a></div> *@
           <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">Pre Order</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">Pre Order</a></div>
             <div class="col-6 col-sm-6 col-md-6 text-right">
               <input class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="True" id="checkbox-avail">
             </div>
           </div>
 
           <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 10px;">Available</a></div>
+            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">Available</a></div>
             <div class="col-6 col-sm-6 col-md-6 text-right">
               <input class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="False" id="checkbox-avail">
             </div>

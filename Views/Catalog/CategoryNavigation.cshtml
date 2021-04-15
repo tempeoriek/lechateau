@@ -182,12 +182,12 @@
               {
                 <div id="sub-subCategory-@category.SubCategories[j].Id" style="width: 100%;">
                   @if (category.SubCategories[j].SubCategories.Any()) {
-                    <a class="subcategory-item d-flex justify-content-left category-item" style="font-size: 14px;" @* href="@Url.RouteUrl("Category", new { SeName = category.SubCategories[j].SeName })" *@>
+                    <a class="subcategory-item d-flex justify-content-left category-item" style="font-size: 18px;" @* href="@Url.RouteUrl("Category", new { SeName = category.SubCategories[j].SeName })" *@>
                       @category.SubCategories[j].Name
                     </a>
                   } else {
                     <div id="subCategoryPict-@category.SubCategories[j].PictureModel.ImageUrl">
-                      <a id="subCategoryText-@category.Id" class="subcategory-item d-flex justify-content-left category-item" style="font-size: 14px;" href="@Url.RouteUrl("Category", new { SeName = category.SubCategories[j].SeName })">
+                      <a id="subCategoryText-@category.Id" class="subcategory-item d-flex justify-content-left category-item" style="font-size: 18px;" href="@Url.RouteUrl("Category", new { SeName = category.SubCategories[j].SeName })">
                         @category.SubCategories[j].Name
                       </a>
                     </div>
@@ -209,13 +209,13 @@
                         {
                           if (z == 0) {
                             <div class="mb-3">
-                              <a class="d-flex justify-content-left category-item" href="@Url.RouteUrl("Category", new { SeName = subcategory.SeName })" style="font-weight: bold; font-size: 12px;">
+                              <a class="d-flex justify-content-left category-item" href="@Url.RouteUrl("Category", new { SeName = subcategory.SeName })" style="font-weight: bold; font-size: 16px;">
                                 View All @subcategory.Name
                               </a>
                             </div>
                           }
                           <div id="subCategoryPict-@subcategory.SubCategories[z].PictureModel.ImageUrl">
-                            <a id="subCategoryText-@subcategory.SubCategories[z].Id" style=" font-size: 12px;" class="subcategory-item d-flex justify-content-left category-item" href="@Url.RouteUrl("Category", new { SeName = subcategory.SubCategories[z].SeName })">
+                            <a id="subCategoryText-@subcategory.SubCategories[z].Id" style=" font-size: 16px;" class="subcategory-item d-flex justify-content-left category-item" href="@Url.RouteUrl("Category", new { SeName = subcategory.SubCategories[z].SeName })">
                               @subcategory.SubCategories[z].Name
                             </a>
                           </div>
@@ -229,13 +229,13 @@
           </div>
 
           <div class="col-5 col-md-5 col-sm-5 d-flex justify-content-center" style="padding-top: 8%;">
-            <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@category.Id" style="width: 100%; height: 75%;" class="header-img-hover"/>
+            <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@category.Id" style="width: 70%; height: 55%;" class="header-img-hover"/>
 
             @foreach (var ctgry in Model.Categories) {
               foreach (var subcategory in ctgry.SubCategories) {
                 for (int z = 0; z < subcategory.SubCategories.Count(); z++) {
                   if (ctgry.Id == category.Id) {
-                    <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@subcategory.SubCategories[z].Id" style="width: 100%; height: 75%;" class="header-img-hover"/>
+                    <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@subcategory.SubCategories[z].Id" style="width: 70%; height: 55%;" class="header-img-hover"/>
                   }
 
                 }
@@ -399,8 +399,8 @@
     }
   );
 
-	//console.log(`CATEGORY NAVIGATION`);
+	console.log(`CATEGORY NAVIGATION`);
 	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-	//console.log(model);    
+	console.log(model);    
 </script>
 

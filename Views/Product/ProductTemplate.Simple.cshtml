@@ -52,30 +52,6 @@
 
 
 <div class="container product-detail" style="margin-top: -7%;">
-  @* BREADCRUMB DESKTOP*@
-  @* <div class="row d-none d-md-block">
-    <div class="col-12 d-flex justify-content-start">
-      <a href="/" style="font-size: 13px;">HOME&nbsp;</a>
-        @foreach (var category in Model.Breadcrumb.CategoryBreadcrumb)
-        {
-           <a href="/@category.SeName" style="font-size: 13px;">/&nbsp; @category.Name.ToUpper() &nbsp;</a>
-        }
-        <a href="/@Model.SeName" style="font-size: 13px;">/&nbsp; @Model.Name.ToUpper()</a>
-    </div>
-  </div> *@
-
-  @* BREADCRUMB MOBILE*@
-  @* <div class="row d-block d-md-none" style="margin-top: 18%; margin-bottom: 5%;">
-    <div class="col-12 d-flex justify-content-start">
-      <a href="/" style="font-size: 13px;">HOME&nbsp;</a>
-        @foreach (var category in Model.Breadcrumb.CategoryBreadcrumb)
-        {
-           <a href="/@category.SeName" style="font-size: 13px;">/&nbsp; @category.Name.ToUpper() &nbsp;</a>
-        }
-        <a href="/@Model.SeName" style="font-size: 13px;">/&nbsp; @Model.Name.ToUpper()</a>
-    </div>
-  </div> *@
-
   <div class="row" style="margin-top: 5%;">
     <div class="col-12 col-sm-7 col-md-7">
       @Html.Partial("_ProductDetailsPictures", Model)
@@ -158,10 +134,12 @@
                       @* detail *@
                       <div class="row">
                         <div class="col-12 pt-2">
-                          <div class="p-2 head-prod-detail" role="tab" id="HeadingDescriptionOne">
-                            <a class="acc-prod-detail" style="font-weight: bold; font-size: 16px;" role="button" data-toggle="collapse" href="#collapseDescriptionOne" aria-expanded="false" aria-controls="collapseDescriptionOne">
-                              Details
-                            </a>
+                          <div class="py-2 head-prod-detail" role="tab" id="HeadingDescriptionOne">
+                            <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">
+                              <a class="acc-prod-detail" role="button" data-toggle="collapse" href="#collapseDescriptionOne" aria-expanded="false" aria-controls="collapseDescriptionOne">
+                                Details
+                              </a>
+                            </h1>
                           </div>
                           <div data-parent="#accordionpProductMenu" id="collapseDescriptionOne" class="ml-2 p-2 collapse show" role="tabpanel" aria-labelledby="HeadingDescriptionOne" >
                             <div style="margin-left: 2%">
@@ -174,10 +152,12 @@
                       @* dimensions *@
                       <div class="row">
                         <div class="col-12 pt-2 head-prod-detail">
-                          <div class="p-2" role="tab" class="dimension-prod-detail" id="HeadingDescriptionTwo" style="border-top: 1px solid black">
-                            <a class="acc-prod-detail collapsed" style="font-weight: bold; font-size: 16px;" role="button" data-toggle="collapse" href="#collapseDescriptionTwo" aria-expanded="false" aria-controls="collapseDescriptionTwo">
-                              Dimension
-                            </a>
+                          <div class="py-2" role="tab" class="dimension-prod-detail" id="HeadingDescriptionTwo" style="border-top: 1px solid black">
+                            <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">
+                              <a class="acc-prod-detail collapsed" style="font-weight: bold; font-size: 16px;" role="button" data-toggle="collapse" href="#collapseDescriptionTwo" aria-expanded="false" aria-controls="collapseDescriptionTwo">
+                                Dimensions
+                              </a>
+                            </h1>
                           </div>
                           <div data-parent="#accordionpProductMenu" id="collapseDescriptionTwo" class="ml-2 p-2 collapse" role="tabpanel" aria-labelledby="HeadingDescriptionTwo" >
                             <ul style="margin-left: 2%">
@@ -192,10 +172,12 @@
                       @* shipping and installation *@
                       <div class="row">
                         <div class="col-12 pt-2 head-prod-detail">
-                          <div class="p-2" role="tab" class="dimension-prod-detail" id="HeadingDescriptionThree" style="border-top: 1px solid black;">
-                            <a class="acc-prod-detail collapsed" style="font-weight: bold; font-size: 16px;" role="button" data-toggle="collapse" href="#collapseDescriptionThree" aria-expanded="false" aria-controls="collapseDescriptionThree">
-                              Shipping and Installation
-                            </a>
+                          <div class="py-2" role="tab" class="dimension-prod-detail" id="HeadingDescriptionThree" style="border-top: 1px solid black;">
+                            <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">
+                              <a class="acc-prod-detail collapsed" style="font-weight: bold; font-size: 16px;" role="button" data-toggle="collapse" href="#collapseDescriptionThree" aria-expanded="false" aria-controls="collapseDescriptionThree">
+                                Shipping and Installation
+                              </a>
+                            </h1>
                           </div>
                           <div data-parent="#accordionpProductMenu" id="collapseDescriptionThree" class="ml-2 p-2 collapse" role="tabpanel" aria-labelledby="HeadingDescriptionThree">
                             <ul style="margin-left: 2%">
@@ -223,6 +205,9 @@
                     </div>
                   </div>
                 </div>
+                <div class="row no-gutters py-2">
+                  <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">Do you require any further assistance?</h1>
+                </div>
               }
               else
               {
@@ -242,43 +227,37 @@
   </div>
   
 
+
+</div>
 <div class="row mt-4">
   <div class="col-12 col-md-12 d-flex justify-content-center mt-3">
-    <h1 class="d-none d-md-block" style="color: black; font-weight: bold; font-style: italic;">Related Products</h1>
-    <h1 class="d-block d-md-none mb-2" style="margin-top: -3%; font-size: 28px; color: black; font-weight: bold; font-style: italic;">Related Products</h1>
+    <h1 class="d-none d-md-block" style="color: black; font-weight: bold; font-style: italic; margin-bottom: 3%;">Related Products</h1>
+    <h1 class="d-block d-md-none mb-4" style="margin-top: -3%; font-size: 28px; color: black; font-weight: bold; font-style: italic;">Related Products</h1>
   </div>
 </div>
 
 @* Related Products Desktop *@
 <div class="d-none d-md-block">
-  <div class="row mb-5">
-    <div class="col-1 col-md-1 ol-sm-1"></div>
+  <div class="row mb-5 px-5">
     @for (int i = 0; i < 4; i++)
     {
-      <div class="col-2 col-md-2 col-sm-2" style="margin-right: 1.5vw; margin-left: 1.5vw;">
+      <div class="col-3 col-md-3 col-sm-3">
         <div class="row">
           <div class="ori-product-img">
-            <a href="#" class="clean">
-              <img src="~/Themes/v1/Content/images/item-example.jpg" class="img-fluid center-block" />
-            </a>
-
-            <a href="#" class="clean overlay-product-img">
-              <img src="~/Themes/v1/Content/images/item-example2.jpg" class="img-fluid center-block" />
-            </a>
+            <img src="~/Themes/v1/Content/images/item-example.jpg" class="img-fluid center-block px-4" />
           </div>
         </div>
-        <div class="row">
+        <div class="row px-4">
           <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">ANTONIO LUPI</p>
         </div>
-        <div class="row" style="margin-top: -10px;">
+        <div class="row px-4" style="margin-top: -10px;">
           <p style="margin: 0; padding: 0;">BAIA OVAL BATHTUB</p>
         </div>
-        <div class="row" style="margin-top: -10px;">
+        <div class="row px-4" style="margin-top: -10px;">
           <p>IDR 2.100.000</p>
         </div>
       </div>
     }
-    <div class="col-1 col-md-1 col-sm-1"></div>
   </div>
 </div>
 
@@ -311,13 +290,12 @@
   </div>
 </div>
 
-      <!-- recommendation--->
-      @*Automatic*@
-      @* @Html.Action("ProductsAlsoPurchased", "Product", new { productId = Model.Id }) *@
+<!-- recommendation--->
+@*Automatic*@
+@* @Html.Action("ProductsAlsoPurchased", "Product", new { productId = Model.Id }) *@
 
-      @*Manual*@
-      @* @Html.Action("CrossSellProducts", "Product", new { productId = Model.Id }) *@
-</div>
+@*Manual*@
+@* @Html.Action("CrossSellProducts", "Product", new { productId = Model.Id }) *@
 
   <script>
     $('.add').click(function () {
