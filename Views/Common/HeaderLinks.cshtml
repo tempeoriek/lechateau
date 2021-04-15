@@ -102,7 +102,7 @@
 				</div>
 
 				@* cart headers *@
-				<div class="col-4 col-md-4 d-flex justify-content-center align-items-center">
+				<div class="col-4 col-md-4 d-flex justify-content-center align-items-center p-0">
 					@if (Model.ShoppingCartEnabled)
 					{
 						var cartItem = "0";
@@ -114,11 +114,10 @@
 						}
 						<a href="#bag">
 							<div id="icbag-panel" class="@cssCartItem">
-								<img src="~/Themes/v1/Content/images/cart-icon.svg"/>
+								<img src="~/Themes/v1/Content/images/cart-icon.svg"/>&nbsp;<span id="mCartItemsQty" class="cart-qty">@cartItem</span>
 							</div>
 						</a>
-						<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
-						</span>
+						
 					}
 				</div>
 			</div>
@@ -200,10 +199,10 @@
 						<a href="#bag" onclick="$('.asidemobile').asidebar('open')">
 							<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
 								<span class="nav-item" style="color:#707070;margin-left:-8px;">
-									<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" /> 
+									<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" />&nbsp;<span id="mCartItemsQty" class="cart-qty">@cartItem</span>
 								</span>
-								<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
-								</span>
+								@* <span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
+								</span> *@
 							</div>
 						</a>
 					}
@@ -235,10 +234,9 @@
 									<a href="#bag" onclick="$('.asidemobile').asidebar('open')" style="padding: 0;">
 										<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
 											<span class="nav-item" style="color:#707070;">
-												<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" /> 
+												<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" />&nbsp;<span id="mCartItemsQty" class="cart-qty">@cartItem</span>
 											</span>
-											<span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
-											</span>
+									
 										</div>
 									</a>
 								}
