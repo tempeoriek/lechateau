@@ -286,22 +286,15 @@
   <div class="row">
       @if (!String.IsNullOrEmpty(Model.Title))
       {
-      <div class="col-12 text-center " style="margin-bottom:-200px;margin-top:150px;z-index:10;">
+        <div class="col-12 text-center">
           <h1>@Model.Title</h1>
-      </div>
+        </div>
       }
 
   </div>
-  <div class="row d-flex justify-content-center m-4">
-    <div class="col-12 col-md-6 text-left mt-0 pt-0 mt-md-5 pt-md-5">
-      <img src="~/Themes/v1/Content/images/about.jpg" class="img-fluid w-100 pr-0 pr-md-4"/>
-    </div>
-    <div class="col-12 col-md-6 mt-0 mt-md-5 pt-5">
-      @if (!String.IsNullOrEmpty(Model.Title))
-      {
-        <div class="d-block d-md-none"><h1>@Model.Title</h1></div>
-      }
-      <div class="pl-md-4 pl-0 about-desc" style="">@Html.Raw(Model.Body)</div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-12">
+      <div class="about-desc" style="">@Html.Raw(Model.Body)</div>
     </div>
   </div>
 </div>
