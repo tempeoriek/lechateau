@@ -229,13 +229,13 @@
           </div>
 
           <div class="col-5 col-md-5 col-sm-5 d-flex justify-content-center" style="padding-top: 8%;">
-            <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@category.Id" style="width: 70%; height: 55%;" class="header-img-hover"/>
+            <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@category.Id" style="width: 90%; height: 65%;" class="header-img-hover"/>
 
             @foreach (var ctgry in Model.Categories) {
               foreach (var subcategory in ctgry.SubCategories) {
                 for (int z = 0; z < subcategory.SubCategories.Count(); z++) {
                   if (ctgry.Id == category.Id) {
-                    <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@subcategory.SubCategories[z].Id" style="width: 70%; height: 55%;" class="header-img-hover"/>
+                    <img src="~/Themes/v1/Content/images/header.jpg" id="headerImg-@subcategory.SubCategories[z].Id" style="width: 90%; height: 65%;" class="header-img-hover"/>
                   }
 
                 }
