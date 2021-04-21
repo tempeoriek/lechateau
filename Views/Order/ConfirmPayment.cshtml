@@ -11,7 +11,7 @@
 
         @*@Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.ConfirmPayment, isMobile = true })*@
 
-        <h1 class="text-center mb-2">Payment Confirmation</h1>
+        <h1 class="text-center mb-5">Payment Confirmation</h1>
         @using (Html.BeginForm("ConfirmPaymentCompleted", "Order", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
