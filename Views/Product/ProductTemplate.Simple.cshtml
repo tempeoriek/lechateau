@@ -44,14 +44,18 @@
     Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
     Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
   }
-
-
+  var Height = Math.Round(Model.Height, 1);
+  var Weight = Math.Round(Model.Weight, 1);
+  var Width = Math.Round(Model.Width, 1);
+  var Length = Math.Round(Model.Length, 1);
+  string[] brands = Model.Brand != null ? Model.Brand.Split(';') : null;
+  string Brands = brands != null ? brands[1].ToUpper() : null;
 }
 
 
 
 
-<div class="container product-detail" style="margin-top: -7%;">
+<div class="container product-detail" style="margin-top: -1%;">
   <div class="row" style="margin-top: 5%;">
     <div class="col-12 col-sm-7 col-md-7">
       @Html.Partial("_ProductDetailsPictures", Model)
@@ -62,7 +66,7 @@
         {
           <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id" style="margin-top: 5%;">
 
-            <p class="m-0">ANTONIO LUPI</p>
+            <p class="m-0" style="font-size: 14px;">@Brands</p>
             <h1 itemprop="name" style="font-weight: bold; margin-bottom: 1%; font-style: italic;">@Model.Name</h1>
             @{
               var dataDictPrice = new ViewDataDictionary();
@@ -161,9 +165,10 @@
                           </div>
                           <div data-parent="#accordionpProductMenu" id="collapseDescriptionTwo" class="ml-2 p-2 collapse" role="tabpanel" aria-labelledby="HeadingDescriptionTwo" >
                             <ul style="margin-left: 2%">
-                              <li>Weight&nbsp;:&nbsp;1.000&nbsp;gram.</li>
-                              <li>Width&nbsp;:&nbsp;10&nbsp;cm.</li>
-                              <li>Length&nbsp;:&nbsp;10&nbsp;cm.</li>
+                              <li>Height&nbsp;:&nbsp;@Height &nbsp;cm.</li>
+                              <li>Weight&nbsp;:&nbsp;@Weight &nbsp;kg.</li>
+                              <li>Width&nbsp;:&nbsp;@Width &nbsp;cm.</li>
+                              <li>Length&nbsp;:&nbsp;@Length &nbsp;cm.</li>
                             </ul>
                           </div>
                         </div>
@@ -180,11 +185,9 @@
                             </h1>
                           </div>
                           <div data-parent="#accordionpProductMenu" id="collapseDescriptionThree" class="ml-2 p-2 collapse" role="tabpanel" aria-labelledby="HeadingDescriptionThree">
-                            <ul style="margin-left: 2%">
-                              <li>Weight&nbsp;:&nbsp;1.000&nbsp;gram.</li>
-                              <li>Width&nbsp;:&nbsp;10&nbsp;cm.</li>
-                              <li>Length&nbsp;:&nbsp;10&nbsp;cm.</li>
-                            </ul>
+                            <div style="margin-left: 2%">
+                              @Html.Raw(Model.ExtraInfo)
+                            </div>
                           </div>
                           <div class="p-2" style="border-bottom: 1px solid black; margin-top: -3%"></div>
                         </div>
@@ -251,7 +254,7 @@
           </div>
         </div>
         <div class="row px-4">
-          <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">ANTONIO LUPI</p>
+          <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@Brands</p>
         </div>
         <div class="row px-4" style="margin-top: -10px;">
           <p style="margin: 0; padding: 0;">BAIA OVAL BATHTUB</p>
@@ -280,7 +283,7 @@
           </a>
         </div>
         <div class="row">
-          <p style="font-weight: bold; margin: 0; padding: 0; color: black;">ANTONIO LUPI</p>
+          <p style="font-weight: bold; margin: 0; padding: 0; color: black;">@Brands</p>
         </div>
         <div class="row" style="margin-top: -10px;">
           <p style="color: black;">BAIA OVAL BATHTUB</p>
@@ -320,7 +323,7 @@
         $(".btn-addcart").innerHTML = "ADD TO BAG";
       }
     }
-    console.log(`PRODUCT DETAIL`);
+    //console.log(`PRODUCT DETAIL`);
     var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-    console.log(model);    
+    //console.log(model);    
   </script>

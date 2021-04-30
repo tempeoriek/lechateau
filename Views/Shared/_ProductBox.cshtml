@@ -1,5 +1,9 @@
 ﻿@model Nop.Web.Models.Catalog.ProductOverviewModel
 
+@{
+  string[] brands = Model.Brand != null ? Model.Brand.Split(';') : null;
+  string Brands = brands != null ? brands[1] : null;
+}
 <div class="product-item">
     <div>
         <div class="ori-product-img">
@@ -37,7 +41,7 @@
     <div class="description">
       <p class="text-left m-0" style="line-height: 1.5em;">
         <a class="clean" style="line-height: 1.5em; font-size: 12px; color: #707070; font-weight: bold; text-transform: uppercase;" href="@Url.RouteUrl("Product", new { SeName = Model.SeName})">
-          Antonio Lupi
+          @Brands
         </a>
       </p>
 
@@ -76,5 +80,5 @@
 <script>
 	//console.log(`PRODUCT BOX`);
 	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-	//console.log(model);    
+	//console.log(model);
 </script>
