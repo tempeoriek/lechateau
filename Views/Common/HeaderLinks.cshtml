@@ -263,10 +263,10 @@
 							</div>
 						</div>
 
-						<div id="accMobileHeader" style="padding: 0 5%;">
+						<div id="accMobileHeader" style="padding: 0 5%; line-height: 1">
 							@* category menu in navbar *@
 							@Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId, isMobile = true })
-							<a href="/capsule-collection" class="signin btn-login" style="font-size:16px;">Capsule Collection</a>
+							@* <a href="/capsule-collection" class="signin btn-login" style="font-size:16px;">Capsule Collection</a> *@
 							<a href="/design-service" class="signin btn-login" style="font-size:16px;">Design Services</a>
 							<ul class="list-unstyled list-inline">
 								@if (Model.IsAuthenticated)

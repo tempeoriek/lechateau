@@ -4,77 +4,90 @@
 
 @if (Model.Count > 0)
 {
-   <div class="col-md-12 mt-large">
-          @{
-            var counter = 0;
-            var cssClass = "";
-          }
-
-        @foreach (var item in Model)
-        {
-            if (counter == 0)
-            {
-                cssClass = "active";
-            }
-            else if (counter > 0 && counter <= 3)
-            {
-                cssClass = "active-next";
-            }
-            else
-            {
-                cssClass = "";
-            }
-
-            <div class="col-md-4 item @cssClass">
-                @Html.Partial("_ProductBox", item)
+   @* Best Seller Desktop *@
+  <div class="d-none d-md-block hidden-xs hidden-sm" style="position: relative;">
+    <div class="row mb-5 carouseldesktop">
+      @for (int i = 0; i < Model.Count(); i++)
+      {
+        var temp = Model[i];
+        <div class="col-12">
+          <div class="row">
+            <div class="ori-product-img">
+              <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
             </div>
-
-        }
-
+          </div>
+    
+          <div class="row">
+            <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@temp.Name.ToUpper()</p>
+          </div>
+          @* <div class="row" style="font-size: 16px; line-height: 19px;">
+            <p>ANTONIO LUPI VITREO FREESTANDING WASHBASIN</p>
+          </div> *@
+          <div class="row" style="margin-top: -10px; font-size: 14px;">
+            <p>@temp.ProductPrice.Price</p>
+          </div>
+        </div>
+      }
     </div>
 
-    //ini codingan yang lama
-    @*<div class="container-fluid homepage-carousel">
-        <h1 class="big pt-35 pb-35">@T("HomePage.Products")</h1>
-        <div class="container carousel" data-ride="carousel" id="mySlider" data-interval="false">
-            <div class="row carousel-inner center-block">
-                @{
-                    var counter = 0;
-                    var cssClass = "";
-                }
+    <div class="row">
+      <div style="position: absolute; top: 35%; left: 10%;">
+        <a role="button" data-slide="prev" class="prevslider">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class=" sr-only">Previous</span>
+        </a>
+      </div>
+      <div style="position: absolute; top: 35%; right: 10%;">
+        <a role="button" data-slide="next" class="nextslider">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class=" sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-                @foreach (var item in Model)
-                {
-                    if (counter == 0)
-                    {
-                        cssClass = "active";
-                    }
-                    else if (counter > 0 && counter <= 3)
-                    {
-                        cssClass = "active-next";
-                    }
-                    else
-                    {
-                        cssClass = "";
-                    }
 
-                    <div class="col-md-4 item @cssClass">
-                        @Html.Partial("_ProductBox", item)
-                    </div>
+  @* Best Seller Mobile *@
+  <div class="row d-block d-md-none carousel slide" style="margin-bottom: 30%;" data-ride="carousel" id="carouselNewArrivalMobile">
+    <div class="carousel-inner col-12 d-block d-md-block position-relative">
+      @{
+          var firstactives = "active";
+          for (int z = 0; z < Model.Count(); z++)
+          {
+            var temp = Model[i];
+            if (z > 0)
+            {
+                firstactives = "";
+            }
 
-                }
+            <div class="carousel-item @firstactives">
+              <div class="row mx-4">
+                <img class="d-block w-100" src="~/Themes/v1/Content/images/item-example.jpg">
+              </div>
+              <div class="row mx-4">
+                <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@temp.Name</p>
+              </div>
+              <div class="row mx-4" style="margin-top: -10px; font-size: 14px;">
+                <p>@temp.ProductPrice.Price</p>
+              </div>
             </div>
-            <a class="left carousel-control" href="#mySlider" role="button" data-slide="prev">
-                <img src="~/Themes/v1/content/images/ic_chevron_left-1.png" alt="">
-                <span class="sr-only">Previous</span>
-            </a>
-
-            <a class="right carousel-control" href="#mySlider" role="button" data-slide="next">
-                <img src="~/Themes/v1/content/images/ic_chevron_left.png" alt="">
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>*@
-
+          }
+      }
+    </div>
+    <a class="mx-3 carousel-control-prev" href="#carouselNewArrivalMobile" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="mx-3 carousel-control-next" href="#carouselNewArrivalMobile" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 }
+
+<script>
+  console.log(`HOMEPAGE PRODUCTS`);
+  var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+  console.log(model);    
+</script>
 

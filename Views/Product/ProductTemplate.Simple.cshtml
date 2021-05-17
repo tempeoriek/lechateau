@@ -67,7 +67,7 @@
           <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id" style="margin-top: 5%;">
 
             <p class="m-0" style="font-size: 14px;">@Brands</p>
-            <h1 itemprop="name" style="font-weight: bold; margin-bottom: 1%; font-style: italic;">@Model.Name</h1>
+            <h1 itemprop="name" style="margin-bottom: 1%; font-style: italic;">@Model.Name</h1>
             @{
               var dataDictPrice = new ViewDataDictionary();
               dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
@@ -140,7 +140,7 @@
                         <div class="col-12 pt-2">
                           <div class="py-2 head-prod-detail" role="tab" id="HeadingDescriptionOne">
                             <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">
-                              <a class="acc-prod-detail" role="button" data-toggle="collapse" href="#collapseDescriptionOne" aria-expanded="false" aria-controls="collapseDescriptionOne">
+                              <a class="acc-prod-detail" style="font-weight: bold; font-size: 16px;" role="button" data-toggle="collapse" href="#collapseDescriptionOne" aria-expanded="false" aria-controls="collapseDescriptionOne">
                                 Details
                               </a>
                             </h1>
@@ -242,8 +242,10 @@
   </div>
 </div>
 
+@* @Html.Action("HomepageProducts", "Product") *@
+
 @* Related Products Desktop *@
-<div class="d-none d-md-block">
+@* <div class="d-none d-md-block">
   <div class="row mb-5 px-5">
     @for (int i = 0; i < 4; i++)
     {
@@ -265,10 +267,10 @@
       </div>
     }
   </div>
-</div>
+</div> *@
 
 @* Related Products Mobile *@
-<div class="row d-block d-md-none mb-5">
+@* <div class="row d-block d-md-none mb-5">
   <div class="row" style="padding: 0 2rem; margin-top: -15px;">
     @for (int i = 0; i < 2; i++)
     {
@@ -294,7 +296,7 @@
       </div>
     }
   </div>
-</div>
+</div> *@
 
 <!-- recommendation--->
 @*Automatic*@
