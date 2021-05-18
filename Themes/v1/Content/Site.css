@@ -162,6 +162,22 @@ label { font-weight: normal; margin-bottom: 0; color: black; text-transform: cap
     margin: 0 auto;
 }
 
+/* INSTAGRAM */
+/* .ig-instagram-item{
+    height: 320px;
+    width: 100%;
+} */
+.ig-inherit {
+    height: inherit;
+    padding: 3px 0;
+}
+#instagram-feed :nth-last-child(2) {
+    width: 100%;
+}
+.instagram-count {
+    display: none;
+}
+
 
 /*Margin Padding*/
 .mt-default {margin-top: 0;}
@@ -2046,6 +2062,10 @@ a.dropdown-item {
 
 
 @media (max-width: 575.98px) {
+    .ig-instagram-item{
+        height: 150px;
+        width: 100%;
+    }
     .about-desc {
         margin-top: 50px;
     }
@@ -2261,7 +2281,10 @@ a.dropdown-item {
 }
 
 @media (max-width: 991.98px) {
-
+    .ig-instagram-item{
+        height: 320px;
+        width: 100%;
+    }
 
 
     .hero {
@@ -2270,6 +2293,10 @@ a.dropdown-item {
 }
 
 @media (max-width: 1445px) {
+    .ig-instagram-item{
+        height: 320px;
+        width: 100%;
+    }
     .submenu{padding-left:2vw;}
 }
 
@@ -2284,6 +2311,10 @@ a.dropdown-item {
 
 
 @media (max-width: 575.98px) {
+    .ig-instagram-item{
+        height: 150px;
+        width: 100%;
+    }
     footer {
         padding: 0;
         /*height:250px;*/
@@ -2333,6 +2364,11 @@ a.dropdown-item {
 
 
 @media screen and (max-width: 767px) {
+    .ig-instagram-item{
+        height: 150px;
+        width: 100%;
+    }
+
     #body-content{
         padding-top:80px;
         padding-left:10px;
@@ -2375,6 +2411,11 @@ a.dropdown-item {
 }
 
 @media (min-width: 768px) and (max-width: 1079px) {
+    .ig-instagram-item{
+        height: 320px;
+        width: 100%;
+    }
+
     footer {
     }
 }
