@@ -299,7 +299,38 @@
 @*Manual*@
 @* @Html.Action("CrossSellProducts", "Product", new { productId = Model.Id }) *@
 
+
+  <script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
   <script>
+    $(document).ready(function () {
+      $('.carousel').carousel({
+        touch: true
+      });
+
+    });
+    $(document).ready(function () {
+      $('.carouseldesktop').slick({
+      slidesToShow: 4,
+      dots: false,
+      centerMode: false,
+      });
+    });
+     $(document).ready(function () {
+      $('.carouseldesktop').slick({
+        slidesToShow: 4,
+        dots: false,
+        centerMode: false,
+      });
+    });
+
+    $('.prevslider').click(function () {
+      $('.carouseldesktop').slick('slickPrev');
+    })
+
+    $('.nextslider').click(function () {
+      $('.carouseldesktop').slick('slickNext');
+    })
+
     $('.add').click(function () {
       if ($(this).prev().val() < 9) {
         $(this).prev().val(+$(this).prev().val() + 1);

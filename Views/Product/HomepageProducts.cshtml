@@ -23,18 +23,29 @@
         <div class="col-12">
           <div class="row mx-2">
             <div class="ori-product-img">
-              <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
+              <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean">
+                <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
+              </a>
             </div>
           </div>
     
           <div class="row mx-2">
-            <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@temp.Name.ToUpper()</p>
+            <a class="clean" style="text-decoration: none; margin: 0; padding: 0; font-size: 14px; font-weight: bold;" href="@Url.RouteUrl("Product", new { SeName = temp.SeName})">
+              @temp.Name
+            </a>
           </div>
           <div class="row mx-2" style="font-size: 16px; line-height: 19px;">
-            <p>@Brands</p>
+            <a class="clean" style="font-weight: bold; text-transform: uppercase; text-decoration: none;" href="@Url.RouteUrl("Product", new { SeName = temp.SeName})">
+              @Brands
+            </a>
           </div>
           <div class="row mx-2" style="margin-top: -10px; font-size: 14px;">
-            <p>@temp.ProductPrice.Price</p>
+            @if (temp.ProductPrice.AvailableForPreOrder) {
+              <div class="price">Request A Quote</div>
+            } else {
+              <p>@temp.ProductPrice.Price</p>
+            }
+
           </div>
         </div>
       }
@@ -74,16 +85,26 @@
 
             <div class="carousel-item @firstactives">
               <div class="row mx-4">
-                <img class="d-block w-100" src="@temp.DefaultPictureModel.ImageUrl">
+                <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean">
+                  <img class="d-block w-100" src="@temp.DefaultPictureModel.ImageUrl">
+                </a>
               </div>
               <div class="row mx-4">
-                <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@temp.Name</p>
+                <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean" style="text-decoration: none; margin: 0; padding: 0; font-size: 14px; font-weight: bold;">
+                  @temp.Name
+                </a>
               </div>
               <div class="row mx-4">
-                <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@Brands</p>
+                <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean" style="text-decoration: none; margin: 0; padding: 0; font-size: 14px; font-weight: bold; text-transform: uppercase;">
+                  @Brands
+                </a>
               </div>
               <div class="row mx-4" style="margin-top: -10px; font-size: 14px;">
-                <p>@temp.ProductPrice.Price</p>
+                @if (temp.ProductPrice.AvailableForPreOrder) {
+                  <div class="price">Request A Quote</div>
+                } else {
+                  <p>@temp.ProductPrice.Price</p>
+                }
               </div>
             </div>
           }
