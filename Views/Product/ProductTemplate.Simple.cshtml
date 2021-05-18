@@ -235,14 +235,8 @@
 
 
 </div>
-<div class="row mt-4">
-  <div class="col-12 col-md-12 d-flex justify-content-center mt-3">
-    <h1 class="d-none d-md-block" style="color: black; font-weight: bold; font-style: italic; margin-bottom: 3%;">Related Products</h1>
-    <h1 class="d-block d-md-none mb-4" style="margin-top: -3%; font-size: 28px; color: black; font-weight: bold; font-style: italic;">Related Products</h1>
-  </div>
-</div>
 
-@Html.Action("HomepageProducts", "Product", new {categoryId = 2})
+@Html.Action("RelatedProducts", "Product", new {categoryId = 2})
 
 @* Related Products Desktop *@
 @* <div class="d-none d-md-block">

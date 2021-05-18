@@ -2,28 +2,38 @@
 
 @using Nop.Web.Models.Catalog;
 
+
 @if (Model.Count > 0)
 {
-   @* Best Seller Desktop *@
+  <div class="row" style="margin-top: 10%; margin-bottom: 5%;">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h1 style="color: black; font-style: italic; font-size: 28px;">Best Selling Items</h1>
+    </div>
+  </div>
+
+  @* Best Seller Desktop *@
   <div class="d-none d-md-block hidden-xs hidden-sm" style="position: relative;">
     <div class="row mb-5 carouseldesktop">
       @for (int i = 0; i < Model.Count(); i++)
       {
         var temp = Model[i];
+        string[] brands = temp.Brand != null ? temp.Brand.Split(';') : null;
+        string Brands = brands != null ? brands[1] : null;
+
         <div class="col-12">
-          <div class="row">
+          <div class="row mx-2">
             <div class="ori-product-img">
               <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
             </div>
           </div>
     
-          <div class="row">
+          <div class="row mx-2">
             <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@temp.Name.ToUpper()</p>
           </div>
-          @* <div class="row" style="font-size: 16px; line-height: 19px;">
-            <p>ANTONIO LUPI VITREO FREESTANDING WASHBASIN</p>
-          </div> *@
-          <div class="row" style="margin-top: -10px; font-size: 14px;">
+          <div class="row mx-2" style="font-size: 16px; line-height: 19px;">
+            <p>@Brands</p>
+          </div>
+          <div class="row mx-2" style="margin-top: -10px; font-size: 14px;">
             <p>@temp.ProductPrice.Price</p>
           </div>
         </div>
@@ -54,7 +64,9 @@
           var firstactives = "active";
           for (int z = 0; z < Model.Count(); z++)
           {
-            var temp = Model[i];
+            var temp = Model[z];
+            string[] brands = temp.Brand != null ? temp.Brand.Split(';') : null;
+            string Brands = brands != null ? brands[1] : null;
             if (z > 0)
             {
                 firstactives = "";
@@ -62,10 +74,13 @@
 
             <div class="carousel-item @firstactives">
               <div class="row mx-4">
-                <img class="d-block w-100" src="~/Themes/v1/Content/images/item-example.jpg">
+                <img class="d-block w-100" src="@temp.DefaultPictureModel.ImageUrl">
               </div>
               <div class="row mx-4">
                 <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@temp.Name</p>
+              </div>
+              <div class="row mx-4">
+                <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@Brands</p>
               </div>
               <div class="row mx-4" style="margin-top: -10px; font-size: 14px;">
                 <p>@temp.ProductPrice.Price</p>
@@ -86,8 +101,8 @@
 }
 
 <script>
-  console.log(`HOMEPAGE PRODUCTS`);
+  //console.log(`HOMEPAGE PRODUCTS`);
   var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-  console.log(model);    
+  //console.log(model);
 </script>
 
