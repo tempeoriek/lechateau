@@ -300,35 +300,69 @@
 @* @Html.Action("CrossSellProducts", "Product", new { productId = Model.Id }) *@
 
 
-  <script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
   <script>
+    
     $(document).ready(function () {
       $('.carousel').carousel({
         touch: true
       });
 
     });
+
+  </script>
+  <link rel="stylesheet" type="text/css" href="~/Scripts/app/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="~/Scripts/app/slick/slick-theme.css">
+  <link href="~/Themes/v1/Content/homepage.css" rel="stylesheet" />
+  <script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script>
     $(document).ready(function () {
-      $('.carouseldesktop').slick({
-      slidesToShow: 4,
-      dots: false,
-      centerMode: false,
+      $('.carouselhero').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2000,
       });
     });
-     $(document).ready(function () {
-      $('.carouseldesktop').slick({
+    $(document).ready(function () {
+      $('.carouselhero2').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouseldesktoprelated').slick({
         slidesToShow: 4,
         dots: false,
         centerMode: false,
       });
     });
+    $(document).ready(function () {
+      $('.carouselmobile').slick({
+        slidesToShow: 3,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
 
     $('.prevslider').click(function () {
-      $('.carouseldesktop').slick('slickPrev');
+      $('.carouseldesktoprelated').slick('slickPrev');
     })
 
     $('.nextslider').click(function () {
-      $('.carouseldesktop').slick('slickNext');
+      $('.carouseldesktoprelated').slick('slickNext');
+    })
+
+    $('.left').click(function () {
+      $('.carouselmobile').slick('slickPrev');
+    })
+
+    $('.right').click(function () {
+      $('.carouselmobile').slick('slickNext');
     })
 
     $('.add').click(function () {

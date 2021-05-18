@@ -13,7 +13,7 @@
 
   @* Best Seller Desktop *@
   <div class="d-none d-md-block hidden-xs hidden-sm" style="position: relative;">
-    <div class="row mb-5 carouseldesktop">
+    <div class="row mb-5 carouseldesktoprelated">
       @for (int i = 0; i < Model.Count(); i++)
       {
         var temp = Model[i];
@@ -34,7 +34,7 @@
               @temp.Name
             </a>
           </div>
-          <div class="row mx-2" style="font-size: 14px; line-height: 22px;">
+          <div class="row mx-2" style="font-size: 14px; line-height: 30px;">
             <a class="clean" style="font-weight: bold; text-transform: uppercase; text-decoration: none;" href="@Url.RouteUrl("Product", new { SeName = temp.SeName})">
               @Brands
             </a>
@@ -121,36 +121,7 @@
   </div>
 }
 
-<script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    $(document).ready(function () {
-      $('.carousel').carousel({
-        touch: true
-      });
-
-    });
-    $(document).ready(function () {
-      $('.carouseldesktop').slick({
-      slidesToShow: 4,
-      dots: false,
-      centerMode: false,
-      });
-    });
-     $(document).ready(function () {
-      $('.carouseldesktop').slick({
-        slidesToShow: 4,
-        dots: false,
-        centerMode: false,
-      });
-    });
-
-    $('.prevslider').click(function () {
-      $('.carouseldesktop').slick('slickPrev');
-    })
-
-    $('.nextslider').click(function () {
-      $('.carouseldesktop').slick('slickNext');
-    })
   //console.log(`HOMEPAGE PRODUCTS`);
   var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
   //console.log(model);

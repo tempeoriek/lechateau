@@ -2300,7 +2300,12 @@ a.dropdown-item {
     .submenu{padding-left:2vw;}
 }
 
-
+@media (max-width: 1845px) {
+    .ig-instagram-item{
+        height: 320px;
+        width: 100%;
+    }
+}
 
 .card-body {
     padding-left: 0;

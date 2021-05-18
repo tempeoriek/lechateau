@@ -532,8 +532,19 @@
   </script>
 
   <script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script src="~/Scripts/app/InstaGet/js/instaget-min.js"></script>
 
   <script>
+    new instaGet('#instagram-feed', {
+      token: 'IGQVJYUDRobEs5aV9nM3RUVW5Pbk1pS1hkcDlQZAndDU1lHZAUNvTUhLMHhTb3RKMjNEYVFpb0FEQWUzMFVxVmFpS0wtNGdhQnh1clFzWTFNcDVyOWppM2hPOEZAmQ3BqUy1ab0s4dTA5eGdRM2NWSFJEWQZDZD',
+      counter: 6,
+      numcol: 6,
+      moreBtn: false,
+      info: false,
+      width: '100%',
+      height: '100%',
+    });
+
     $(document).ready(function () {
       $('.carouselhero').slick({
         slidesToShow: 1,
@@ -583,30 +594,18 @@
     $('.right').click(function () {
       $('.carouselmobile').slick('slickNext');
     })
+    
+    setTimeout(() => {
+      $('div[class*="ig-instagram-items"]').addClass('row')
+      $('.ig-instagram-item').addClass('col-4 col-md-4 col-sm-4 p-1')
+      $('div.ig-instagram-item a').addClass('ig-inherit')
+      $('div.ig-instagram-item img').addClass('img-fluid ig-inherit')
+    }, 1000)
   </script>
-   <script src="~/Scripts/app/InstaGet/js/instaget-min.js"></script>
-    <script>
-        new instaGet('#instagram-feed', {
-            token: 'IGQVJYUDRobEs5aV9nM3RUVW5Pbk1pS1hkcDlQZAndDU1lHZAUNvTUhLMHhTb3RKMjNEYVFpb0FEQWUzMFVxVmFpS0wtNGdhQnh1clFzWTFNcDVyOWppM2hPOEZAmQ3BqUy1ab0s4dTA5eGdRM2NWSFJEWQZDZD',
-            counter: 6,
-            numcol: 6,
-            moreBtn: false,
-            info: false,
-            width: '100%',
-            height: '100%',
-        });
-        
-    </script>
-
 }
 <script>
-  setTimeout(() => {
-    $('div[class*="ig-instagram-items"]').addClass('row')
-    $('.ig-instagram-item').addClass('col-4 col-md-4 col-sm-4 p-1')
-    $('div.ig-instagram-item a').addClass('ig-inherit')
-    $('div.ig-instagram-item img').addClass('img-fluid ig-inherit')
-  }, 1300)
-  
+
+
 	//console.log(`HOME`);
 	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
 	//console.log(model);    
