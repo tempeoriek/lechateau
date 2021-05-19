@@ -245,9 +245,9 @@
   }
   $('.button-category-mobile').click(shoCategoryMenu);
 	
-  console.log(`PRODUCT CATEGORY`);
+  //console.log(`PRODUCT CATEGORY`);
 	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-	console.log(model);
+	//console.log(model);
 
   var arr = [null, null, null, null, null, null], arr_multi_color = [], arr_multi_brand = [];
   var all_arr = [], arr_none_cat = [], arr_none_color = [], arr_none_brand = [],arr_none_avail = [], arr_none_price = [], arr_none_new = [];
@@ -337,7 +337,7 @@
 
     startfilter();
     all_arr = [];
-    console.log(arr)
+    //console.log(arr)
   });
 
   // remove filter
@@ -568,7 +568,7 @@
     });
 
     if (all_arr.length == 0) {
-      console.log("product empty");
+      //console.log("product empty");
       $('#emptyproduct').css("display", "block");
     } else {
       $('#emptyproduct').css("display", "none");

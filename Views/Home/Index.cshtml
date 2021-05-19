@@ -130,7 +130,7 @@
               </div> *@
             </div>
 
-            <div class="row">
+            <div class="row m-0">
               <a href="#">
                 <img src="@item.MobileItems[0].PictureUrl" class="img-fluid w-100" style="height: 100%;" />
               </a>
@@ -600,10 +600,12 @@
       $('.ig-instagram-item').addClass('col-4 col-md-4 col-sm-4 p-1')
       $('div.ig-instagram-item a').addClass('ig-inherit')
       $('div.ig-instagram-item img').addClass('img-fluid ig-inherit')
-    }, 1000)
+    }, 1500)
   </script>
 }
 <script>
+  
+  
 	//console.log(`HOME`);
 	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
 	//console.log(model);    

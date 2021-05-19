@@ -55,7 +55,7 @@
             <form style="margin-left: -4%;" action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
               <div class="form-group d-flex justify-content-center mb-4 mb-md-0" style="vertical-align:top;">
                 <input id="mce-EMAIL" class="email form-footer" type="email" style="border: 1px solid; padding: 14px; background-color: white;" name="EMAIL" placeholder="Your e-mail" value="" required="required" />
-                <button id="mc-embedded-subscribe" style="margin-left: -30px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.svg" /></button>
+                <button id="mc-embedded-subscribe3" style="margin-left: -30px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.svg" /></button>
                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0713301c8224b9979b17bdd9b_0e2ea9797e" tabindex="-1" value=""></div>
               </div>
             </form>
@@ -94,7 +94,7 @@
         <h3 style="font-size: 16px; font-style: italic; font-weight: bold;">Get in touch with us for any enquiry</h3>
       </div>
       <div class="row m-0 p-0" style="display: flex; justify-content: center; align-items: center;">
-        <a href="https://wa.me/628111459933" style="font-size: 16px; font-weight: bold; text-decoration: none; color: black;"><img src="~/Themes/v1/Content/images/instagram icon.jpg" />&nbsp;+62 811-1459-933</a> 
+        <a href="https://wa.me/628111459933" style="font-size: 16px; font-weight: bold; text-decoration: none; color: black;"><img src="~/Themes/v1/Content/images/wa.svg" />&nbsp;+62 811-1459-933</a> 
       </div>
 
       @* service *@
@@ -128,7 +128,7 @@
             <form style="margin-left: -6%;" action="" method="post" id="mc-embedded-subscribe-form-mobile" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
               <div class="form-group d-flex justify-content-center mb-4 mb-md-0" style="vertical-align:top;">
                 <input id="mce-EMAIL-mobile" class="email form-footer" type="email" style="border: 1px solid; padding: 16px; background-color: white;" name="EMAIL" placeholder="Your e-mail" value="" required="required" />
-                <button id="mc-embedded-subscribe" style="margin-left: -30px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.svg" /></button>
+                <button id="mc-embedded-subscribe2" style="margin-left: -30px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.svg" /></button>
                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0713301c8224b9979b17bdd9b_0e2ea9797e" tabindex="-1" value=""></div>
               </div>
             </form>
@@ -156,6 +156,14 @@
 
 <script>
   $("#mc-embedded-subscribe").click(function () {
+    $("#nieuwsbrief").css("display", "none");
+    $("#nieuwsbrief-msg").css("display", "block");
+  });
+  $("#mc-embedded-subscribe2").click(function () {
+    $("#nieuwsbrief").css("display", "none");
+    $("#nieuwsbrief-msg").css("display", "block");
+  });
+  $("#mc-embedded-subscribe3").click(function () {
     $("#nieuwsbrief").css("display", "none");
     $("#nieuwsbrief-msg").css("display", "block");
   });

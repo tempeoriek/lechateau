@@ -209,10 +209,13 @@
                   </div>
                 </div>
                 <div class="row no-gutters py-2">
-                  <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">Do you require any further assistance?</h1>
-                  <a href="https://wa.me/628111459933">
-                    <img src="~/Themes/v1/Content/images/wa-product.png" style="margin-top: 5px;">
-                  </a>
+                  @if (!Model.AddToCart.AvailableForPreOrder) {
+                    <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">Do you require any further assistance?</h1>
+                    <a href="https://wa.me/628111459933">
+                      <img src="~/Themes/v1/Content/images/wa-product.png" style="margin-top: 5px;">
+                    </a>
+                  }
+
                 </div>
               }
               else
@@ -238,9 +241,6 @@
 
 @* Related Products Desktop *@
 @Html.Action("RelatedProducts", "Product", new {productId = Model.Id})
-
-
-
 
   <script>
     

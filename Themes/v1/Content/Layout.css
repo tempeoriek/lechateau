@@ -662,9 +662,29 @@
 #nieuwsbrief input[type="submit"],
 #nieuwsbrief-mobile input[type="submit"] {background-color: rgba(0, 0, 255, 0);border: 0 none;display: inline;margin: 0;padding: 0;text-transform: uppercase;}
 #nieuwsbrief #mc-embedded-subscribe { background-color: transparent;border: none;margin-left:-1vw}
+#nieuwsbrief #mc-embedded-subscribe2 { background-color: transparent;border: none;margin-left:-1vw}
+#nieuwsbrief #mc-embedded-subscribe3 { background-color: transparent;border: none;margin-left:-1vw}
 
 
     #nieuwsbrief #mc-embedded-subscribe {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        color: #707070;
+        font-size:12.8px;
+        margin-top:-10px;
+    }
+    #nieuwsbrief #mc-embedded-subscribe2 {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        color: #707070;
+        font-size:12.8px;
+        margin-top:-10px;
+    }
+    #nieuwsbrief #mc-embedded-subscribe3 {
         -moz-appearance: none;
         -webkit-appearance: none;
         appearance: none;

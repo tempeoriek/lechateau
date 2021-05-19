@@ -305,7 +305,7 @@
 	<span class="closebtn" onclick="closeSearch()" title="Close Overlay">close</span>
 	<div class="overlay-content">
 		<form action="~/search" autocomplete="on">
-			<input class="search-nav-2 mb-5" id="search" name="q" type="text" placeholder="Type something">
+			<input class="search-nav-2 mb-5" id="search1" name="q" type="text" placeholder="Type something">
 		</form>
 	</div>
 </div>
@@ -408,7 +408,7 @@
 	    $('.header-links').attr('style', "display: none !important;;");
 		}
 		function showMobileMenu() {
-			console.log(document.querySelector('.search-text-homepage'))
+			//console.log(document.querySelector('.search-text-homepage'))
 			if (document.querySelector('.search-text-homepage') !== null){
 					// Do something if class exists
 				$('.form-input-search').removeClass('search-text-homepage');
