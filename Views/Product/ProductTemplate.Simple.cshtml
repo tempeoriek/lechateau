@@ -236,68 +236,10 @@
 
 </div>
 
+@* Related Products Desktop *@
 @Html.Action("RelatedProducts", "Product", new {productId = Model.Id})
 
-@* Related Products Desktop *@
-@* <div class="d-none d-md-block">
-  <div class="row mb-5 px-5">
-    @for (int i = 0; i < 4; i++)
-    {
-      <div class="col-3 col-md-3 col-sm-3">
-        <div class="row">
-          <div class="ori-product-img">
-            <img src="~/Themes/v1/Content/images/item-example.jpg" class="img-fluid center-block px-4" />
-          </div>
-        </div>
-        <div class="row px-4">
-          <p style="margin: 0; padding: 0; font-size: 14px; font-weight: bold;">@Brands</p>
-        </div>
-        <div class="row px-4" style="margin-top: -10px;">
-          <p style="margin: 0; padding: 0;">BAIA OVAL BATHTUB</p>
-        </div>
-        <div class="row px-4" style="margin-top: -10px;">
-          <p>IDR 2.100.000</p>
-        </div>
-      </div>
-    }
-  </div>
-</div> *@
 
-@* Related Products Mobile *@
-@* <div class="row d-block d-md-none mb-5">
-  <div class="row" style="padding: 0 2rem; margin-top: -15px;">
-    @for (int i = 0; i < 2; i++)
-    {
-      <div class="col-6 col-md-6" style="padding: 10px !important;">
-        <div class="ori-product-img">
-          <a href="" class="clean">
-            <img src="~/Themes/v1/Content/images/item-example.jpg" class="img-fluid center-block" />
-          </a>
-
-          <a href="" class="clean overlay-product-img">
-            <img src="~/Themes/v1/Content/images/item-example2.jpg" class="img-fluid center-block" />
-          </a>
-        </div>
-        <div class="row">
-          <p style="font-weight: bold; margin: 0; padding: 0; color: black;">@Brands</p>
-        </div>
-        <div class="row" style="margin-top: -10px;">
-          <p style="color: black;">BAIA OVAL BATHTUB</p>
-        </div>
-        <div class="row" style="margin-top: -20px;">
-          <p class="color: black;">IDR 2.100.000</p>
-        </div>
-      </div>
-    }
-  </div>
-</div> *@
-
-<!-- recommendation--->
-@*Automatic*@
-@* @Html.Action("ProductsAlsoPurchased", "Product", new { productId = Model.Id }) *@
-
-@*Manual*@
-@* @Html.Action("CrossSellProducts", "Product", new { productId = Model.Id }) *@
 
 
   <script>
