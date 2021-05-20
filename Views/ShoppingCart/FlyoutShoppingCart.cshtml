@@ -20,7 +20,7 @@
         }
 
         @if (Model.TotalProducts > 0) {
-          <div class="inner p-1 items scroll-cart scroll--simple" style="height: inherit;">
+          <div class="inner p-1 items scroll-cart scroll--simple" style="height: 65vh;">
             @for (int i = 0; i < Model.Items.Count; i++)
             {
               var item = Model.Items[i];

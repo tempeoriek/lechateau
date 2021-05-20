@@ -154,7 +154,7 @@
                       </div>
 
                       @* dimensions *@
-                      <div class="row">
+                      @* <div class="row">
                         <div class="col-12 pt-2 head-prod-detail">
                           <div class="py-2" role="tab" class="dimension-prod-detail" id="HeadingDescriptionTwo" style="border-top: 1px solid black">
                             <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">
@@ -172,7 +172,7 @@
                             </ul>
                           </div>
                         </div>
-                      </div>
+                      </div> *@
 
                       @* shipping and installation *@
                       <div class="row">
@@ -208,15 +208,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="row no-gutters py-2">
+                @* <div class="row no-gutters py-2">
                   @if (!Model.AddToCart.AvailableForPreOrder) {
                     <h1 style="font-weight: bold; font-size: 16px; font-style: italic;">Do you require any further assistance?</h1>
                     <a href="https://wa.me/628111459933">
                       <img src="~/Themes/v1/Content/images/wa-product.png" style="margin-top: 5px;">
                     </a>
                   }
-
-                </div>
+                </div> *@
               }
               else
               {
@@ -326,7 +325,7 @@
         $(".btn-addcart").innerHTML = "ADD TO BAG";
       }
     }
-    //console.log(`PRODUCT DETAIL`);
+    console.log(`PRODUCT DETAIL`);
     var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-    //console.log(model);    
+    console.log(model);    
   </script>
