@@ -305,6 +305,7 @@
     function() {
       var id = parseInt(this.id.replace("sub-subCategory-", ""), 10);
       $("#sub-subcategory-" + id).attr('style', 'display: flex !important');
+
       $("div[id^='sub-subCategory-']").each(function() {
         var id_drop = parseInt(this.id.replace("sub-subCategory-", ""), 10);
 
