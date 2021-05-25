@@ -19,10 +19,10 @@
 
   var breadcrumbDelimiter = EngineContext.Current.Resolve<CommonSettings>().BreadcrumbDelimiter;
 
-  string[] listparams = {"/faucet", "/kitchen-taps", "/showering" , "/shower" , "/well-being-products", "/bathroom-accessories", "/bathroom-accessories-2", "/bathtub-mixer", "/bathub" , "/bathing" , "/washing", "/washbasins" , "/wc" , "/bathroom-furniture"};
-  string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-  string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
-  string src_banner = absolutepath == "/faucet" ? host + "/Themes/v1/Content/images/banner1.jpg" :
+  @* string[] listparams = {"/faucet", "/kitchen-taps", "/showering" , "/shower" , "/well-being-products", "/bathroom-accessories", "/bathroom-accessories-2", "/bathtub-mixer", "/bathub" , "/bathing" , "/washing", "/washbasins" , "/wc" , "/bathroom-furniture"}; *@
+  @* string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority); *@
+  @* string absolutepath = HttpContext.Current.Request.Url.AbsolutePath; *@
+  @* string src_banner = absolutepath == "/faucet" ? host + "/Themes/v1/Content/images/banner1.jpg" :
     absolutepath == "/kitchen-taps" ? host + "/Themes/v1/Content/images/banner2.jpg" : 
     absolutepath == "/showering" || absolutepath == "/shower" ? host + "/Themes/v1/Content/images/banner3.jpg" : 
     absolutepath == "/well-being-products" ? host + "/Themes/v1/Content/images/banner4.jpg" : 
@@ -31,14 +31,16 @@
     absolutepath == "/bathub" || absolutepath == "/bathing" ? host + "/Themes/v1/Content/images/banner7.jpg" : 
     absolutepath == "/washing" || absolutepath == "/washbasins" ? host + "/Themes/v1/Content/images/banner8.jpg" : 
     absolutepath == "/wc" ? host + "/Themes/v1/Content/images/banner9.jpg" :
-    absolutepath == "/bathroom-furniture" ? host + "/Themes/v1/Content/images/banner10.jpg" : host + "/Themes/v1/Content/images/banner-example.jpg";
+    absolutepath == "/bathroom-furniture" ? host + "/Themes/v1/Content/images/banner10.jpg" : host + "/Themes/v1/Content/images/banner-example.jpg"; *@
   
-  var styleDivCenterDesktop = "position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%);";
-  var styleContentCenterDeskop = "color: white; font-style: italic;";
-  if (!listparams.Contains(absolutepath)) {
+  @* var styleDivCenterDesktop = "position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%);"; *@
+  @* var styleContentCenterDeskop = "color: white; font-style: italic;"; *@
+  var styleDivCenterDesktop = "position: absolute; top: 0; left: 0; height: 100%; width: 100%; right: 0; bottom: 0;";
+  var styleContentCenterDeskop = "color: white; font-style: italic; display: flex; justify-content: center; align-items: center; height: 100%;";
+  @* if (!listparams.Contains(absolutepath)) {
     styleDivCenterDesktop = "position: absolute; top: 0; left: 0; opacity: 1; height: 100%; background-color: black; width: 100%; right: 0; bottom: 0;";
     styleContentCenterDeskop = "color: white; font-style: italic; display: flex; justify-content: center; align-items: center; height: 100%;";
-  }
+  } *@
 }
 
 @{
@@ -57,7 +59,7 @@
 
 @* header desktop *@
 <div class="row d-none d-md-block carousel" style="margin: -50px 0; margin-bottom: 0; position: relative;"> 
-  <img class="d-block w-100" src="@src_banner"> 
+  <img class="d-block w-100" src="@String.Format("/Content/Images/uploaded/categories/{0}.jpg", Model.SeName)"> 
   <div class="text-center" style="@styleDivCenterDesktop">
     <h1 style="@styleContentCenterDeskop">@Model.Name</h1>
   </div>
@@ -68,7 +70,7 @@
 
 @* header mobile *@
 <div class="row d-block d-md-none carousel" style="margin: -30px -30px 15px; position: relative;"> 
-  <img style="left: 50%; position: relative; transform: translateX(-50%);" src="@src_banner"> 
+  <img style="left: 50%; position: relative; transform: translateX(-50%); width: 350%;" class="d-block" src="@String.Format("/Content/Images/uploaded/categories/{0}.jpg", Model.SeName)"> 
   <div class="text-center" style="@styleDivCenterDesktop">
     <h1 style="@styleContentCenterDeskop">@Model.Name</h1>
   </div>
@@ -82,7 +84,7 @@
 <div class="row d-block d-md-none"> 
     <div class="col-12 col-md-12 col-sm-12 ">
       <a  role="button" data-toggle="collapse" href="#collapseMenu" aria-expanded="false" aria-controls="collapseMenu" class="btn button-category-mobile collapsed" style="font-size: 17px; margin-left: -1%">
-        FILTER SELECTION
+        FILTER SELECTION 
       </a>
     </div>
 </div>
