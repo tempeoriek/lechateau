@@ -124,7 +124,7 @@
   <div class="d-none d-md-block hidden-xs hidden-sm" style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey;">
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-categories" style="margin: 0; float: left;"></p>
-      <p class="removeshowfilter-categories" style="margin: 0; float: right;"></p>
+      <p class="removeshowfilter-categories" style="margin: 0; float: right; cursor: pointer;"></p>
     </div>
     @* <div class="px-2" style="display: flow-root;">
       <p class="showfilter-color" style="margin: 0; float: left;"></p>
@@ -165,11 +165,11 @@
               if (subcategory.SubCategories.Any()) {
                 foreach (var subsubcategory in subcategory.SubCategories) {
                   @* when click parent, show all child  *@
-                  <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 13px;">@subsubcategory.Name</a></div>
+                  <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@subsubcategory.Name</a></div>
                 }
               } else {
                 @* when click parent, show only parent  *@
-                <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px;">@subcategory.Name</a></div>
+                <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@subcategory.Name</a></div>
               }
             } else {
               foreach (var othersubcategory in subcategory.SubCategories) {
@@ -177,13 +177,16 @@
                   foreach (var tempcategory in category.SubCategories) {
                     if (tempcategory.Id == subcategory.Id){ 
                       foreach (var tempsubcategory in tempcategory.SubCategories) {
-                        <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 13px;">@tempsubcategory.Name</a></div>
+                        <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@tempsubcategory.Name</a></div>
                       }
                     }
                   }
-                }@*  else {
-                  <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@othersubcategory.Id" class="content-filter-categories" style="font-size: 13px;">@othersubcategory.Name</a></div>
-                } *@
+                } else {
+                  if (absolutepath.Contains("shop")){
+                    <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@othersubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@othersubcategory.Name</a></div>
+                  }
+
+                }
               }
             }
           }
