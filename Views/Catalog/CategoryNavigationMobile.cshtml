@@ -547,26 +547,28 @@
       @* MOBILE SIDE MENU NAVIGATION *@
       <div class="header-links">
         <div class="d-block d-md-none hidden-md hidden-lg">
-          @if (category.SubCategories.Any()) {
-            <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
-              <a style="font-size: 16px;" data-toggle="collapse" href="#collapseheader-@category.SeName" aria-expanded="false" aria-controls="collapseheader-@category.SeName">
-                @category.Name
-              </a>
-            </div>
+          @if (!category.SeName.Contains("collection")) {
+            if (category.SubCategories.Any()) {
+              <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
+                <a style="font-size: 16px;" data-toggle="collapse" href="#collapseheader-@category.SeName" aria-expanded="false" aria-controls="collapseheader-@category.SeName">
+                  @category.Name
+                </a>
+              </div>
 
-            <div data-parent="#accMobileHeader" id="collapseheader-@category.SeName" class="collapse" style="padding-left: 5%;" role="tabpanel" aria-labelledby="Headingheader-@category.SeName">
-                <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">View All @category.Name</a></div>
-                @foreach (var subcat in category.SubCategories)
-                {
-                  <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = subcat.SeName })">@subcat.Name</a></div>
-                }
-            </div>
-          } else {
-            <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
-              <a href="/@category.SeName" style="font-size: 16px;">
-                @category.Name
-              </a>
-            </div>
+              <div data-parent="#accMobileHeader" id="collapseheader-@category.SeName" class="collapse" style="padding-left: 5%;" role="tabpanel" aria-labelledby="Headingheader-@category.SeName">
+                  <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">View All @category.Name</a></div>
+                  @foreach (var subcat in category.SubCategories)
+                  {
+                    <div class="mb-2"><a style="padding: 0; font-size: 16px;" href="@Url.RouteUrl("Category", new { SeName = subcat.SeName })">@subcat.Name</a></div>
+                  }
+              </div>
+            } else {
+              <div role="tab" id="Headingheader-@category.SeName" class="mb-2">
+                <a href="/@category.SeName" style="font-size: 16px;">
+                  @category.Name
+                </a>
+              </div>
+            }
           }
         </div>
       </div>
