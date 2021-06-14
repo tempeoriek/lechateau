@@ -180,6 +180,15 @@
             <div style="width: 100%;">
               @for (int j = 0; j < category.SubCategories.Count(); j++)
               {
+                if ( j == 0) {
+                  <div id="sub-subCategory-shop" style="width: 100%;">
+                    <div id="subCategoryPict-null">
+                      <a id="subCategoryText-shop" class="subcategory-item d-flex justify-content-left category-item" style="font-size: 18px; cursor: pointer;" href="/shop">
+                        Shop All
+                      </a>
+                    </div>
+                  </div>
+                }
                 <div id="sub-subCategory-@category.SubCategories[j].Id" style="width: 100%;">
                   @if (!category.SubCategories[j].SeName.Contains("collection")) {
                     if (category.SubCategories[j].SubCategories.Any()) {
@@ -195,15 +204,6 @@
                     }
                   }
                 </div>
-                if ( j == category.SubCategories.Count()-1) {
-                  <div id="sub-subCategory-shop" style="width: 100%;">
-                    <div id="subCategoryPict-null">
-                      <a id="subCategoryText-shop" class="subcategory-item d-flex justify-content-left category-item" style="font-size: 18px; cursor: pointer;" href="/shop">
-                        Shop All
-                      </a>
-                    </div>
-                  </div>
-                }
               }
             </div>
           </div>
