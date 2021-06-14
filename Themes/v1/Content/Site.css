@@ -1318,6 +1318,11 @@ a.dropdown-item {
     text-transform: capitalize;
 }
 
+.bannerhomeheader {
+    max-height: 800px;
+    object-fit: cover;
+}
+
     .dropright-drop > a {
         font-size: 12px;
         color: #707070;
@@ -2285,7 +2290,10 @@ a.dropdown-item {
         height: 320px;
         width: 100%;
     }
-
+    .bannerhomeheader {
+        max-height: 800px;
+        object-fit: cover;
+    }
 
     .hero {
         margin-left: 0px;
@@ -2312,7 +2320,8 @@ a.dropdown-item {
     padding-right: 0;
 }
 
-
+@media (max-width: 1845px) {
+}
 
 
 @media (max-width: 575.98px) {
@@ -2368,7 +2377,7 @@ a.dropdown-item {
 }
 
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {  
     .ig-instagram-item{
         height: 150px;
         width: 100%;
@@ -2420,7 +2429,41 @@ a.dropdown-item {
         height: 320px;
         width: 100%;
     }
-
+    .bannerhomeheader {
+        max-height: 800px;
+        object-fit: cover;
+    }
     footer {
+    }
+}
+@media (min-width: 1080px) and (max-width: 1445px) {
+    .bannerhomeheader {
+        max-height: 800px;
+        object-fit: cover;
+    }
+}
+@media (min-width: 1447px) and (max-width: 1615px) {
+    .bannerhomeheader {
+        max-height: 800px;
+        object-fit: cover;
+    }
+}
+@media (min-width: 1617px) and (max-width: 1843px) {
+    .bannerhomeheader {
+        max-height: 1450px;
+        object-fit: cover;
+    }
+}
+@media (min-width: 1845px) and (max-width: 2560px) {
+    .bannerhomeheader {
+        max-height: 1450px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 2562px){
+    .bannerhomeheader {
+        max-height: 1850px;
+        object-fit: cover;
     }
 }
