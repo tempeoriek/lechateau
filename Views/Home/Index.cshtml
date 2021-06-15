@@ -469,8 +469,11 @@
 <section>
   <div class="row" style="margin-top: 5%; margin-bottom: 10%;">
     <div class="col-12 col-md-4 col-sm-4" style="height: inherit">
-      <div style="height: 100%;">
+      <div class="d-none d-md-block hidden-xs hidden-sm" style="height: 100%;">
         <h1 style="display: flex; justify-content: center; align-items: center; height: inherit; color: black; font-size: 35px; font-style: italic;">Stay<br>Updated<br><a href="https://www.instagram.com/lechateauliving/" style="display: contents; font-style: normal; font-weight: 400; text-decoration: none; color: black; font-size: 16px;">&#64;lechateauliving</a></h1>
+      </div>
+      <div class="d-block d-md-none hidden-md hidden-xl" style="height: 100%;">
+        <h1 class="my-3" style="text-align: center; height: inherit; color: black; font-size: 25px; font-style: italic;">Stay Updated <br /><a href="https://www.instagram.com/lechateauliving/" style="display: contents; font-style: normal; font-weight: 400; text-decoration: none; color: black; font-size: 16px;">&#64;lechateauliving</a></h1>
       </div>
     </div>
 
@@ -605,7 +608,7 @@
       $('.ig-instagram-item').addClass('col-4 col-md-4 col-sm-4 p-1')
       $('div.ig-instagram-item a').addClass('ig-inherit')
       $('div.ig-instagram-item img').addClass('img-fluid ig-inherit')
-    }, 1500)
+    }, 1700)
   </script>
 }
 <script>

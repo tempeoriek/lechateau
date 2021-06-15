@@ -70,7 +70,8 @@
 
 @* header mobile *@
 <div class="row d-block d-md-none carousel" style="margin: -30px -30px 15px; position: relative;"> 
-  <img style="left: 50%; position: relative; transform: translateX(-50%); width: 350%;" class="d-block" src="@String.Format("/Content/Images/uploaded/categories/{0}.jpg", Model.SeName)"> 
+  <img style="left: 50%; position: relative; transform: translateX(-50%);" class="d-block" src="@String.Format("/Content/Images/uploaded/categories/{0}.jpg", Model.SeName)"> 
+  @* <img style="left: 50%; position: relative; transform: translateX(-50%); width: 350%;" class="d-block" src="@String.Format("/Content/Images/uploaded/categories/{0}.jpg", Model.SeName)">  *@
   <div class="text-center" style="@styleDivCenterDesktop">
     <h1 style="@styleContentCenterDeskop">@Model.Name</h1>
   </div>
@@ -275,7 +276,7 @@
   var arr = [null, null, null, null, null, null], arr_multi_color = [], arr_multi_brand = [];
   var all_arr = [], arr_none_cat = [], arr_none_color = [], arr_none_brand = [],arr_none_avail = [], arr_none_price = [], arr_none_new = [];
 
-
+  
   /*$('.checkboxprice').change(function(event) {
     console.log(document.getElementById("checkbox-price").value);
   });*/
@@ -332,10 +333,10 @@
         arr_none_price = [];
       }
 
-      @* arr[3] = this.id; *@
+      //arr[3] = this.id;
 
       setTimeout(function() {
-        @* tag("add", str, val); *@
+        //tag("add", str, val);
         tag("add", chckbox, val);
       }, 100);
     } else if (chckbox == "avail") {
@@ -482,21 +483,38 @@
         for (let i = 0; i < arr.length; i++) {
           if (i == 0 && arr[i]) {
             var category = $(this).attr("data-categories").split(",");
-            if (category.find(x => parseInt(x) == parseInt(arr[i]))) {
-              if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
-                displayproduct(product_id, "block");
+            if (arr[i].length > 0) {
+              if (category.find(x => parseInt(x) == parseInt(arr[i]))) {
+                if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                  displayproduct(product_id, "block");
+                }
+              } else {
+                all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
+                arr_none_cat.push(parseInt(product_id));
+                arr_none_cat = [...new Set(arr_none_cat)];
+                displayproduct(product_id, "none");
               }
-            } else {
-              all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
-              arr_none_cat.push(parseInt(product_id));
-              arr_none_cat = [...new Set(arr_none_cat)];
-              displayproduct(product_id, "none");
             }
           } 
           
           if (i == 1 && arr[i]) {
             var category = $(this).attr("data-categories").split(",");
-            for (let j = 0; j < arr[i].length; j++) {
+            //OR LOGIC
+            if (arr[i].length > 0) {
+              if (category.some(r=> arr[i].includes(r))) {
+                if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                  displayproduct(product_id, "block");
+                }
+              } else {
+                all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
+                arr_none_color.push(parseInt(product_id));
+                arr_none_color = [...new Set(arr_none_color)];
+                displayproduct(product_id, "none");
+              }
+            }
+
+            //AND LOGIC
+            /*for (let j = 0; j < arr[i].length; j++) {
               let temp = arr[i][j];
               if (category.find(x => parseInt(x) == parseInt(temp))) {
                 if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
@@ -508,12 +526,27 @@
                 arr_none_color = [...new Set(arr_none_color)];
                 displayproduct(product_id, "none");
               }
-            }
+            }*/
           } 
           
           if (i == 2 && arr[i]) {
             var category = $(this).attr("data-categories").split(",");
-            for (let j = 0; j < arr[i].length; j++) {
+            //OR LOGIC
+            if (arr[i].length > 0) {
+              if (category.some(r=> arr[i].includes(r))) {
+                if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                  displayproduct(product_id, "block");
+                }
+              } else {
+                all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
+                arr_none_color.push(parseInt(product_id));
+                arr_none_color = [...new Set(arr_none_color)];
+                displayproduct(product_id, "none");
+              }
+            }
+
+            //AND LOGIC
+            /*for (let j = 0; j < arr[i].length; j++) {
               let temp = arr[i][j];
               if (category.find(x => parseInt(x) == parseInt(temp))) {
                 if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
@@ -525,22 +558,24 @@
                 arr_none_brand = [...new Set(arr_none_brand)];
                 displayproduct(product_id, "none");
               }
-            }
+            }*/
           } 
           
           // filter logic price
           if (i == 3 && arr[i]) {
             var price = parseInt($(this).attr("data-price"));
-            if (parseInt(price) <= parseInt(arr[i])) {
-              if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
-                displayproduct(product_id, "block");
-              }
-            } else {
-              if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
-                all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
-                arr_none_price.push(parseInt(product_id));
-                arr_none_price = [...new Set(arr_none_price)];
-                displayproduct(product_id, "none");
+            if (arr[i].length > 0) {
+              if (parseInt(price) <= parseInt(arr[i])) {
+                if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                  displayproduct(product_id, "block");
+                }
+              } else {
+                if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                  all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
+                  arr_none_price.push(parseInt(product_id));
+                  arr_none_price = [...new Set(arr_none_price)];
+                  displayproduct(product_id, "none");
+                }
               }
             }
           } 
@@ -548,40 +583,44 @@
           // filter logic avail
           if (i == 4 && arr[i]) {
             var avail = $(this).attr("data-avail");
-            if (avail == arr[i]) {
-              if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
-                displayproduct(product_id, "block");
-              }
-            } else {
-              if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
-                all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
-                arr_none_avail.push(parseInt(product_id));
-                arr_none_avail = [...new Set(arr_none_avail)];
-                displayproduct(product_id, "none");
-              }
-            }
-          }
-
-          // filter logic hightolow
-          if (i == 5 && arr[i]) {
-            if (arr[i] == "hightolow") {
-              displaysortproduct("none", "none", "flex")
-              removesortnew();
-            } else if (arr[i] == "lowtohigh") {
-              displaysortproduct("none", "flex", "none")
-              removesortnew();
-            } else if (arr[i] == "whatnew") {
-              var marknew = $(this).attr("data-new");
-              if (marknew == "True") {
+            if (arr[i].length > 0) {
+              if (avail == arr[i]) {
                 if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
                   displayproduct(product_id, "block");
                 }
               } else {
                 if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
                   all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
-                  arr_none_new.push(parseInt(product_id));
-                  arr_none_new = [...new Set(arr_none_new)];
+                  arr_none_avail.push(parseInt(product_id));
+                  arr_none_avail = [...new Set(arr_none_avail)];
                   displayproduct(product_id, "none");
+                }
+              }
+            }
+          }
+
+          // filter logic hightolow
+          if (i == 5 && arr[i]) {
+            if (arr[i].length > 0) {
+              if (arr[i] == "hightolow") {
+                displaysortproduct("none", "none", "flex")
+                removesortnew();
+              } else if (arr[i] == "lowtohigh") {
+                displaysortproduct("none", "flex", "none")
+                removesortnew();
+              } else if (arr[i] == "whatnew") {
+                var marknew = $(this).attr("data-new");
+                if (marknew == "True") {
+                  if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                    displayproduct(product_id, "block");
+                  }
+                } else {
+                  if (all_arr.find(element => parseInt(element) == parseInt(product_id))) {
+                    all_arr = all_arr.filter(id => parseInt(id) !== parseInt(product_id));
+                    arr_none_new.push(parseInt(product_id));
+                    arr_none_new = [...new Set(arr_none_new)];
+                    displayproduct(product_id, "none");
+                  }
                 }
               }
             }
@@ -591,7 +630,6 @@
     });
 
     if (all_arr.length == 0) {
-      //console.log("product empty");
       $('#emptyproduct').css("display", "block");
     } else {
       $('#emptyproduct').css("display", "none");

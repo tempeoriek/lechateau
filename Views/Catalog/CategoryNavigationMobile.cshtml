@@ -120,11 +120,246 @@
 
 }
 
-  @* DESKTOP MENU CATALOG NAVIGATION *@
-  <div class="d-none d-md-block hidden-xs hidden-sm" style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey;">
+@* DESKTOP MENU CATALOG NAVIGATION *@
+<div class="d-none d-md-block hidden-xs hidden-sm" style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey;">
+  <div class="px-2" style="display: flow-root;">
+    <p class="showfilter-categories" style="margin: 0; float: left;"></p>
+    <p class="removeshowfilter-categories" style="margin: 0; float: right; cursor: pointer;"></p>
+  </div>
+  @* <div class="px-2" style="display: flow-root;">
+    <p class="showfilter-color" style="margin: 0; float: left;"></p>
+    <p class="removeshowfilter-color" style="margin: 0; float: right;"></p>
+  </div>
+  <div class="px-2" style="display: flow-root;">
+    <p class="showfilter-brand" style="margin: 0; float: left;"></p>
+    <p class="removeshowfilter-brand" style="margin: 0; float: right;"></p>
+  </div> 
+  <div class="px-2" style="display: flow-root;">
+    <p class="showfilter-price" style="margin: 0; float: left;"></p>
+    <p class="removeshowfilter-price" style="margin: 0; float: right;"></p>
+  </div>
+  <div class="px-2" style="display: flow-root;">
+    <p class="showfilter-avail" style="margin: 0; float: left;"></p>
+    <p class="removeshowfilter-avail" style="margin: 0; float: right;"></p>
+  </div>*@
+
+  @* categories *@
+  @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+    var category = Model.Categories[j];
+    if (j == 0) {
+      <div class="p-2 head-prod-detail" role="tab" id="HeadingOne" style="border-top: 1px solid lightgrey;">
+        <a id="id-acc-category-1" class="child-acc-category-1 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-One" aria-expanded="false" aria-controls="collapse-One">
+          CATEGORIES
+        </a>
+      </div>
+
+      <div data-parent="#accordionDesktopMenu" id="collapse-One" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingOne" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
+        @* when click child will show the clicked child  *@
+        @* foreach (var othersubcategory in subcategory.SubCategories) {
+          if (absolutepath.Contains(othersubcategory.SeName)){ 
+            <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px;">@othersubcategory.Name</a></div>
+          }
+        } *@
+        @foreach (var subcategory in category.SubCategories) {
+          if (absolutepath.Contains(subcategory.SeName)){
+            if (subcategory.SubCategories.Any()) {
+              foreach (var subsubcategory in subcategory.SubCategories) {
+                @* when click parent, show all child  *@
+                <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@subsubcategory.Name</a></div>
+              }
+            } else {
+              @* when click parent, show only parent  *@
+              <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@subcategory.Name</a></div>
+            }
+          } else {
+            foreach (var othersubcategory in subcategory.SubCategories) {
+              if (absolutepath.Contains(othersubcategory.SeName)){ 
+                foreach (var tempcategory in category.SubCategories) {
+                  if (tempcategory.Id == subcategory.Id){ 
+                    foreach (var tempsubcategory in tempcategory.SubCategories) {
+                      <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@tempsubcategory.Name</a></div>
+                    }
+                  }
+                }
+              } else {
+                if (absolutepath.Contains("shop")){
+                  <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@othersubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@othersubcategory.Name</a></div>
+                }
+
+              }
+            }
+          }
+        }
+      </div>
+    }
+  }
+
+  @* color *@
+  @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+    var category = Model.Categories[j];
+    if (j == 0) {
+      <div class="p-2 head-prod-detail" role="tab" id="HeadingTwo" style="border-top: 1px solid lightgrey;">
+        <a id="id-acc-category-2" class="child-acc-category-2 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Two" aria-expanded="false" aria-controls="collapse-Two">
+          COLOR/FINISHING
+        </a>
+      </div>
+    }
+    
+    <div data-parent="#accordionDesktopMenu" id="collapse-Two" class="collapse" role="tabpanel" aria-labelledby="HeadingTwo">
+      @if (category.SeName == "colors" || category.SeName == "finishing") {
+        for (int k = 0 ; k < category.SubCategories.Count(); k++) {
+          var subcategory = category.SubCategories[k];
+          if (category.SeName == "colors" && k == 0) {
+            <div class="row m-0" style="border-top: 1px solid lightgrey; padding-top: 20px !important">
+              <div class="col-6 col-sm-6 col-md-6 text-left p-0">
+                <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
+                  @subcategory.Name
+                </a>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-6 text-right">
+                <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
+              </div>
+            </div>
+          } else if (category.SeName == "finishing" && k+1 == category.SubCategories.Count()) {
+            <div class="row m-0" style="padding-bottom: 20px !important">
+              <div class="col-6 col-sm-6 col-md-6 text-left p-0">
+                <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
+                  @subcategory.Name
+                </a>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-6 text-right">
+                <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
+              </div>
+            </div>
+          } else {
+            <div class="row m-0">
+              <div class="col-6 col-sm-6 col-md-6 text-left p-0">
+                <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
+                  @subcategory.Name
+                </a>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-6 text-right">
+                <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
+              </div>
+
+            </div>
+          }
+        } 
+      }
+    </div>
+  }
+
+  @* brands *@
+  @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+    var category = Model.Categories[j];
+    if (j == 2) {
+      <div class="p-2 head-prod-detail" role="tab" id="HeadingThree" style="border-top: 1px solid lightgrey;">
+        <a id="id-acc-category-3" class="child-acc-category-3 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Three" aria-expanded="false" aria-controls="collapse-Three">
+          BRANDS
+        </a>
+      </div>
+
+      <div data-parent="#accordionDesktopMenu" id="collapse-Three" class="collapse" role="tabpanel" aria-labelledby="HeadingThree" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
+        @if (category.SeName == "brands") {
+          foreach (var subcategory in category.SubCategories) {
+            <div class="row m-0">
+              <div class="col-6 col-sm-6 col-md-6 text-left p-0">
+                <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-brand" style="padding-left: 0.5rem !important; font-size: 13px;">
+                  @subcategory.Name
+                </a>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-6 text-right">
+                <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
+              </div>
+            </div>
+          }
+        }
+      </div>
+    }
+  }
+
+  @* price and availibility*@
+  @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+    var category = Model.Categories[j];
+    if (j == 0) {
+      <div class="p-2 head-prod-detail" role="tab" id="HeadingFour" style="border-top: 1px solid lightgrey;">
+        <a id="id-acc-category-4" class="child-acc-category-4 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Four" aria-expanded="false" aria-controls="collapse-Four">
+          PRICE RANGE
+        </a>
+      </div>
+
+      <div data-parent="#accordionDesktopMenu" id="collapse-Four" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFour" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important; margin-bottom: 15px;">
+        @* <div class="row m-0">
+          <div class="col-12 col-sm-12 col-md-12 d-flex justify-content-center align-items-center">
+            <input autocomplete="off" class="checkboxprice" type="range" style="width: 100%;" id="checkbox-price">
+          </div>
+        </div>
+        <div style="float: left; clear: both">test</div>
+        <div style="float: right; ">test</div> *@
+
+        <div class="row m-0">
+          <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">0 IDR - 1,000,000 IDR</a></div>
+          <div class="col-6 col-sm-6 col-md-6 text-right">
+            <input autocomplete="off" class="checkbox-price" type="checkbox" name="SortProduct" data-price="1000000" id="checkbox-price">
+          </div>
+        </div>
+
+        <div class="row m-0">
+          <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">1,000,000 IDR - 10,000,000 IDR</a></div>
+          <div class="col-6 col-sm-6 col-md-6 text-right">
+            <input autocomplete="off" class="checkbox-price" type="checkbox" name="SortProduct" data-price="10000000" id="checkbox-price">
+          </div>
+        </div>
+
+        <div class="row m-0">
+          <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">10,000,000 IDR - 100,000,000 IDR</a></div>
+          <div class="col-6 col-sm-6 col-md-6 text-right">
+            <input autocomplete="off" class="checkbox-price" type="checkbox" name="SortProduct" data-price="100000000" id="checkbox-price">
+          </div>
+        </div>
+
+        @* <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">0 IDR - 1,000,000 IDR</a></div>
+        <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">1,000,000 IDR - 10,000,000 IDR</a></div>
+        <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">10,000,000 IDR - 100,000,000 IDR</a></div> *@
+      </div>
+
+      <div class="p-2 head-prod-detail" role="tab" id="HeadingFive" style="border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
+        <a id="id-acc-category-5" class="child-acc-category-5 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Five" aria-expanded="false" aria-controls="collapse-Five">
+          AVAILABILITY
+        </a>
+      </div>
+
+      <div data-parent="#accordionDesktopMenu" id="collapse-Five" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFive" style="border-bottom: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
+        @* <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 13px;">Pre Order</a></div> *@
+        @* <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 13px;">Available</a></div> *@
+        <div class="row m-0">
+          <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">Pre Order</a></div>
+          <div class="col-6 col-sm-6 col-md-6 text-right">
+            <input autocomplete="off" class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="True" id="checkbox-avail">
+          </div>
+        </div>
+
+        <div class="row m-0">
+          <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">Available</a></div>
+          <div class="col-6 col-sm-6 col-md-6 text-right">
+            <input autocomplete="off" class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="False" id="checkbox-avail">
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>
+
+@* MOBILE MENU CATALOG NAVIGATION *@
+<div class="mobile-category-menu">
+  <div class="d-block d-md-none hidden-md hidden-lg">
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-categories" style="margin: 0; float: left;"></p>
-      <p class="removeshowfilter-categories" style="margin: 0; float: right; cursor: pointer;"></p>
+      <p class="removeshowfilter-categories" style="margin: 0; float: right;"></p>
     </div>
     @* <div class="px-2" style="display: flow-root;">
       <p class="showfilter-color" style="margin: 0; float: left;"></p>
@@ -133,7 +368,7 @@
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-brand" style="margin: 0; float: left;"></p>
       <p class="removeshowfilter-brand" style="margin: 0; float: right;"></p>
-    </div> 
+    </div> *@
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-price" style="margin: 0; float: left;"></p>
       <p class="removeshowfilter-price" style="margin: 0; float: right;"></p>
@@ -141,403 +376,169 @@
     <div class="px-2" style="display: flow-root;">
       <p class="showfilter-avail" style="margin: 0; float: left;"></p>
       <p class="removeshowfilter-avail" style="margin: 0; float: right;"></p>
-    </div>*@
+    </div>
 
-    @* categories *@
+    @* category *@
     @for (int j = 0 ; j < Model.Categories.Count(); j++) {
       var category = Model.Categories[j];
-      if (j == 0) {
-        <div class="p-2 head-prod-detail" role="tab" id="HeadingOne" style="border-top: 1px solid lightgrey;">
-          <a id="id-acc-category-1" class="child-acc-category-1 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-One" aria-expanded="false" aria-controls="collapse-One">
-            CATEGORIES
-          </a>
-        </div>
+        if (j == 0) {
+          <div class="p-2 head-prod-detail" role="tab" id="HeadingSix" style="border-top: 1px solid lightgrey; margin-top: 10px;">
+            <a id="id-acc-category-6" class="child-acc-category-6 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+              CATEGORIES
+            </a>
+          </div>
 
-        <div data-parent="#accordionDesktopMenu" id="collapse-One" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingOne" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
-          @* when click child will show the clicked child  *@
-          @* foreach (var othersubcategory in subcategory.SubCategories) {
-            if (absolutepath.Contains(othersubcategory.SeName)){ 
-              <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px;">@othersubcategory.Name</a></div>
-            }
-          } *@
-          @foreach (var subcategory in category.SubCategories) {
-            if (absolutepath.Contains(subcategory.SeName)){
-              if (subcategory.SubCategories.Any()) {
-                foreach (var subsubcategory in subcategory.SubCategories) {
-                  @* when click parent, show all child  *@
-                  <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@subsubcategory.Name</a></div>
+          <div data-parent="#accordionMobileMenu" id="collapseSix" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingSix" style="border-top: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
+            @foreach (var subcategory in category.SubCategories) {
+              if (absolutepath.Contains(subcategory.SeName)){
+                if (subcategory.SubCategories.Any()) {
+                  foreach (var subsubcategory in subcategory.SubCategories) {
+                    @* when click parent, show all child  *@
+                    <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 16px;">@subsubcategory.Name</a></div>
+                  }
+                } else {
+                  @* when click parent, show only parent  *@
+                  <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 16px;">@subcategory.Name</a></div>
                 }
               } else {
-                @* when click parent, show only parent  *@
-                <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@subcategory.Name</a></div>
-              }
-            } else {
-              foreach (var othersubcategory in subcategory.SubCategories) {
-                if (absolutepath.Contains(othersubcategory.SeName)){ 
-                  foreach (var tempcategory in category.SubCategories) {
-                    if (tempcategory.Id == subcategory.Id){ 
-                      foreach (var tempsubcategory in tempcategory.SubCategories) {
-                        <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@tempsubcategory.Name</a></div>
-                      }
-                    }
-                  }
-                } else {
-                  if (absolutepath.Contains("shop")){
-                    <div><a id="@othersubcategory.SeName" name="SortProduct" data-cat-id="@othersubcategory.Id" class="content-filter-categories" style="font-size: 13px; cursor: pointer;">@othersubcategory.Name</a></div>
-                  }
-
-                }
-              }
-            }
-          }
-        </div>
-      }
-    }
-
-    @* color *@
-    @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-      var category = Model.Categories[j];
-      if (j == 0) {
-        <div class="p-2 head-prod-detail" role="tab" id="HeadingTwo" style="border-top: 1px solid lightgrey;">
-          <a id="id-acc-category-2" class="child-acc-category-2 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Two" aria-expanded="false" aria-controls="collapse-Two">
-            COLOR/FINISHING
-          </a>
-        </div>
-      }
-      
-      <div data-parent="#accordionDesktopMenu" id="collapse-Two" class="collapse" role="tabpanel" aria-labelledby="HeadingTwo">
-        @if (category.SeName == "colors" || category.SeName == "finishing") {
-          for (int k = 0 ; k < category.SubCategories.Count(); k++) {
-            var subcategory = category.SubCategories[k];
-            if (category.SeName == "colors" && k == 0) {
-              <div class="row m-0" style="border-top: 1px solid lightgrey; padding-top: 20px !important">
-                <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
-                    @subcategory.Name
-                  </a>
-                </div>
-
-                <div class="col-6 col-sm-6 col-md-6 text-right">
-                  <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
-                </div>
-              </div>
-            } else if (category.SeName == "finishing" && k+1 == category.SubCategories.Count()) {
-              <div class="row m-0" style="padding-bottom: 20px !important">
-                <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
-                    @subcategory.Name
-                  </a>
-                </div>
-
-                <div class="col-6 col-sm-6 col-md-6 text-right">
-                  <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
-                </div>
-              </div>
-            } else {
-              <div class="row m-0">
-                <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="padding-left: 0.5rem !important; font-size: 13px;">
-                    @subcategory.Name
-                  </a>
-                </div>
-
-                <div class="col-6 col-sm-6 col-md-6 text-right">
-                  <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
-                </div>
-
-              </div>
-            }
-          } 
-        }
-      </div>
-    }
-
-    @* brands *@
-    @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-      var category = Model.Categories[j];
-      if (j == 2) {
-        <div class="p-2 head-prod-detail" role="tab" id="HeadingThree" style="border-top: 1px solid lightgrey;">
-          <a id="id-acc-category-3" class="child-acc-category-3 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Three" aria-expanded="false" aria-controls="collapse-Three">
-            BRANDS
-          </a>
-        </div>
-
-        <div data-parent="#accordionDesktopMenu" id="collapse-Three" class="collapse" role="tabpanel" aria-labelledby="HeadingThree" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
-          @if (category.SeName == "brands") {
-            foreach (var subcategory in category.SubCategories) {
-              <div class="row m-0">
-                <div class="col-6 col-sm-6 col-md-6 text-left p-0">
-                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-brand" style="padding-left: 0.5rem !important; font-size: 13px;">
-                    @subcategory.Name
-                  </a>
-                </div>
-
-                <div class="col-6 col-sm-6 col-md-6 text-right">
-                  <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
-                </div>
-              </div>
-            }
-          }
-        </div>
-      }
-    }
-
-    @* price and availibility*@
-    @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-      var category = Model.Categories[j];
-      if (j == 0) {
-        <div class="p-2 head-prod-detail" role="tab" id="HeadingFour" style="border-top: 1px solid lightgrey;">
-          <a id="id-acc-category-4" class="child-acc-category-4 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Four" aria-expanded="false" aria-controls="collapse-Four">
-            PRICE RANGE
-          </a>
-        </div>
-
-        <div data-parent="#accordionDesktopMenu" id="collapse-Four" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFour" style="border-top: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important; margin-bottom: 15px;">
-          @* <div class="row m-0">
-            <div class="col-12 col-sm-12 col-md-12 d-flex justify-content-center align-items-center">
-              <input class="checkboxprice" type="range" style="width: 100%;" id="checkbox-price">
-            </div>
-          </div>
-          <div style="float: left; clear: both">test</div>
-          <div style="float: right; ">test</div> *@
-
-          <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">0 IDR - 1,000,000 IDR</a></div>
-            <div class="col-6 col-sm-6 col-md-6 text-right">
-              <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="1000000" id="checkbox-price">
-            </div>
-          </div>
-
-          <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">1,000,000 IDR - 10,000,000 IDR</a></div>
-            <div class="col-6 col-sm-6 col-md-6 text-right">
-              <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="10000000" id="checkbox-price">
-            </div>
-          </div>
-
-          <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">10,000,000 IDR - 100,000,000 IDR</a></div>
-            <div class="col-6 col-sm-6 col-md-6 text-right">
-              <input class="checkbox-price" type="checkbox" name="SortProduct" data-price="100000000" id="checkbox-price">
-            </div>
-          </div>
-
-          @* <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">0 IDR - 1,000,000 IDR</a></div>
-          <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">1,000,000 IDR - 10,000,000 IDR</a></div>
-          <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 13px;">10,000,000 IDR - 100,000,000 IDR</a></div> *@
-        </div>
-
-        <div class="p-2 head-prod-detail" role="tab" id="HeadingFive" style="border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
-          <a id="id-acc-category-5" class="child-acc-category-5 collapsed" style="font-weight: 500;" role="button" data-toggle="collapse" href="#collapse-Five" aria-expanded="false" aria-controls="collapse-Five">
-            AVAILABILITY
-          </a>
-        </div>
-
-        <div data-parent="#accordionDesktopMenu" id="collapse-Five" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingFive" style="border-bottom: 1px solid lightgrey; padding-top: 20px !important; padding-bottom: 20px !important;">
-          @* <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 13px;">Pre Order</a></div> *@
-          @* <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 13px;">Available</a></div> *@
-          <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">Pre Order</a></div>
-            <div class="col-6 col-sm-6 col-md-6 text-right">
-              <input class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="True" id="checkbox-avail">
-            </div>
-          </div>
-
-          <div class="row m-0">
-            <div class="col-6 col-sm-6 col-md-6 text-left p-0"><a style="font-size: 13px;">Available</a></div>
-            <div class="col-6 col-sm-6 col-md-6 text-right">
-              <input class="checkbox-avail" type="checkbox" name="SortProduct" data-avail="False" id="checkbox-avail">
-            </div>
-          </div>
-        </div>
-      }
-    }
-  </div>
-
-  @* MOBILE MENU CATALOG NAVIGATION *@
-  <div class="mobile-category-menu">
-    <div class="d-block d-md-none hidden-md hidden-lg">
-      <div class="px-2" style="display: flow-root;">
-        <p class="showfilter-categories" style="margin: 0; float: left;"></p>
-        <p class="removeshowfilter-categories" style="margin: 0; float: right;"></p>
-      </div>
-      @* <div class="px-2" style="display: flow-root;">
-        <p class="showfilter-color" style="margin: 0; float: left;"></p>
-        <p class="removeshowfilter-color" style="margin: 0; float: right;"></p>
-      </div>
-      <div class="px-2" style="display: flow-root;">
-        <p class="showfilter-brand" style="margin: 0; float: left;"></p>
-        <p class="removeshowfilter-brand" style="margin: 0; float: right;"></p>
-      </div> *@
-      <div class="px-2" style="display: flow-root;">
-        <p class="showfilter-price" style="margin: 0; float: left;"></p>
-        <p class="removeshowfilter-price" style="margin: 0; float: right;"></p>
-      </div>
-      <div class="px-2" style="display: flow-root;">
-        <p class="showfilter-avail" style="margin: 0; float: left;"></p>
-        <p class="removeshowfilter-avail" style="margin: 0; float: right;"></p>
-      </div>
-
-      @* category *@
-      @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-        var category = Model.Categories[j];
-          if (j == 0) {
-            <div class="p-2 head-prod-detail" role="tab" id="HeadingSix" style="border-top: 1px solid lightgrey; margin-top: 10px;">
-              <a id="id-acc-category-6" class="child-acc-category-6 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                CATEGORIES
-              </a>
-            </div>
-
-            <div data-parent="#accordionMobileMenu" id="collapseSix" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingSix" style="border-top: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
-              @foreach (var subcategory in category.SubCategories) {
-                if (absolutepath.Contains(subcategory.SeName)){
-                  if (subcategory.SubCategories.Any()) {
-                    foreach (var subsubcategory in subcategory.SubCategories) {
-                      @* when click parent, show all child  *@
-                      <div><a id="@subsubcategory.SeName" name="SortProduct" data-cat-id="@subsubcategory.Id" class="content-filter-categories" style="font-size: 16px;">@subsubcategory.Name</a></div>
-                    }
-                  } else {
-                    @* when click parent, show only parent  *@
-                    <div><a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-categories" style="font-size: 16px;">@subcategory.Name</a></div>
-                  }
-                } else {
-                  foreach (var othersubcategory in subcategory.SubCategories) {
-                    if (absolutepath.Contains(othersubcategory.SeName)){ 
-                      foreach (var tempcategory in category.SubCategories) {
-                        if (tempcategory.Id == subcategory.Id){ 
-                          foreach (var tempsubcategory in tempcategory.SubCategories) {
-                            <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 16px;">@tempsubcategory.Name</a></div>
-                          }
+                foreach (var othersubcategory in subcategory.SubCategories) {
+                  if (absolutepath.Contains(othersubcategory.SeName)){ 
+                    foreach (var tempcategory in category.SubCategories) {
+                      if (tempcategory.Id == subcategory.Id){ 
+                        foreach (var tempsubcategory in tempcategory.SubCategories) {
+                          <div><a id="@tempsubcategory.SeName" name="SortProduct" data-cat-id="@tempsubcategory.Id" class="content-filter-categories" style="font-size: 16px;">@tempsubcategory.Name</a></div>
                         }
                       }
                     }
                   }
                 }
               }
-            </div>
-          }
-      }
-
-      @* color *@
-      @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-        var category = Model.Categories[j];
-          if (j == 0) {
-            <div class="p-2 head-prod-detail" role="tab" id="HeadingSeven" style="border-top: 1px solid lightgrey;">
-              <a id="id-acc-category-7" class="child-acc-category-7 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                COLOR/FINISHING
-              </a>
-            </div>
-          }
-
-          <div data-parent="#accordionMobileMenu" id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="HeadingSeven">
-            @if (category.SeName == "colors" || category.SeName == "finishing") {
-              for (int k = 0 ; k < category.SubCategories.Count(); k++) {
-                var subcategory = category.SubCategories[k];
-                if (category.SeName == "colors" && k == 0) {
-                  <div class="row m-0" style="border-top: 1px solid lightgrey; padding-top: 20px !important">
-                    <div class="col-6 col-md-6 col-sm-6 text-left" style="padding-left: 8px;">
-                      <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="font-size: 16px;">
-                        @subcategory.Name
-                      </a>
-                    </div>
-
-                    <div class="col-6 col-md-6 col-sm-6" style="text-align: end; padding-right: 1%;">
-                      <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
-                    </div>
-                  </div>
-                } else if (category.SeName == "finishing" && k+1 == category.SubCategories.Count()) {
-                  <div class="row m-0" style="padding-bottom: 20px !important">
-                    <div class="col-6 col-md-6 col-sm-6 text-left" style="padding-left: 8px;">
-                      <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="font-size: 16px;">
-                        @subcategory.Name
-                      </a>
-                    </div>
-
-                    <div class="col-6 col-md-6 col-sm-6" style="text-align: end; padding-right: 1%;">
-                    
-                      <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
-                    </div>
-                  </div>
-                } else {
-                  <div class="row m-0">
-                    <div class="col-6 col-md-6 col-sm-6 text-left" style="padding-left: 8px;">
-                      <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="font-size: 16px;">
-                        @subcategory.Name
-                      </a>
-                    </div>
-
-                    <div class="col-6 col-md-6 col-sm-6" style="text-align: end; padding-right: 1%;">
-                      <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
-                    </div>
-                  </div>
-                }
-              } 
             }
           </div>
-      }
+        }
+    }
 
-      @* brands *@
-      @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-        var category = Model.Categories[j];
-        if (j == 2) {
-          <div class="p-2 head-prod-detail" role="tab" id="HeadingEight" style="border-top: 1px solid lightgrey;">
-            <a id="id-acc-category-8" class="child-acc-category-8 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-              BRANDS
+    @* color *@
+    @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+      var category = Model.Categories[j];
+        if (j == 0) {
+          <div class="p-2 head-prod-detail" role="tab" id="HeadingSeven" style="border-top: 1px solid lightgrey;">
+            <a id="id-acc-category-7" class="child-acc-category-7 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+              COLOR/FINISHING
             </a>
           </div>
-          
-          <div data-parent="#accordionMobileMenu" id="collapseEight" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingEight" style="border-top: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
-            @if (category.SeName == "brands") {
-              foreach (var subcategory in category.SubCategories) {
-                <div class="row">
-                  <div class="col-6 col-md-6 col-sm-6 text-left">
-                    <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-brand" style="font-size: 16px;">
+        }
+
+        <div data-parent="#accordionMobileMenu" id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="HeadingSeven">
+          @if (category.SeName == "colors" || category.SeName == "finishing") {
+            for (int k = 0 ; k < category.SubCategories.Count(); k++) {
+              var subcategory = category.SubCategories[k];
+              if (category.SeName == "colors" && k == 0) {
+                <div class="row m-0" style="border-top: 1px solid lightgrey; padding-top: 20px !important">
+                  <div class="col-6 col-md-6 col-sm-6 text-left" style="padding-left: 8px;">
+                    <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="font-size: 16px;">
                       @subcategory.Name
                     </a>
                   </div>
 
-                  <div class="col-6 col-md-6 col-sm-6" style="text-align: end;">
-                      <input class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
+                  <div class="col-6 col-md-6 col-sm-6" style="text-align: end; padding-right: 1%;">
+                    <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
+                  </div>
+                </div>
+              } else if (category.SeName == "finishing" && k+1 == category.SubCategories.Count()) {
+                <div class="row m-0" style="padding-bottom: 20px !important">
+                  <div class="col-6 col-md-6 col-sm-6 text-left" style="padding-left: 8px;">
+                    <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="font-size: 16px;">
+                      @subcategory.Name
+                    </a>
+                  </div>
+
+                  <div class="col-6 col-md-6 col-sm-6" style="text-align: end; padding-right: 1%;">
+                  
+                    <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
+                  </div>
+                </div>
+              } else {
+                <div class="row m-0">
+                  <div class="col-6 col-md-6 col-sm-6 text-left" style="padding-left: 8px;">
+                    <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-color" style="font-size: 16px;">
+                      @subcategory.Name
+                    </a>
+                  </div>
+
+                  <div class="col-6 col-md-6 col-sm-6" style="text-align: end; padding-right: 1%;">
+                    <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-color">
                   </div>
                 </div>
               }
+            } 
+          }
+        </div>
+    }
+
+    @* brands *@
+    @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+      var category = Model.Categories[j];
+      if (j == 2) {
+        <div class="p-2 head-prod-detail" role="tab" id="HeadingEight" style="border-top: 1px solid lightgrey;">
+          <a id="id-acc-category-8" class="child-acc-category-8 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+            BRANDS
+          </a>
+        </div>
+        
+        <div data-parent="#accordionMobileMenu" id="collapseEight" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingEight" style="border-top: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
+          @if (category.SeName == "brands") {
+            foreach (var subcategory in category.SubCategories) {
+              <div class="row">
+                <div class="col-6 col-md-6 col-sm-6 text-left">
+                  <a id="@subcategory.SeName" name="SortProduct" data-cat-id="@subcategory.Id" class="content-filter-brand" style="font-size: 16px;">
+                    @subcategory.Name
+                  </a>
+                </div>
+
+                <div class="col-6 col-md-6 col-sm-6" style="text-align: end;">
+                    <input autocomplete="off" class="form-check-input" type="checkbox" name="SortProduct" data-cat-id="@subcategory.Id" value="@subcategory.Id" id="checkbox-brand">
+                </div>
+              </div>
             }
-          </div>
-        }
+          }
+        </div>
       }
+    }
 
-      @* price and availability *@
-      @for (int j = 0 ; j < Model.Categories.Count(); j++) {
-        var category = Model.Categories[j];
-        if (j == 0) {
-          <div class="p-2 head-prod-detail" role="tab" id="HeadingNine" style="border-top: 1px solid lightgrey;">
-            <a id="id-acc-category-9" class="child-acc-category-9 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-              PRICE
-            </a>
-          </div>
+    @* price and availability *@
+    @for (int j = 0 ; j < Model.Categories.Count(); j++) {
+      var category = Model.Categories[j];
+      if (j == 0) {
+        <div class="p-2 head-prod-detail" role="tab" id="HeadingNine" style="border-top: 1px solid lightgrey;">
+          <a id="id-acc-category-9" class="child-acc-category-9 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+            PRICE
+          </a>
+        </div>
 
-          <div data-parent="#accordionMobileMenu" id="collapseNine" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingNine" style="border-top: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
-            <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 16px;">0 IDR - 1,000,000 IDR</a></div>
-            <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 16px;">1,000,000 IDR - 10,000,000 IDR</a></div>
-            <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 16px;">10,000,000 IDR - 100,000,000 IDR</a></div>
-          </div>
+        <div data-parent="#accordionMobileMenu" id="collapseNine" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingNine" style="border-top: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
+          <div><a id="1000000" name="SortProduct" class="content-filter-price" style="font-size: 16px;">0 IDR - 1,000,000 IDR</a></div>
+          <div><a id="10000000" name="SortProduct" class="content-filter-price" style="font-size: 16px;">1,000,000 IDR - 10,000,000 IDR</a></div>
+          <div><a id="100000000" name="SortProduct" class="content-filter-price" style="font-size: 16px;">10,000,000 IDR - 100,000,000 IDR</a></div>
+        </div>
 
-          <div class="p-2 head-prod-detail" role="tab" id="HeadingTen" style="border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
-            <a id="id-acc-category-10" class="child-acc-category-10 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-              AVAILABILITY
-            </a>
-          </div>
+        <div class="p-2 head-prod-detail" role="tab" id="HeadingTen" style="border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
+          <a id="id-acc-category-10" class="child-acc-category-10 collapsed" style="font-size: 17px; font-weight: 500;" role="button" data-toggle="collapse" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+            AVAILABILITY
+          </a>
+        </div>
 
-          <div data-parent="#accordionMobileMenu" id="collapseTen" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingTen" style="border-bottom: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
-            <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 16px;">Pre Order</a></div>
-            <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 16px;">Available</a></div>
-          </div>
-        }
+        <div data-parent="#accordionMobileMenu" id="collapseTen" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingTen" style="border-bottom: 1px solid lightgrey; padding-top: 10px !important; padding-bottom: 10px !important;">
+          <div><a id="True" name="SortProduct" class="content-filter-avail" style="font-size: 16px;">Pre Order</a></div>
+          <div><a id="False" name="SortProduct" class="content-filter-avail" style="font-size: 16px;">Available</a></div>
+        </div>
       }
+    }
 
 
-    </div>
   </div>
+</div>
+
 @for (int j = 0 ; j < Model.Categories.Count(); j++) {
   var parent_category = Model.Categories[j];
   if (parent_category.SeName == "shop") {
