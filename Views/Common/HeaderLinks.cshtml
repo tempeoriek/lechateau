@@ -317,7 +317,7 @@
 <script>
 	setTimeout(function() {
 		$('#navbarsExampleDefault').css("display", "block");
-	}, 400);
+	}, 100);
 	
 	window.onload = function () { if (window.jQuery) { $(document).ready(function () { $(".sidebarNavigation .navbar-collapse").hide().clone().appendTo("body").removeAttr("class").addClass("sideMenu").show(); $("body").append("<div class='overlay'></div>"); $(".navbar-toggle, .navbar-togglers").on("click", function () { $(".sideMenu").addClass($(".sidebarNavigation").attr("data-sidebarClass")); $(".sideMenu, .overlay, .xclose").toggleClass("open"); $(".overlay, .xclose").on("click", function () { $(this).removeClass("open"); $(".sideMenu").removeClass("open") }) }); $("body").on("click", ".sideMenu.open .nav-item", function () { if (!$(this).hasClass("dropdown")) { $(".sideMenu, .overlay, .xclose").toggleClass("open") } }); $(window).resize(function () { if ($(".navbar-toggler").is(":block")) { $(".sideMenu, .overlay").hide() } else { $(".sideMenu, .overlay, .xclose").show() } }) }) } else { console.log("sidebarNavigation Requires jQuery") } }
 
