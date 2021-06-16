@@ -498,7 +498,7 @@
           <div><img src="~/content/images/uploaded/homepage/thabs 3.png" class="img-fluid"></div>
           <div><img src="~/content/images/uploaded/homepage/thabs 4.png" class="img-fluid"></div>
         </div>
-        <div class="carouselmobile d-block d-md-none hidden-md hidden-xl">
+        <div class="carouselmobilehomepage d-block d-md-none hidden-md hidden-xl">
           <div><img src="~/content/images/uploaded/homepage/thabs 2.png" class="img-fluid"></div>
           <div><img src="~/content/images/uploaded/homepage/thabs 3.png" class="img-fluid"></div>
           <div><img src="~/content/images/uploaded/homepage/thabs 4.png" class="img-fluid"></div>
@@ -579,8 +579,8 @@
       });
     });
     $(document).ready(function () {
-      $('.carouselmobile').slick({
-        slidesToShow: 3,
+      $('.carouselmobilehomepage').slick({
+        slidesToShow: 2,
         dots: false,
         centerMode: false,
         arrows: false,
@@ -595,12 +595,12 @@
       $('.carouseldesktop').slick('slickNext');
     })
 
-    $('.left').click(function () {
-      $('.carouselmobile').slick('slickPrev');
+    $('.leftslidermobilehome').click(function () {
+      $('.carouselmobilehomepage').slick('slickPrev');
     })
 
-    $('.right').click(function () {
-      $('.carouselmobile').slick('slickNext');
+    $('.rightslidermobilehome').click(function () {
+      $('.carouselmobilehomepage').slick('slickNext');
     })
     
     setTimeout(() => {

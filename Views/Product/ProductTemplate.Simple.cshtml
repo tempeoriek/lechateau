@@ -278,7 +278,7 @@
     });
     $(document).ready(function () {
       $('.carouselhero2').slick({
-        slidesToShow: 1,
+        slidesToShow: 2,
         dots: false,
         centerMode: false,
         arrows: false,
@@ -293,10 +293,9 @@
     });
     $(document).ready(function () {
       $('.carouselmobile').slick({
-        slidesToShow: 3,
+        slidesToShow: 2,
         dots: false,
         centerMode: false,
-        arrows: false,
       });
     });
 
@@ -308,11 +307,11 @@
       $('.carouseldesktoprelated').slick('slickNext');
     })
 
-    $('.left').click(function () {
+    $('.leftslidermobile').click(function () {
       $('.carouselmobile').slick('slickPrev');
     })
 
-    $('.right').click(function () {
+    $('.rightslidermobile').click(function () {
       $('.carouselmobile').slick('slickNext');
     })
 

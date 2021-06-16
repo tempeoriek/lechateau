@@ -29,9 +29,9 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th class="no-leftpadding d-none d-md-table-cell" style="padding-top:0;"><h5 style="text-align:left !important;">@T("Order.BillingAddress")</h5></th>
+                    <th class="no-leftpadding d-none d-md-table-cell" style="padding-top:0;"><h5 style="text-align:left !important; margin: 10px 0 2px;">@T("Order.BillingAddress")</h5></th>
                     <th class="d-none d-md-table-cell" style="padding-top:0;">
-                        <h5 style="text-align:left !important;">
+                        <h5 style="text-align:left !important; margin: 10px 0 2px;">
                             @T("Order.ShippingAddress")
                         </h5>
                     </th>
@@ -194,7 +194,7 @@
         </table>
 
         <div class="col-md-6 d-md-none">
-            <div><h5 style="text-align:left !important;">@T("Order.BillingAddress")</h5></div>
+            <div><h5 style="text-align:left !important; margin: 10px 0 2px;">@T("Order.BillingAddress")</h5></div>
             <div>
                 <!--billing -->
                 <div class="checkout-blox">
@@ -271,7 +271,7 @@
         </div>
         <div class="col-md-6 d-md-none mt-20">
             <div>
-                <h5 style="text-align:left !important;">
+                <h5 style="text-align:left !important; margin: 10px 0 2px;">
                     @T("Order.ShippingAddress")
                 </h5>
             </div>
@@ -359,10 +359,10 @@
             <thead>
                 <tr>
                     <th class="no-leftpadding d-none d-md-table-cell">
-                        <h5>@T("Order.Payment.Method")</h5>
+                        <h5 style="margin: 10px 0 2px;">@T("Order.Payment.Method")</h5>
                     </th>
                     <th class="d-none d-md-table-cell">
-                        <h5>@T("Order.Shipping.Name")</h5>
+                        <h5 style="margin: 10px 0 2px;">@T("Order.Shipping.Name")</h5>
                     </th>
                 </tr>
             </thead>
@@ -407,7 +407,7 @@
         </table>
 
         <div class="col-md-6 mt-20 d-md-none">
-            <div><h5>@T("Order.Payment.Method")</h5> </div>
+            <div><h5 style="margin: 10px 0 2px;">@T("Order.Payment.Method")</h5> </div>
             <div><!--payment method-->
             @if (!String.IsNullOrEmpty(Model.PaymentMethod))
             {
@@ -430,7 +430,7 @@
             </div>
         </div>
         <div class="col-md-6 mt-20 d-md-none">
-            <div><h5> @T("Order.Shipping.Name")</h5> </div>
+            <div><h5 style="margin: 10px 0 2px;"> @T("Order.Shipping.Name")</h5> </div>
             <div>
     <!-- shipping method -->
                     @if (Model.IsShippable)

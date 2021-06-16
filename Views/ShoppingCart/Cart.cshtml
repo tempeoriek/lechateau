@@ -11,9 +11,14 @@
 
 @*@section Left{@Html.Partial("MenuStatic")}*@
 
-<div class="container mt-5">
-    <div class="col-main mt-normal">
-        <h2 class="text-left mb-3">BAG</h2>
+<div class="container">
+    <div class="col-main mt-normal m-2">
+        <div class="d-none d-md-block">
+            <h2 class="text-left mb-3 mt-4">BAG</h2>
+        </div>
+        <div class="d-block d-md-none hidden-md hidden-xl">
+            <h2 class="text-left mb-3">BAG</h2>
+        </div>
         <div id="pleasewait" style="display:none;" class="text-shop">
             <img src="~/Themes/v1/Content/images/ajax_loader_small.gif" style="display:block;" /> <i>Please wait...</i>
         </div>

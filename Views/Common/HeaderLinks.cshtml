@@ -147,25 +147,17 @@
 			@Html.Action("FlyoutShoppingCart", "ShoppingCart")
 		</div>
 	</div>
-	@* <div class="aside-header p-4">
-		<span style="color: black; font-size: 22px;">Your Bag</span>
-		<span class="close" data-dismiss="aside" aria-hidden="true">&times;</span>
-		<hr style="border-top: 2px solid black;">
-	</div>
-	<div class="aside-contents">
-		<div id="bag" style="height: 100%;">@Html.Action("FlyoutShoppingCart", "ShoppingCart")</div>
-	</div> *@
 </div>
 
 @* cart mobile  *@
-<div class="asidemobile">
+@* <div class="asidemobile">
 	<div style="height: 100%; display: flex; justify-content: space-between">
 		<div id="bag" style="height: 100%; width: 100%;">
 			@Html.Action("FlyoutShoppingCart", "ShoppingCart")
 		</div>
 	</div>
 </div>
-<div class="asidemobile-backdrop"></div>
+<div class="asidemobile-backdrop"></div> *@
 
 
 @*mobile navbar*@
@@ -196,7 +188,7 @@
 							cartItem = string.Format("{0}", Model.ShoppingCartItems);
 							cssCartItem = "bag";
 						}
-						<a href="#bag" onclick="$('.asidemobile').asidebar('open')">
+						<a href="#bag" onclick="$('.aside').asidebar('open')">
 							<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
 								<span class="nav-item" style="color:#707070;margin-left:-8px;">
 									<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" />&nbsp;<span id="mCartItemsQty" class="cart-qty">@cartItem</span>
@@ -231,7 +223,7 @@
 										cartItem = string.Format("{0}", Model.ShoppingCartItems);
 										cssCartItem = "bag";
 									}
-									<a href="#bag" onclick="$('.asidemobile').asidebar('open')" style="padding: 0;">
+									<a href="#bag" onclick="$('.aside').asidebar('open')" style="padding: 0;">
 										<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
 											<span class="nav-item" style="color:#707070;">
 												<img src="~/Themes/v1/Content/images/cart-icon.svg" style="width:22px;" />&nbsp;<span id="mCartItemsQty" class="cart-qty">@cartItem</span>

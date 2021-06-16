@@ -69,8 +69,8 @@
 
 
   @* Best Seller Mobile *@
-  <div class="row d-block d-md-none carousel slide" data-ride="carousel" id="carouselNewArrivalMobile">
-    <div class="carousel-inner col-12 d-block d-md-block position-relative">
+  <div class="m-0 p-0 row d-block d-md-none carousel slide" data-ride="carousel" id="carouselNewArrivalMobile">
+    <div class="carousel-inner col-12 d-block d-md-block position-relative carouselmobilehomepage">
       @{
           var firstactives = "active";
           for (int z = 0; z < Model.Count(); z++)
@@ -84,22 +84,22 @@
             }
 
             <div class="carousel-item @firstactives">
-              <div class="row mx-4">
+              <div class="row mx-2">
                 <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean">
                   <img class="d-block w-100" src="@temp.DefaultPictureModel.ImageUrl">
                 </a>
               </div>
-              <div class="row mx-4 mt-2">
+              <div class="row mx-2 mt-2">
                 <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean" style="text-decoration: none; margin: 0; padding: 0; font-size: 16px; font-weight: bold; margin-bottom: -9px;">
                   @temp.Name
                 </a>
               </div>
-              <div class="row mx-4">
+              <div class="row mx-2">
                 <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean" style="text-decoration: none; margin: 0; padding: 0; font-size: 14px; font-weight: bold; text-transform: uppercase;">
                   @Brands
                 </a>
               </div>
-              <div class="row mx-4" style="margin-top: -10px; font-size: 14px;">
+              <div class="row mx-2" style="margin-top: -10px; font-size: 14px;">
                 @if (temp.ProductPrice.AvailableForPreOrder) {
                   <div class="price">Request A Quote</div>
                 } else {
@@ -110,11 +110,11 @@
           }
       }
     </div>
-    <a class="mx-3 carousel-control-prev" href="#carouselNewArrivalMobile" role="button" data-slide="prev">
+    <a class="leftslidermobilehome mx-3 carousel-control-prev" href="#carouselNewArrivalMobile" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="mx-3 carousel-control-next" href="#carouselNewArrivalMobile" role="button" data-slide="next">
+    <a class="rightslidermobilehome mx-3 carousel-control-next" href="#carouselNewArrivalMobile" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>

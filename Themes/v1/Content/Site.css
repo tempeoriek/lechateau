@@ -394,7 +394,18 @@ textarea.form-control {
     font-size: 12.8px;
 }
 
-
+/* ::placeholder {
+    color: black;
+    opacity: 1; 
+  }
+  
+  :-ms-input-placeholder { 
+   color: black;
+  }
+  
+  ::-ms-input-placeholder {
+   color: black;
+  } */
 
 
 
@@ -1077,7 +1088,7 @@ a.link-nav {
     border-bottom: 1px solid black;
     padding-bottom: 10px;
     outline: none;
-    color: #2F2F2F;
+    color: #2F2F2F !important;
     padding-top: 8px;
     padding-left: 4px;
     margin-left: 5px;
@@ -1089,6 +1100,7 @@ a.link-nav {
     width: 95%;
     z-index: 1;
     cursor: text;
+    /* background-color: rgba(238, 238, 238, 0.5) */
 }
 
 .search-navdesktop {
@@ -1594,23 +1606,25 @@ a.dropdown-item {
 
     .order-summary-item-mobile {
         display: flex;
-        margin: 20px;
+        /* margin: 20px; */
         justify-content: space-between;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid gray;
     }
 
     .order-summary {
-        width: 380px;
+        /* width: 380px; */
         margin: auto;
     }
 
     .cart-column2-mobile {
         width: 40%;
         padding-left: 10px;
+        padding-top: 10px;
     }
-
+    
     .cart-column3-mobile {
         width: 30%;
+        padding-top: 10px;
     }
 
         .cart-column2-mobile > div > p, .cart-column3-mobile > p {
@@ -2105,8 +2119,8 @@ a.dropdown-item {
         z-index: 3000;
         top: 0;
         left: 0;
-        background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0, 0.6);
+        /* background-color: rgb(0,0,0); */
+        background-color: rgba(0,0,0, 0.9);
     }
 
     .overlay-content {
@@ -2385,8 +2399,8 @@ a.dropdown-item {
 
     #body-content{
         padding-top:80px;
-        padding-left:10px;
-        padding-right:10px;
+        padding-left:25px;
+        padding-right:25px;
     }
 
 
