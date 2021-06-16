@@ -1376,7 +1376,7 @@ a.dropdown-item {
     }
 
 .form_signup {
-    width: 168px;
+    width: 100%;
     padding: 5px;
     background-color: transparent;
     border: 1px solid #DEDEDF !important;
@@ -1389,7 +1389,7 @@ a.dropdown-item {
 
 .form_signin {
     margin-bottom: 5px;
-    width: 350px;
+    width: 100%;
     /* border-bottom: 1px solid #000 !important; */
     padding: 5px;
     background-color: transparent;
@@ -1405,7 +1405,7 @@ a.dropdown-item {
 
 .button_signin {
     margin-top: 10px;
-    width: 350px;
+    width: 100%;
     color: white;
     background-color: black;
 }
@@ -1625,6 +1625,7 @@ a.dropdown-item {
     .cart-column3-mobile {
         width: 30%;
         padding-top: 10px;
+        text-align: right;
     }
 
         .cart-column2-mobile > div > p, .cart-column3-mobile > p {

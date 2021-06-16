@@ -27,7 +27,9 @@
     
 
             <div class="section order-summary">
-                @Html.Action("OrderSummary", "ShoppingCart", new { prepareAndDisplayOrderReviewData = true })
+                <div class="ordersummaryextend">
+                    @Html.Action("OrderSummary", "ShoppingCart", new { prepareAndDisplayOrderReviewData = true })
+                </div>
             </div> 
        
             @if (String.IsNullOrEmpty(Model.MinOrderTotalWarning) && Model.TermsOfServiceOnOrderConfirmPage)
