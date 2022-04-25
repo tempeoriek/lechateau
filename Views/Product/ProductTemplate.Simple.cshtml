@@ -87,6 +87,11 @@
             <hr class="pb-2" style="margin: 0; border-top: 1px solid;">
             <div class="description pb-2" style="color: black;">
               @Model.ShortDescription
+              @if(Model.LinkReference != null && Model.TextReference != null) {
+                <p>
+                  Reference: <a style="color: #2200CC;" href="@Model.LinkReference" target="_blank">@Model.TextReference</a>
+                </p>
+              }
             </div>
 
             @{

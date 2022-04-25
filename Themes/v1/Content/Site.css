@@ -121,6 +121,51 @@ label { font-weight: normal; margin-bottom: 0; color: black; text-transform: cap
     margin-right: -50vw;
 }
 
+.matterport-wrapper {
+    height: 95vh;
+    width: 100vw;
+    
+    position: relative;
+    overflow: hidden;
+}
+
+
+#matterport-placeholder {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+
+    cursor: pointer;
+
+    opacity: 1;
+    display: block;
+    transition: opacity 0.5s;
+
+    height: 95vh;
+    width: 100vw;
+    object-fit: cover;
+    object-position: top;
+}
+#matterport-placeholder.inactive {
+    opacity: 0;
+    display: none;
+    transition: display 0.5s ease-in 0.5s;
+}
+
+#matterport {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    
+    width: 100vw;
+    height: 95vh;
+}
 
 .clean-all {
     max-width: 100% !important;
@@ -1346,9 +1391,28 @@ a.dropdown-item {
 
 
 
+.nav-pills-inspiration .nav-link {
+    border-radius: 0;
+}
 
-
-/*sign in sign up*/
+    .nav-pills-inspiration .nav-link.active,
+    .nav-pills-inspiration .show > .nav-link,
+    .nav-pills-inspiration .show > .nav-link:hover,
+    .nav-pills-inspiration .nav-link:hover {
+        background-color: black;
+        color: white;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+        font-size: 14px;
+    }
+.nav-link {
+    display: block;
+    padding: 0 2rem;
+}
+.nav-spaces {
+    margin-right: 5px;
+    margin-left: 5px;
+}
 .nav-pills .nav-link {
     border-radius: 0;
 }
@@ -2080,8 +2144,32 @@ a.dropdown-item {
 
 
 
-
+.font-inspiration {
+    text-align: center;
+    line-height: normal;
+    font-size: 16px;
+}
+.inspirations-container {
+    margin-top: 5rem !important
+}
+/* for phones */
 @media (max-width: 575.98px) {
+    .inspirations-container {
+        margin-top: 0 !important
+    }
+    .container-gallery {
+        margin-left: 25px !important;
+        margin-right: 25px !important;
+    }
+    .gallery-img {
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+    }
+    .font-inspiration {
+        text-align: center;
+        line-height: normal;
+        font-size: 12px;
+    }
     .ig-instagram-item{
         height: 150px;
         width: 100%;
@@ -2301,6 +2389,9 @@ a.dropdown-item {
 }
 
 @media (max-width: 991.98px) {
+    .inspirations-container {
+        margin-top: 0 !important;
+    }
     .ig-instagram-item{
         height: 320px;
         width: 100%;

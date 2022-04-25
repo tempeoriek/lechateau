@@ -19,6 +19,7 @@
         var temp = Model[i];
         string[] brands = temp.Brand != null ? temp.Brand.Split(';') : null;
         string Brands = brands != null ? brands[1] : null;
+        var pricing_style = brands == null ? "0px" : "-10px";
 
         <div class="col-12">
           <div class="row mx-2">
@@ -39,7 +40,7 @@
               @Brands
             </a>
           </div>
-          <div class="row mx-2" style="margin-top: -10px; font-size: 14px;">
+          <div class="row mx-2" style="margin-top: @pricing_style; font-size: 14px;">
             @if (temp.ProductPrice.AvailableForPreOrder) {
               <div class="price">Request A Quote</div>
             } else {
@@ -78,6 +79,8 @@
             var temp = Model[z];
             string[] brands = temp.Brand != null ? temp.Brand.Split(';') : null;
             string Brands = brands != null ? brands[1] : null;
+            var pricing_style = brands == null ? "0px" : "-10px";
+
             if (z > 0)
             {
                 firstactives = "";
@@ -99,7 +102,7 @@
                   @Brands
                 </a>
               </div>
-              <div class="row mx-1" style="margin-top: -10px; font-size: 14px;">
+              <div class="row mx-1" style="@pricing_style">
                 @if (temp.ProductPrice.AvailableForPreOrder) {
                   <div class="price">Request A Quote</div>
                 } else {

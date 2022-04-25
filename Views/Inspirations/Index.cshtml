@@ -1,0 +1,89 @@
+﻿@model List<Nop.Web.Models.Flitts.Collection.LookViewModel>
+
+
+@{
+    ViewBag.Title = "Inspirations";
+}
+
+
+
+
+<div class="container mt-5 pb-5">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <h1>Inspirations</h1>
+    </div>
+  </div>
+  <div class="row mb-5 mt-4">
+    <div class="col-12 d-flex justify-content-center align-items-center font-inspiration">
+      <p>Inspirational sanitary images to envision <br> your dream sanitary room.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center font-inspiration">
+      <p>Explore Bathroom Style</p>
+    </div>
+  </div>
+  <hr class="mb-5" style="width: 16%; margin-left: 42%; margin-right: 42%; background: black;">
+
+  <div class="row">
+    <div class="col-12">
+      <ul class="nav nav-pills-inspiration mb-3 d-flex justify-content-center align-items-center" id="pills-tab" role="tablist">
+          @{
+                for (int i = 0; i < Model.Count; i++) 
+                {
+                    var active = i == 0 ? "active" : "";
+                    var categories = Model[i];
+                    <li class="nav-item nav-spaces mb-1">
+                        <a 
+                            class="nav-link @active" 
+                            id="tabsinspiration-@i-tab" 
+                            data-toggle="pill" 
+                            href="#tabsinspiration-@i" 
+                            role="tab" 
+                            aria-controls="tabsinspiration-@i" 
+                            aria-selected="true"
+                        >
+                            @categories.CollectionName
+                        </a>
+                    </li>
+                }
+          }
+      </ul>
+      
+      <div class="tab-content mt-5" id="pills-tabContent">
+        @{
+            for (int i = 0; i < Model.Count; i++) 
+            {
+                var active = i == 0 ? "show active" : "";
+                var content_categories = Model[i];
+                <div class="tab-pane fade @active" id="tabsinspiration-@i" role="tabpanel" aria-labelledby="tabsinspiration-@i-tab">
+                    <div class="row m-0 p-0 container-gallery">
+                        @{
+                            for (int j = 0; j < content_categories.Look.Count; j++)
+                            {
+                                var index = j+1;
+                                var look = content_categories.Look[j];
+                                <div class="col-6 col-md-3 col-sm-3 gallery-img">
+                                    <a type="button" data-toggle="modal" data-target="#modalInspiration-@i-@j">
+                                        <img src="@look.ImageUrl" class="img-fluid w-100" />
+                                    </a>
+                                </div>
+                                
+                                <div class="modal fade" id="modalInspiration-@i-@j" tabindex="-1" role="dialog" aria-labelledby="modalInspirationTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <img src="@look.ImageUrl" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+      </div>
+    </div>
+  </div>
+</div>
