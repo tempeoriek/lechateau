@@ -13,7 +13,14 @@
         {
           var pic = Model.PictureModels[i];
           <div>
-            <img src="@pic.FullSizeImageUrl" class="img-fluid pb-1" id="prodimg-@i" />
+            @if (Model.LinkToBrand!=null) {
+              <a href="@Model.LinkToBrand" rel="noopener noreferrer">
+                <img src="@pic.FullSizeImageUrl" class="img-fluid pb-1" id="prodimg-@i" />
+              </a>
+            }
+            else {
+              <img src="@pic.FullSizeImageUrl" class="img-fluid pb-1" id="prodimg-@i" />
+            }
           </div>
         }
         @if (Model.LinkVideo != null) {
@@ -96,7 +103,14 @@
           @for (int i = 0; i < Model.PictureModels.Count; i++)
           {
             var p = Model.PictureModels[i];
-            <img style="width: 330px; padding: 5px; height: 330px;" src="@p.FullSizeImageUrl" alt="@p.AlternateText" title="@p.Title" />
+            if (Model.LinkToBrand!=null) {
+              <a href="@Model.LinkToBrand" rel="noopener noreferrer">
+                <img style="width: 330px; padding: 5px; height: 330px;" src="@p.FullSizeImageUrl" alt="@p.AlternateText" title="@p.Title" />
+              </a>
+            }
+            else {
+              <img style="width: 330px; padding: 5px; height: 330px;" src="@p.FullSizeImageUrl" alt="@p.AlternateText" title="@p.Title" />
+            }
             if (i+1 == Model.PictureModels.Count && Model.LinkVideo != null) 
             { 
               <div style="width: 330px; height: 330px; padding: 5px;">
