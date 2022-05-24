@@ -36,7 +36,7 @@
                     var categories = Model[i];
                     <li class="nav-item nav-spaces mb-1">
                         <a 
-                            class="nav-link @active" 
+                            class="nav-link @active tab-inspirations" 
                             id="tabsinspiration-@i-tab" 
                             data-toggle="pill" 
                             href="#tabsinspiration-@i" 
@@ -58,12 +58,67 @@
                 var active = i == 0 ? "show active" : "";
                 var content_categories = Model[i];
                 <div class="tab-pane fade @active" id="tabsinspiration-@i" role="tabpanel" aria-labelledby="tabsinspiration-@i-tab">
-                    <div class="row m-0 p-0 container-gallery">
+                  <div class="grids">
+                    <div class="grids-sizer"></div>
+
+                    @{ 
+                        for (int j = 0; j < content_categories.Look.Count; j++) {
+                          var index = j+1;
+                          var look = content_categories.Look[j];
+
+                          <div class="grids-item">
+                            <a type="button" data-toggle="modal" data-target="#modalInspiration-@i-@j">
+                                <img src="@look.ImageUrl" />
+                            </a>
+                          </div>
+                          <div class="modal fade" id="modalInspiration-@i-@j" tabindex="-1" role="dialog" aria-labelledby="modalInspirationTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <img src="@look.ImageUrl" class="img-fluid" />
+                              </div>
+                            </div>
+                          </div>
+                        }
+
+                    }
+                    @* Image Example  *@
+                    @*
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/food3.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image02.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image002.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image06.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image008.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image005.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image010.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image18.webp" />
+                    </div>
+                    <div class="grids-item">
+                      <img src="https://mdbootstrap.com/img/Photos/Others/image17.webp" />
+                    </div> *@
+                  </div>
+                    @* OLD CODE *@
+                    @* <div class="row m-0 p-0 container-gallery">
                         @{
                             for (int j = 0; j < content_categories.Look.Count; j++)
                             {
                                 var index = j+1;
                                 var look = content_categories.Look[j];
+
                                 <div class="col-6 col-md-3 col-sm-3 gallery-img mb-3 pl-2 pr-2">
                                     <a type="button" data-toggle="modal" data-target="#modalInspiration-@i-@j">
                                         <img src="@look.ImageUrl" class="img-fluid w-100" />
@@ -79,7 +134,7 @@
                                 </div>
                             }
                         }
-                    </div>
+                    </div> *@
                 </div>
             }
         }
@@ -87,3 +142,90 @@
     </div>
   </div>
 </div>
+
+<style>
+  
+/* masonry */
+* { box-sizing: border-box; }
+
+.grids:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grids-sizer,
+.grids-item {
+  width: 20%;
+  padding: 5px;
+}
+@@media (max-width: 575px) {
+  .grids-sizer,
+  .grids-item {
+    width: 100%;
+    padding: 5px;
+  }
+}
+@@media (min-width: 576px) and (max-width: 767px) {
+  .grids-sizer,
+  .grids-item {
+    width: 50%;
+    padding: 5px;
+  }
+}
+
+ @@media (min-width: 768px) and (max-width: 991px) {
+  .grids-sizer,
+  .grids-item {
+    width: 33.333%;
+    padding: 5px;
+  }
+}
+@@media (min-width: 992px) and (max-width: 1199px) {
+  .grids-sizer,
+  .grids-item {
+    width: 25%;
+    padding: 5px;
+  }
+}
+@@media (min-width: 1200px) {
+  .grids-sizer,
+  .grids-item {
+    width: 20%;
+    padding: 8px;
+  }
+} 
+
+.grids-item {
+  float: left;
+}
+
+.grids-item img {
+  display: block;
+  max-width: 100%;
+}
+</style>
+
+<script>
+  masonryImage();
+  function masonryImage () {
+    setTimeout(function () {
+      $('.grids').masonry({
+        itemSelector: '.grids-item',
+        percentPosition: true,
+        columnWidth: '.grids-sizer'
+      });
+    }, 180)
+  }
+
+  // layout Masonry after each image loads
+  @* $grids.imagesLoaded().progress( function() {
+    $grids.masonry();
+  }); *@
+
+  $('.tab-inspirations').on("click",function(){
+    masonryImage();
+  })
+
+  @* $(window).on('resize load', updateMansory) *@
+</script>
