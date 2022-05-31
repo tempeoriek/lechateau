@@ -143,9 +143,12 @@
                   <a id="headingCategory-@category.Id" class="category-item" role="button" @* href="/@category.SeName" *@>
                     @category.Name.ToUpper()
                   </a>
-                  <a class="category-item" href="/special-collection">
+                  <a id="headingCategory-2698" class="category-item" role="button">
                     SPECIAL COLLECTION
                   </a>
+                  @* <a class="category-item" href="/special-collection">
+                    SPECIAL COLLECTION
+                  </a> *@
                   <a class="category-item" href="/design-service">
                     DESIGN SERVICES
                   </a>
@@ -263,6 +266,38 @@
         </div>
       }
     }
+
+    //FOR COLLECTION
+    <div style="background-color: white; width: 102%; position: absolute; z-index: -1; top: 0; right: 0; left: 0; box-shadow: 0 8px 6px -6px lightgray; height: 900px;" class="row content-hover" id="dropdownMenuLink-2698">
+      <div class="col-1 col-md-1 col-sm-1"></div>
+      <div class="col-3 col-md-3 col-sm-3 d-flex justify-content-left" style="padding-top: 8%;">
+        <div style="width: 100%;">
+          <div id="sub-subCategory-shop" style="width: 100%;">
+            <a id="subCategoryText-shop" class="subcategory-item d-flex justify-content-left category-item" style="font-size: 18px; cursor: pointer;" href="/special-collection">
+              Cristalmood Collection
+            </a>
+          </div>
+          <div id="sub-subCategory-shop" style="width: 100%;">
+            <a id="subCategoryText-shop" class="subcategory-item d-flex justify-content-left category-item" style="font-size: 18px; cursor: pointer;" href="/breaking-tradition">
+              A Tradition of Breaking with Tradition
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      @* sub sub category *@
+      <div id="divSubcategory" class="col-2 col-md-2 col-sm-2 d-flex justify-content-left" style="padding-top: 8%;">
+       
+      </div>
+
+      <div class="col-5 col-md-5 col-sm-5 d-flex justify-content-center" style="padding-top: 8%;">
+     
+      </div>
+
+      <div class="col-1 col-md-1 col-sm-1 d-flex justify-content-center" style="padding-top: 8%;">
+        <a id="close-category-header" style="font-size: 20px; font-weight: 600;">X</a>
+      </div>
+    </div>
   }
 </div>
 
